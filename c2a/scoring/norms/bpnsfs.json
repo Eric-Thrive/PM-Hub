@@ -1,0 +1,70 @@
+{
+  "instrument_id": "bpnsfs",
+  "instrument_name": "Basic Psychological Need Satisfaction and Frustration Scale",
+  "version": "1.0.0",
+  "primaryReference": "Chen et al., 2015",
+  "sampleSize": 298,
+  "population": "Belgian university students (Study 1)",
+  "scoreLevel": "itemMean",
+  "likertRange": [1, 5],
+  "reflected": false,
+  "partialReflection": {
+    "reflectedSubscales": ["autonomy_frustration", "competence_frustration", "relatedness_frustration"],
+    "formula": "6 - raw",
+    "note": "Only frustration subscales reflected so high = low frustration (positive). Satisfaction subscales unchanged."
+  },
+  "subscales": {
+    "autonomy_satisfaction": {
+      "label": "Autonomy Satisfaction",
+      "items": 4,
+      "mean": 3.89,
+      "sd": 0.61,
+      "reflected": false
+    },
+    "autonomy_frustration": {
+      "label": "Autonomy Frustration (Reflected)",
+      "items": 4,
+      "original": { "mean": 2.53, "sd": 0.79 },
+      "mean": 3.47,
+      "sd": 0.79,
+      "reflected": true,
+      "note": "Reflected: 6 - 2.53 = 3.47. High score = LOW frustration (positive). SD unchanged."
+    },
+    "competence_satisfaction": {
+      "label": "Competence Satisfaction",
+      "items": 4,
+      "mean": 3.87,
+      "sd": 0.61,
+      "reflected": false
+    },
+    "competence_frustration": {
+      "label": "Competence Frustration (Reflected)",
+      "items": 4,
+      "original": { "mean": 2.01, "sd": 0.72 },
+      "mean": 3.99,
+      "sd": 0.72,
+      "reflected": true,
+      "note": "Reflected: 6 - 2.01 = 3.99. High score = LOW frustration (positive). SD unchanged."
+    },
+    "relatedness_satisfaction": {
+      "label": "Relatedness Satisfaction",
+      "items": 4,
+      "mean": 4.15,
+      "sd": 0.59,
+      "reflected": false
+    },
+    "relatedness_frustration": {
+      "label": "Relatedness Frustration (Reflected)",
+      "items": 4,
+      "original": { "mean": 1.85, "sd": 0.68 },
+      "mean": 4.15,
+      "sd": 0.68,
+      "reflected": true,
+      "note": "Reflected: 6 - 1.85 = 4.15. High score = LOW frustration (positive). SD unchanged."
+    }
+  },
+  "tScoreExample": {
+    "description": "Student scores raw 3.5 on Autonomy Frustration",
+    "calculation": "Reflected = 6 - 3.5 = 2.5. T = 50 + 10 × ((2.5 - 3.47) / 0.79) = 50 + 10 × (-1.23) = 37.7 → Needs Focus (indicates elevated autonomy frustration)"
+  }
+}

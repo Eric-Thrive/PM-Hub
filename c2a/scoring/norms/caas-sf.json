@@ -1,0 +1,52 @@
+{
+  "instrument_id": "caas-sf",
+  "instrument_name": "Career Adapt-Abilities Scale — Short Form",
+  "version": "1.0.0",
+  "primaryReference": "Maggiori, Rossier & Savickas, 2015",
+  "sampleSize": 2800,
+  "population": "Swiss adults, nationally representative sample",
+  "scoreLevel": "itemMean",
+  "likertRange": [1, 5],
+  "reflected": false,
+  "subscales": {
+    "concern": {
+      "label": "Concern",
+      "items": 3,
+      "mean": 3.62,
+      "sd": 0.76,
+      "note": "Thinking about what my future will be like; realizing that today's choices shape my future; preparing for the future."
+    },
+    "control": {
+      "label": "Control",
+      "items": 3,
+      "mean": 3.92,
+      "sd": 0.62,
+      "note": "Keeping upbeat; making decisions by myself; taking responsibility for my actions."
+    },
+    "curiosity": {
+      "label": "Curiosity",
+      "items": 3,
+      "mean": 3.75,
+      "sd": 0.68,
+      "note": "Exploring my surroundings; looking for opportunities to grow as a person; investigating options before making a choice."
+    },
+    "confidence": {
+      "label": "Confidence",
+      "items": 3,
+      "mean": 3.89,
+      "sd": 0.63,
+      "note": "Performing tasks efficiently; taking care to do things well; learning new skills."
+    },
+    "total": {
+      "label": "Total Adaptability",
+      "items": 12,
+      "mean": 3.80,
+      "sd": 0.54,
+      "note": "Mean of all 12 items across 4 subscales."
+    }
+  },
+  "tScoreExample": {
+    "description": "Student scores item-mean of 3.2 on Curiosity subscale",
+    "calculation": "T = 50 + 10 × ((3.2 - 3.75) / 0.68) = 50 + 10 × (-0.81) = 41.9 → Needs Focus"
+  }
+}

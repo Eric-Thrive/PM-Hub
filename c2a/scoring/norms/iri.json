@@ -1,0 +1,56 @@
+{
+  "instrument_id": "iri",
+  "instrument_name": "Interpersonal Reactivity Index (PT + EC subscales)",
+  "version": "1.0.0",
+  "primaryReference": "Davis, 1980/1983",
+  "sampleSize": 1161,
+  "population": "US college students (579 male, 582 female)",
+  "scoreLevel": "itemMean",
+  "likertRange": [1, 5],
+  "reflected": false,
+  "reanchored": {
+    "originalScale": [0, 4],
+    "c2aScale": [1, 5],
+    "offset": 1.0,
+    "method": "All published norms converted: sum → item-mean → +1.0 reanchoring. SDs unchanged (reanchoring is linear shift).",
+    "genderPooling": {
+      "method": "weighted mean by N",
+      "male": { "n": 579 },
+      "female": { "n": 582 }
+    }
+  },
+  "subscales": {
+    "perspective_taking": {
+      "label": "Perspective Taking (Reanchored)",
+      "items": 7,
+      "mean": 3.48,
+      "sd": 0.69,
+      "original": {
+        "male": { "sum_mean": 16.78, "sum_sd": 4.72, "n": 579 },
+        "female": { "sum_mean": 17.96, "sum_sd": 4.85, "n": 582 },
+        "pooled_sum_mean": 17.37,
+        "pooled_item_mean": 2.48,
+        "reanchored_item_mean": 3.48
+      },
+      "note": "Pooled: (16.78×579 + 17.96×582) / 1161 = 17.37. Item mean: 17.37/7 = 2.48. Reanchored: 2.48 + 1.0 = 3.48."
+    },
+    "empathic_concern": {
+      "label": "Empathic Concern (Reanchored)",
+      "items": 7,
+      "mean": 3.91,
+      "sd": 0.60,
+      "original": {
+        "male": { "sum_mean": 19.04, "sum_sd": 4.21, "n": 579 },
+        "female": { "sum_mean": 21.67, "sum_sd": 3.83, "n": 582 },
+        "pooled_sum_mean": 20.36,
+        "pooled_item_mean": 2.91,
+        "reanchored_item_mean": 3.91
+      },
+      "note": "Pooled: (19.04×579 + 21.67×582) / 1161 = 20.36. Item mean: 20.36/7 = 2.91. Reanchored: 2.91 + 1.0 = 3.91."
+    }
+  },
+  "tScoreExample": {
+    "description": "Student scores reanchored item-mean of 3.0 on Perspective Taking",
+    "calculation": "T = 50 + 10 × ((3.0 - 3.48) / 0.69) = 50 + 10 × (-0.70) = 43.0 → Developing"
+  }
+}

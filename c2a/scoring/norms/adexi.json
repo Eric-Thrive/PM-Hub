@@ -1,0 +1,46 @@
+{
+  "instrument_id": "adexi",
+  "instrument_name": "ADEXI (Adult Executive Functioning Inventory)",
+  "version": "1.0.0",
+  "primaryReference": "Holst & Thorell, 2018",
+  "sampleSize": 105,
+  "population": "Swedish adults, community sample",
+  "scoreLevel": "itemMean",
+  "likertRange": [1, 5],
+  "reflected": true,
+  "reflectionFormula": "6 - raw",
+  "reflectionNote": "Original ADEXI: high = more EF difficulty. Reflected so high = strong executive functioning, consistent with all other C2A instruments.",
+  "subscales": {
+    "working_memory": {
+      "label": "Working Memory (Reflected)",
+      "items": 9,
+      "original": { "mean": 1.97, "sd": 0.61 },
+      "mean": 4.03,
+      "sd": 0.61,
+      "reflected": true,
+      "note": "Reflected: 6 - 1.97 = 4.03. SD unchanged."
+    },
+    "inhibition": {
+      "label": "Inhibition (Reflected)",
+      "items": 5,
+      "original": { "mean": 2.14, "sd": 0.73 },
+      "mean": 3.86,
+      "sd": 0.73,
+      "reflected": true,
+      "note": "Reflected: 6 - 2.14 = 3.86. SD unchanged."
+    },
+    "full_scale": {
+      "label": "Full Scale (Reflected)",
+      "items": 14,
+      "original": { "mean": 2.03, "sd": 0.61 },
+      "mean": 3.97,
+      "sd": 0.61,
+      "reflected": true,
+      "note": "Reflected: 6 - 2.03 = 3.97. SD unchanged."
+    }
+  },
+  "tScoreExample": {
+    "description": "Student scores reflected item-mean of 3.5 on Working Memory",
+    "calculation": "T = 50 + 10 × ((3.5 - 4.03) / 0.61) = 50 + 10 × (-0.87) = 41.3 → Needs Focus"
+  }
+}

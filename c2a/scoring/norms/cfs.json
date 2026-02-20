@@ -1,0 +1,26 @@
+{
+  "instrument_id": "cfs",
+  "instrument_name": "Cognitive Flexibility Scale",
+  "version": "1.0.0",
+  "primaryReference": "Martin & Rubin, 1995",
+  "sampleSize": 200,
+  "population": "US college students",
+  "scoreLevel": "sum",
+  "likertRange": [1, 6],
+  "itemCount": 12,
+  "sumRange": [12, 72],
+  "reflected": false,
+  "subscales": {
+    "total": {
+      "label": "Total Score (Sum)",
+      "items": 12,
+      "mean": 55,
+      "sd": 7,
+      "note": "Only sum-scored instrument in the battery. Range 12-72."
+    }
+  },
+  "tScoreExample": {
+    "description": "Student scores sum of 48 on CFS",
+    "calculation": "T = 50 + 10 × ((48 - 55) / 7) = 50 + 10 × (-1.0) = 40.0 → Needs Focus"
+  }
+}

@@ -1,0 +1,120 @@
+{
+  "$schema": "./norms-schema.json",
+  "version": "1.0.0",
+  "description": "C2A Durable Skills Assessment Battery — Published Norms Registry. All instruments normalized to T-scores (M=50, SD=10) on a 1-100 display scale. Category thresholds: Low (<25), Needs Focus (25-42), Developing (42-58), Strong (58-75), Very Strong (>75).",
+  "created": "2026-02-17",
+  "tScoreFormula": "T = 50 + 10 × ((X - M_pub) / SD_pub)",
+  "displayScale": {
+    "min": 1,
+    "max": 100,
+    "categories": [
+      { "label": "Low",         "min": 1,  "max": 24  },
+      { "label": "Needs Focus", "min": 25, "max": 42  },
+      { "label": "Developing",  "min": 42, "max": 58  },
+      { "label": "Strong",      "min": 58, "max": 75  },
+      { "label": "Very Strong", "min": 75, "max": 100 }
+    ]
+  },
+  "instruments": {
+    "adexi": {
+      "file": "adexi.json",
+      "method": "tScore",
+      "scoreLevel": "itemMean",
+      "reverseScored": true,
+      "reverseFormula": "6 - raw",
+      "reverseNote": "All subscales reflected so high = strong EF (original: high = more difficulty)",
+      "reverseSubscales": null,
+      "likertRange": [1, 5],
+      "subscaleCount": 3,
+      "primaryReference": "Holst & Thorell, 2018"
+    },
+    "cfs": {
+      "file": "cfs.json",
+      "method": "tScore",
+      "scoreLevel": "sum",
+      "reverseScored": false,
+      "reverseFormula": null,
+      "reverseSubscales": null,
+      "likertRange": [1, 6],
+      "subscaleCount": 1,
+      "primaryReference": "Martin & Rubin, 1995"
+    },
+    "brs": {
+      "file": "brs.json",
+      "method": "tScore",
+      "scoreLevel": "itemMean",
+      "reverseScored": false,
+      "reverseFormula": null,
+      "reverseSubscales": null,
+      "likertRange": [1, 5],
+      "subscaleCount": 1,
+      "primaryReference": "Smith et al., 2008"
+    },
+    "caas-sf": {
+      "file": "caas-sf.json",
+      "method": "tScore",
+      "scoreLevel": "itemMean",
+      "reverseScored": false,
+      "reverseFormula": null,
+      "reverseSubscales": null,
+      "likertRange": [1, 5],
+      "subscaleCount": 5,
+      "primaryReference": "Maggiori, Rossier & Savickas, 2015"
+    },
+    "iri": {
+      "file": "iri.json",
+      "method": "tScore",
+      "scoreLevel": "itemMean",
+      "reverseScored": false,
+      "reverseFormula": null,
+      "reverseSubscales": null,
+      "likertRange": [1, 5],
+      "reanchored": {
+        "from": [0, 4],
+        "to": [1, 5],
+        "offset": 1.0,
+        "note": "Davis (1980/83) norms on 0-4; C2A uses 1-5. Item means reanchored +1.0, SDs unchanged."
+      },
+      "subscaleCount": 2,
+      "primaryReference": "Davis, 1980/1983"
+    },
+    "bpnsfs": {
+      "file": "bpnsfs.json",
+      "method": "tScore",
+      "scoreLevel": "itemMean",
+      "reverseScored": false,
+      "reverseFormula": null,
+      "reverseSubscales": ["autonomy_frustration", "competence_frustration", "relatedness_frustration"],
+      "reverseSubscaleFormula": "6 - raw",
+      "reverseNote": "Only frustration subscales reflected so high = low frustration (positive). Satisfaction subscales unchanged.",
+      "likertRange": [1, 5],
+      "subscaleCount": 6,
+      "primaryReference": "Chen et al., 2015"
+    },
+    "gms": {
+      "file": "gms.json",
+      "method": "tScore",
+      "scoreLevel": "itemMean",
+      "reverseScored": false,
+      "reverseFormula": null,
+      "reverseSubscales": ["amotivation", "external_regulation"],
+      "reverseSubscaleFormula": "8 - raw",
+      "reverseNote": "Amotivation and External Regulation reflected so high = positive (less amotivation, less external regulation). Intrinsic Motivation unchanged.",
+      "likertRange": [1, 7],
+      "subscaleCount": 3,
+      "primaryReference": "Guay, Mageau & Vallerand, 2003"
+    }
+  },
+  "tier2Instruments": {
+    "note": "These instruments use linear min-max scaling (no published norms). Same category thresholds apply.",
+    "method": "linearMinMax",
+    "formula": "display = ((X - scale_min) / (scale_max - scale_min)) × 99 + 1",
+    "instruments": {
+      "spcc": { "likertRange": [0, 100], "note": "Already 0-100 scale. McCroskey cutoffs available: Low <59, Normal 59-86, High >87" },
+      "lcq6": { "likertRange": [1, 7], "formula": "display = ((X - 1) / 6) × 99 + 1" },
+      "team_psych_safety": { "likertRange": [1, 7], "formula": "display = ((X - 1) / 6) × 99 + 1" },
+      "nbs6": { "likertRange": [1, 5], "note": "Custom R&D instrument — no external reference until pilot data" },
+      "rqm6": { "likertRange": [1, 5], "note": "Custom R&D instrument — no external reference until pilot data" }
+    }
+  }
+}

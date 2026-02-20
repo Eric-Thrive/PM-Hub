@@ -1,0 +1,33 @@
+{
+  "instrument_id": "brs",
+  "instrument_name": "Brief Resilience Scale",
+  "version": "1.0.0",
+  "primaryReference": "Smith et al., 2008",
+  "sampleSize": 844,
+  "population": "Combined 4 samples: 2 undergraduate, 1 cardiac rehabilitation, 1 chronic pain",
+  "scoreLevel": "itemMean",
+  "likertRange": [1, 5],
+  "reflected": false,
+  "subscales": {
+    "total": {
+      "label": "Total Score (Item Mean)",
+      "items": 6,
+      "mean": 3.53,
+      "sd": 0.84,
+      "note": "Items 1, 3, 5 positive; items 2, 4, 6 reverse-scored at item level before averaging."
+    }
+  },
+  "clinicalCutoffs": {
+    "source": "Smith et al., 2008",
+    "cutoffs": [
+      { "label": "Low resilience", "range": [1.0, 2.99] },
+      { "label": "Normal resilience", "range": [3.0, 4.30] },
+      { "label": "High resilience", "range": [4.31, 5.0] }
+    ],
+    "note": "These cutoffs are supplementary. Primary categorization uses T-score thresholds from norms-index.json."
+  },
+  "tScoreExample": {
+    "description": "Student scores item-mean of 2.8 on BRS",
+    "calculation": "T = 50 + 10 × ((2.8 - 3.53) / 0.84) = 50 + 10 × (-0.87) = 41.3 → Needs Focus. Also below clinical cutoff of 3.0 = 'Low resilience'."
+  }
+}

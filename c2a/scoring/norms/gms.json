@@ -1,0 +1,57 @@
+{
+  "instrument_id": "gms",
+  "instrument_name": "Global Motivation Scale — Bookends (adapted)",
+  "version": "1.0.0",
+  "primaryReference": "Guay, Mageau & Vallerand, 2003",
+  "sampleSize": 360,
+  "population": "Canadian university students",
+  "scoreLevel": "itemMean",
+  "likertRange": [1, 7],
+  "reflected": false,
+  "partialReflection": {
+    "reflectedSubscales": ["amotivation", "external_regulation"],
+    "formula": "8 - raw",
+    "note": "Amotivation and External Regulation reflected so high = positive. Intrinsic Motivation unchanged."
+  },
+  "subscales": {
+    "intrinsic_motivation": {
+      "label": "Intrinsic Motivation",
+      "items": 4,
+      "mean": 4.68,
+      "sd": 1.13,
+      "reflected": false,
+      "note": "High = strong intrinsic motivation. SD unchanged."
+    },
+    "external_regulation": {
+      "label": "External Regulation (Reflected)",
+      "items": 3,
+      "original": { "mean": 3.25, "sd": 1.32 },
+      "mean": 4.75,
+      "sd": 1.32,
+      "reflected": true,
+      "note": "Reflected: 8 - 3.25 = 4.75. High score = LOW external regulation (positive — more autonomous). SD unchanged."
+    },
+    "amotivation": {
+      "label": "Amotivation (Reflected)",
+      "items": 3,
+      "original": { "mean": 2.15, "sd": 1.10 },
+      "mean": 5.85,
+      "sd": 1.10,
+      "reflected": true,
+      "note": "Reflected: 8 - 2.15 = 5.85. High score = LOW amotivation (positive — more motivated). SD unchanged.",
+      "clinicalFlag": {
+        "threshold": 4.0,
+        "direction": "original_raw",
+        "note": "Amotivation raw ≥ 4.0 flagged as clinical concern (≈1.7 SD above normative mean). In reflected terms, this is ≤ 4.0 reflected."
+      }
+    }
+  },
+  "rai": {
+    "note": "The Relative Autonomy Index (RAI = 2×IM + 0×ER + -2×Amot) is computed on ORIGINAL (unreflected) scores. RAI range: -14 to +14. Positive = net autonomous motivation.",
+    "computedOnReflected": false
+  },
+  "tScoreExample": {
+    "description": "Student scores raw item-mean of 3.5 on Amotivation",
+    "calculation": "Reflected = 8 - 3.5 = 4.5. T = 50 + 10 × ((4.5 - 5.85) / 1.10) = 50 + 10 × (-1.23) = 37.7 → Needs Focus (indicates elevated amotivation)"
+  }
+}
