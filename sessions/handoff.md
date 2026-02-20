@@ -4,6 +4,36 @@ Rolling log of the last 5 PM Copilot sessions. Oldest entry drops off when a new
 
 ---
 
+## Session 26 — 2026-02-20 (Dashboard Canonicalized + Artifact Rendered)
+**Focus:** Fixed dashboard skill to use canonical template; rendered live morning dashboard artifact
+
+**What we did:**
+- Identified root cause of dark-mode redesign bug: skill had no template reference
+- Copied Eric's light-mode template to `dashboard/dashboard-template.jsx` in PM-Hub
+- Updated `skills/thriveiep-dashboard/SKILL.md` with explicit template read instruction and data constants
+- Synced template into `skills/thriveiep-dashboard/templates/`
+- Packaged updated `thriveiep-dashboard.zip` for re-upload
+- Pushed all changes to PM-Hub — commits `86aa441`, `89ac54b`
+- Rendered live morning dashboard artifact with Feb 20 data (Focus Picks, Calendar, Issues, Gmail, Standup)
+- Read Claude Code article from project files — discussed memory hierarchy, skills system, multi-agent orchestration
+
+**Key decisions:**
+- Dashboard skill must `cat` the template file first, populate data constants only, never alter structure/styling
+- Artifact renders best as inline JSX in response (not via file present_files)
+
+**Artifacts produced:**
+- Updated `thriveiep-dashboard` skill zip (ready to upload)
+- PM-Hub commits `86aa441`, `89ac54b`
+- Morning dashboard artifact (Feb 20, live data)
+
+**Pickup for next session:**
+- Upload updated `thriveiep-dashboard.zip` to Claude.ai Settings → Skills (replaces old version)
+- Test in new conversation: say "morning" — verify template is used, not redesigned
+- Claude Code Phase 2: export 8 C2A docs from Notion → `c2a/docs/`
+- Still outstanding: Step 2.5 scoring spec updates, 155 vs 144 item count, exemplar cards (Ref #6)
+
+---
+
 ## Session 25 — 2026-02-20 (Skills Built + Uploaded for Claude.ai)
 **Focus:** Built and packaged 4 Claude.ai skills updated for GitHub-first architecture; pushed updated skills to PM-Hub
 
@@ -57,8 +87,4 @@ Rolling log of the last 5 PM Copilot sessions. Oldest entry drops off when a new
 **PM-Hub:** 5 commits, ~5,360 lines. Complete psychometric data layer + 4 skills.
 **Pickup:** Migration planning → done in Session 23.
 
----
 
-## Session 21 — 2026-02-20 (Skills Architecture Design + PM-Hub Repo)
-**Focus:** Designed Claude Skills architecture for ThriveIEP PM system; established GitHub versioning strategy; initialized PM-Hub repo
-**Pickup:** Seed PM-Hub → done in Session 22.
