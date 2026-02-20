@@ -1,330 +1,421 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
-// ─── LIVE DATA — February 20, 2026 ───
-const DAYS_TO_M2 = 9;
-const DAYS_TO_M3 = 23;
+// ─── LIVE DATA (fetched Feb 20, 2026) ────────────────────────────────────────
 
-const FOCUS_PICKS = [
-  { id: 1, icon: "🔴", action: "Continue M3 profile work: Interpretation template library", source: "THR-198 · In Progress · High", why: "M3 profiles due March 15 — template library is prerequisite for profile generation." },
-  { id: 2, icon: "📋", action: "Scope remaining M2 work: Admin UI + property tests", source: "THR-180, THR-182, THR-187, THR-191 · Todo", why: "M2 MVP due March 1 — 9 days. Assess what's left after this week's completions." },
-  { id: 3, icon: "📈", action: "Prep for GTM call with Elizabeth & Lori (today 9:30 AM)", source: "Calendar — ThriveIEP GTM", why: "Recurring GTM meeting. Update on M2 progress, student survey status." },
-];
-
-const ISSUES = {
-  inProgress: [
-    { id: "THR-198", title: "Interpretation template library (clinical content)", priority: "High", project: "C2A", milestone: "M3", assignee: "Eric" },
-    { id: "THR-196", title: "Profile data model and schema extension", priority: "High", project: "C2A", milestone: "M3", assignee: "Eric" },
-    { id: "THR-93", title: "Iterate on UX mockups for student assessment flow", priority: "High", project: "C2A", milestone: "M1", assignee: "Elizabeth" },
-    { id: "THR-22", title: "Build: Profile Generation Engine", project: "C2A", milestone: "M3", due: "Mar 15", assignee: "Eric" },
-    { id: "THR-21", title: "Build: Assessment Platform MVP", project: "C2A", milestone: "M2", due: "Mar 1", assignee: "Eric" },
-  ],
-  todo: [
-    { id: "THR-86", title: "Create kickoff deck for NLU", priority: "Urgent", project: "C2A", assignee: "Elizabeth" },
-    { id: "THR-90", title: "Design student onboarding experience", priority: "High", project: "C2A", milestone: "M2", assignee: "Elizabeth" },
-    { id: "THR-205", title: "Research: Gather published norms for 7 instruments", priority: "High", project: "C2A", milestone: "M3", assignee: "Eric" },
-    { id: "THR-180", title: "Implement admin UI (timepoint mgmt)", priority: "Medium", project: "C2A", milestone: "M2" },
-    { id: "THR-182", title: "Property tests — Registry and admin", priority: "Medium", project: "C2A", milestone: "M2" },
-    { id: "THR-187", title: "Property tests — Student API", priority: "Medium", project: "C2A", milestone: "M2" },
-    { id: "THR-191", title: "Property tests — Scoring and RBAC", priority: "Medium", project: "C2A", milestone: "M2" },
-    { id: "THR-62", title: "Deploy dev enhancements to production", priority: "High", project: "AE", assignee: "Soham" },
-    { id: "THR-14", title: "Fix sample report link drop-off", priority: "High", project: "AE", assignee: "Eric" },
-    { id: "THR-118", title: "Migrate to HIPAA-compliant GPU infra", priority: "Low", project: "PI", assignee: "Soham" },
-  ],
-  done: [
-    { id: "THR-207", title: "Student survey UX + DB scoring check", at: "Feb 18", who: "Soham" },
-    { id: "THR-176", title: "Student frontend (layout, onboarding)", at: "Feb 18" },
-    { id: "THR-179", title: "Survey engine (frontend)", at: "Feb 18" },
-    { id: "THR-172", title: "Scoring service, RBAC, coach routes", at: "Feb 18" },
-    { id: "THR-29", title: "Student + advisor auth (MVP)", at: "Feb 18" },
-    { id: "THR-30", title: "Survey delivery UI component", at: "Feb 18" },
-    { id: "THR-154", title: "Rename 'advisor' → 'coach' in RBAC", at: "Feb 18", who: "Soham" },
-    { id: "THR-131", title: "Construct mapping definitions", at: "Feb 12" },
-  ],
+const META = {
+  date: "Friday, February 20, 2026",
+  weekLabel: "Week of Feb 17",
+  m2Days: 9,
+  m3Days: 23,
 };
 
-const CALENDAR = [
-  { time: "9:30–10:15a", title: "ThriveIEP GTM", type: "gtm", detail: "Elizabeth, Lori, Craig", day: "Fri 2/20" },
-  { time: "7:30–8:30a", title: "Team Meeting", type: "team", detail: "Elizabeth, Craig", day: "Sun 2/22" },
-  { time: "3:15–4:15p", title: "George", type: "tutoring", day: "Mon 2/23" },
-  { time: "6:00–7:00p", title: "Vera", type: "tutoring", day: "Mon 2/23" },
-  { time: "9:30a–2:00p", title: "In-Person Work Block", type: "work", detail: "CiC Kendall · Elizabeth", day: "Tue 2/24" },
-  { time: "4:30–5:00p", title: "Jack", type: "tutoring", day: "Tue 2/24" },
-  { time: "6:00–7:00p", title: "Vera", type: "tutoring", day: "Wed 2/25" },
-  { time: "9:30a–2:30p", title: "In-Person Work Block", type: "work", detail: "CiC Kendall · Elizabeth", day: "Thu 2/26" },
-  { time: "4:30–5:00p", title: "Jack", type: "tutoring", day: "Thu 2/26" },
-  { time: "7:00a–1:00p", title: "Abby real estate exam", type: "personal", day: "Fri 2/27" },
-  { time: "9:30–10:15a", title: "ThriveIEP GTM", type: "gtm", detail: "Elizabeth, Lori, Craig", day: "Fri 2/27" },
-  { time: "2:30–3:30p", title: "Nehmet", type: "tutoring", day: "Fri 2/27" },
+const FOCUS_PICKS = [
+  {
+    icon: "📋",
+    title: "THR-198 — Interpretation Template Library",
+    source: "Linear THR-198",
+    sourceUrl: "https://linear.app/thriveiep/issue/THR-198",
+    why: "Active M3 work, In Progress — clinical content layer that unblocks profile generation. M3 is 23 days out.",
+  },
+  {
+    icon: "🔴",
+    title: "THR-205 — Norms Research (means/SDs for 7 instruments)",
+    source: "Linear THR-205",
+    sourceUrl: "https://linear.app/thriveiep/issue/THR-205",
+    why: "Assigned to Eric, Todo. Required for norm-referenced T-score conversion (THR-197), blocking the full profile pipeline.",
+  },
+  {
+    icon: "🧪",
+    title: "Close M2 property tests — THR-182, THR-187, THR-191",
+    source: "Linear THR-21",
+    sourceUrl: "https://linear.app/thriveiep/issue/THR-21",
+    why: "M2 due in 9 days. Three test suites (registry, student API, scoring/RBAC) are the last structural gaps before M2 ships.",
+  },
+];
+
+const CALENDAR_TODAY = [
+  {
+    time: "9:30 AM",
+    title: "ThriveIEP GTM",
+    type: "team",
+    attendees: ["Elizabeth", "Lori", "Craig"],
+    zoom: "https://us06web.zoom.us/j/86021059679?pwd=5stFXbg6MCskxJMJDuc3sUF4gobOfF.1",
+    alert: "Lori running a few mins late — on phone with Alexa's financial aid office",
+  },
+];
+
+const CALENDAR_UPCOMING = [
+  { date: "Sun Feb 22", time: "7:30 AM", title: "ThriveIEP Team Meeting", type: "team", attendees: ["Elizabeth", "Craig"] },
+  { date: "Sun Feb 22", time: "9:00 AM",  title: "Eric (personal block)", type: "focus", attendees: [] },
+];
+
+const ACTIVE_ISSUES = [
+  { id: "THR-198", title: "Interpretation template library (clinical content)", priority: "High",   milestone: "M3", assignee: "Eric",      url: "https://linear.app/thriveiep/issue/THR-198" },
+  { id: "THR-196", title: "Profile data model and schema extension",            priority: "High",   milestone: "M3", assignee: "Eric",      url: "https://linear.app/thriveiep/issue/THR-196" },
+  { id: "THR-22",  title: "Build: Profile Generation Engine",                  priority: "Normal", milestone: "M3", assignee: "Eric",      url: "https://linear.app/thriveiep/issue/THR-22",  due: "Mar 15" },
+  { id: "THR-21",  title: "Build: Assessment Platform MVP",                    priority: "Normal", milestone: "M2", assignee: "Eric",      url: "https://linear.app/thriveiep/issue/THR-21",  due: "Mar 1" },
+  { id: "THR-93",  title: "UX mockups iteration (C2A student flow)",           priority: "High",   milestone: "M1", assignee: "Elizabeth", url: "https://linear.app/thriveiep/issue/THR-93" },
+];
+
+const TODO_ISSUES = [
+  { id: "THR-86",  title: "NLU kickoff deck",                               priority: "Urgent",  milestone: "M2", assignee: "Elizabeth", url: "https://linear.app/thriveiep/issue/THR-86" },
+  { id: "THR-205", title: "Norms research: means/SDs for 7 instruments",   priority: "High",    milestone: "M3", assignee: "Eric",      url: "https://linear.app/thriveiep/issue/THR-205" },
+  { id: "THR-182", title: "Property tests — Registry & admin",             priority: "Medium",  milestone: "M2", assignee: "Eric",      url: "https://linear.app/thriveiep/issue/THR-182" },
+  { id: "THR-187", title: "Property tests — Student API",                  priority: "Medium",  milestone: "M2", assignee: "Eric",      url: "https://linear.app/thriveiep/issue/THR-187" },
+  { id: "THR-191", title: "Property tests — Scoring & RBAC",               priority: "Medium",  milestone: "M2", assignee: "Eric",      url: "https://linear.app/thriveiep/issue/THR-191" },
+  { id: "THR-180", title: "Admin UI: Timepoint management",                priority: "Medium",  milestone: "M2", assignee: "Eric",      url: "https://linear.app/thriveiep/issue/THR-180" },
+  { id: "THR-90",  title: "Design student onboarding/orientation exp.",    priority: "High",    milestone: "M2", assignee: "Elizabeth", url: "https://linear.app/thriveiep/issue/THR-90" },
+];
+
+const COMPLETED = [
+  { id: "THR-207", title: "Student survey UX & database scoring check (Soham)", when: "Feb 19" },
+  { id: "THR-29",  title: "Student & advisor authentication (MVP)",              when: "Feb 18" },
+  { id: "THR-30",  title: "Survey delivery UI component",                        when: "Feb 18" },
+  { id: "THR-172", title: "Scoring service, RBAC, coach routes",                 when: "Feb 18" },
+  { id: "THR-176", title: "Student frontend layout / onboarding",                when: "Feb 18" },
+  { id: "THR-179", title: "Survey engine (frontend)",                            when: "Feb 18" },
 ];
 
 const GMAIL = [
-  { from: "Hannah (TriTogether)", subject: "Re: Report attached", note: "FYI — acknowledged delivery", date: "Feb 19" },
-  { from: "ThriveIEP (test)", subject: "C2A Coach invite email", note: "Verify coach signup flow", date: "Feb 18" },
+  { from: "Lori Scanlon",          subject: "ThriveIEP GTM",                          preview: "Running a few mins late — on the phone w Alexa's financial aid office.",                             tag: "FYI",    action: false },
+  { from: "Hannah Sieber (TriTogether)", subject: "Re: Report attached",              preview: "Thanks! — reply to your report send. TriTogether migration working smoothly.",                       tag: "FYI",    action: false },
+  { from: "ThriveIEP System",      subject: "You've been invited to join C2A as a Coach", preview: "Coach invite sent to eric+c2atestcoach — testing end-to-end coach onboarding flow.", tag: "Test",   action: false },
 ];
 
-const WEEKLY = [
-  { text: "M2 backend: Scoring, RBAC, coach routes (THR-172)", done: true },
-  { text: "M2 frontend: Layout/onboarding (THR-176), Survey engine (THR-179)", done: true },
-  { text: "Scope and decompose M3 profile work (THR-22)", done: false },
-  { text: "Project scaffolding (THR-27)", done: false },
-  { text: "DB credentials from Soham (THR-181)", done: false },
-  { text: "Coach journey mapping w/ Elizabeth", done: false },
-  { text: "MVP vs post-MVP decision list", done: false },
-  { text: "Soham audit todo for FERPA UI", done: false },
+const NOTION_FOCUS = [
+  { text: "Continue C2A M2 backend: Scoring, RBAC, coach routes (THR-172)",         done: true  },
+  { text: "C2A M2 frontend: Student layout/onboarding (THR-176), Survey (THR-179)", done: true  },
+  { text: "Scope and decompose M3 profile work (THR-22)",                            done: false },
+  { text: "Project scaffolding (THR-27, due Feb 18)",                                done: false },
+  { text: "Get DB credentials from Soham (THR-181)",                                 done: false },
+  { text: "Coach journey mapping session with Elizabeth (Wed)",                       done: false },
+  { text: "Prep MVP vs post-MVP decision list for coach journey session",             done: false },
+  { text: "Build Soham audit todo list for new FERPA UI",                            done: false },
 ];
 
-// WCAG AA palette — all ≥ 4.5:1 on their backgrounds
-const C = {
-  bg: "#0f1117",
-  card: "#171a23",
-  border: "#2a2f3c",
-  div: "#22262f",
-  text: "#e2dfd8",
-  mid: "#b0ada6",
-  muted: "#918e87",
-  accent: "#e8a63a",
-  warm: "#e8a63a",
-  warmBg: "#251e0e",
-  ok: "#6fcf7c",
-  okBg: "#0f2016",
-  blue: "#7db4fc",
-  purple: "#c4b3e6",
-  pink: "#dba8c8",
+const STANDUP_TEXT =
+`Yesterday: Closed 6 M2 issues — auth (THR-29), survey delivery UI (THR-30), scoring service + RBAC + coach routes (THR-172), student frontend layout/onboarding (THR-176), survey engine (THR-179). Coach invite flow tested end-to-end (THR-207).
+
+Today: THR-198 interpretation template library, THR-205 norms research, M2 property tests (THR-182 / THR-187 / THR-191). GTM at 9:30.
+
+Blockers: None.`;
+
+// ─── STYLE MAPS ───────────────────────────────────────────────────────────────
+
+const P_STYLE = {
+  Urgent: "bg-red-100 text-red-800 border-red-200",
+  High:   "bg-orange-100 text-orange-700 border-orange-200",
+  Medium: "bg-blue-100 text-blue-700 border-blue-200",
+  Normal: "bg-gray-100 text-gray-600 border-gray-200",
+};
+const M_STYLE = {
+  M1: "bg-green-100 text-green-800 border-green-200",
+  M2: "bg-yellow-100 text-yellow-800 border-yellow-200",
+  M3: "bg-purple-100 text-purple-800 border-purple-200",
+};
+const EV_STYLE = {
+  team:  "bg-blue-50 border-blue-200",
+  focus: "bg-green-50 border-green-200",
 };
 
-const TS = {
-  gtm: { c: C.warm, l: "GTM" },
-  team: { c: C.blue, l: "TEAM" },
-  client: { c: C.purple, l: "CLIENT" },
-  tutoring: { c: C.muted, l: "TUTOR" },
-  work: { c: C.ok, l: "WORK" },
-  personal: { c: C.pink, l: "PERS" },
-};
+const STORAGE_KEY = "dashboard-2026-02-20-v2";
 
-const PC = { Urgent: C.warm, High: C.warm, Medium: C.mid, Low: C.muted };
-const PB = { C2A: { c: C.warm, b: C.warmBg }, AE: { c: C.warm, b: C.warmBg }, PI: { c: C.ok, b: C.okBg } };
+// ─── SMALL COMPONENTS ─────────────────────────────────────────────────────────
+
+function Badge({ label, cls }) {
+  return <span className={`inline-flex px-1.5 py-0.5 rounded text-xs font-medium border ${cls}`}>{label}</span>;
+}
+
+function IssueRow({ issue, checked, onToggle }) {
+  const done = !!checked[issue.id];
+  return (
+    <div
+      onClick={() => onToggle(issue.id)}
+      className={`bg-white border rounded-lg p-3 flex items-start gap-3 cursor-pointer hover:border-blue-300 transition-colors ${done ? "opacity-40" : ""}`}
+    >
+      <input type="checkbox" checked={done} readOnly className="mt-0.5 h-4 w-4 accent-blue-600 shrink-0" />
+      <div className="flex-1 min-w-0">
+        <div className={`text-sm font-medium text-gray-900 leading-snug ${done ? "line-through" : ""}`}>
+          <a href={issue.url} target="_blank" rel="noreferrer" className="text-blue-600 hover:underline mr-1" onClick={e => e.stopPropagation()}>{issue.id}</a>
+          {issue.title}
+        </div>
+        <div className="flex flex-wrap gap-1.5 mt-1.5">
+          <Badge label={issue.priority} cls={P_STYLE[issue.priority] || P_STYLE.Normal} />
+          <Badge label={issue.milestone} cls={M_STYLE[issue.milestone] || "bg-gray-100 text-gray-500 border-gray-200"} />
+          {issue.assignee && <span className="text-xs text-gray-400 self-center">{issue.assignee}</span>}
+          {issue.due      && <span className="text-xs text-gray-400 self-center">due {issue.due}</span>}
+        </div>
+      </div>
+    </div>
+  );
+}
+
+// ─── MAIN ─────────────────────────────────────────────────────────────────────
 
 export default function Dashboard() {
-  const [open, setOpen] = useState({ focus: true, sched: true, gmail: true });
-  const [ck, setCk] = useState({});
-  const [copied, setCopied] = useState(false);
+  const [tab,     setTab]     = useState("today");
+  const [checked, setChecked] = useState({});
+  const [toast,   setToast]   = useState(null);
+  const [ready,   setReady]   = useState(false);
 
-  const tog = s => setOpen(p => ({ ...p, [s]: !p[s] }));
-  const chk = k => setCk(p => ({ ...p, [k]: !p[k] }));
-  const copyFP = () => {
-    navigator.clipboard.writeText(FOCUS_PICKS.map((f, i) => `${i + 1}. ${f.action}\n   ${f.source}\n   ${f.why}`).join("\n\n"));
-    setCopied(true); setTimeout(() => setCopied(false), 2000);
+  useEffect(() => {
+    (async () => {
+      try {
+        const s = await window.storage.get(STORAGE_KEY);
+        if (s?.value) setChecked(JSON.parse(s.value));
+      } catch {}
+      setReady(true);
+    })();
+  }, []);
+
+  const toggle = async (key) => {
+    const next = { ...checked, [key]: !checked[key] };
+    setChecked(next);
+    try { await window.storage.set(STORAGE_KEY, JSON.stringify(next)); } catch {}
   };
 
-  const todayEv = CALENDAR.filter(e => e.day === "Fri 2/20");
-  const futureDays = ["Sun 2/22", "Mon 2/23", "Tue 2/24", "Wed 2/25", "Thu 2/26", "Fri 2/27"];
-  const mono = "'JetBrains Mono',monospace";
+  const flash = (msg) => { setToast(msg); setTimeout(() => setToast(null), 2000); };
 
-  return (
-    <div style={{ fontFamily: "'DM Sans','Helvetica Neue',sans-serif", background: C.bg, minHeight: "100vh", color: C.text, padding: "12px 16px" }}>
-      <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  const copy = (text, msg) => navigator.clipboard.writeText(text).then(() => flash(msg));
 
-      {/* HEADER */}
-      <div style={{ background: "linear-gradient(135deg,#1a1d2e,#141824)", borderRadius: 14, padding: "18px 22px", marginBottom: 10, border: `1px solid ${C.border}` }}>
-        <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", flexWrap: "wrap", gap: 10 }}>
-          <div>
-            <div style={{ fontSize: 11, fontWeight: 600, letterSpacing: 2, color: C.accent, textTransform: "uppercase", fontFamily: mono }}>ThriveIEP PM Dashboard</div>
-            <div style={{ fontSize: 26, fontWeight: 700, color: C.text, letterSpacing: -0.5, marginTop: 3 }}>Friday, February 20</div>
-          </div>
-          <div style={{ display: "flex", gap: 10, alignItems: "center" }}>
-            <MCh label="M2 MVP" days={DAYS_TO_M2} hot />
-            <MCh label="M3" days={DAYS_TO_M3} />
-          </div>
-        </div>
-        <div style={{ display: "flex", gap: 20, marginTop: 14, flexWrap: "wrap" }}>
-          <St label="In Progress" v={ISSUES.inProgress.length} color={C.blue} />
-          <St label="Todo" v={ISSUES.todo.length} color={C.warm} />
-          <St label="Done 48h" v={ISSUES.done.length} color={C.ok} />
-          <St label="Today" v={todayEv.length} color={C.purple} />
-        </div>
-      </div>
+  const clearAll = async () => {
+    setChecked({});
+    try { await window.storage.set(STORAGE_KEY, "{}"); } catch {}
+    flash("Cleared!");
+  };
 
-      {/* TWO-COLUMN LAYOUT */}
-      <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 8, alignItems: "start" }}>
+  const TABS = [
+    { id: "today",   label: "Today"       },
+    { id: "issues",  label: "Issues"      },
+    { id: "focus",   label: "Notion Focus"},
+    { id: "gmail",   label: "Gmail"       },
+    { id: "standup", label: "Standup"     },
+  ];
 
-        {/* LEFT COLUMN */}
-        <div style={{ display: "flex", flexDirection: "column", gap: 6 }}>
-          <Acc title="Focus Picks" icon="🎯" open={open.focus} tog={() => tog("focus")} badge="3"
-            right={<SmBtn onClick={copyFP} label={copied ? "✓ Copied" : "Copy"} active={copied} />}>
-            {FOCUS_PICKS.map(fp => (
-              <CkRow key={fp.id} ck={ck[`f${fp.id}`]} onCk={() => chk(`f${fp.id}`)}>
-                <div style={{ fontSize: 15, fontWeight: 600, color: ck[`f${fp.id}`] ? C.muted : C.text, textDecoration: ck[`f${fp.id}`] ? "line-through" : "none", lineHeight: 1.4 }}>{fp.icon} {fp.action}</div>
-                <div style={{ fontSize: 12, color: C.muted, marginTop: 4, fontFamily: mono }}>{fp.source}</div>
-                <div style={{ fontSize: 13, color: C.mid, marginTop: 3, lineHeight: 1.4 }}>{fp.why}</div>
-              </CkRow>
-            ))}
-          </Acc>
-
-          <Acc title="In Progress" icon="🔵" open={open.ip} tog={() => tog("ip")} badge={String(ISSUES.inProgress.length)}>
-            {ISSUES.inProgress.map((iss, i) => <IRow key={i} iss={iss} ck={ck[`i${i}`]} onCk={() => chk(`i${i}`)} />)}
-          </Acc>
-
-          <Acc title="Todo" icon="🟡" open={open.td} tog={() => tog("td")} badge={String(ISSUES.todo.length)}>
-            {ISSUES.todo.map((iss, i) => <IRow key={i} iss={iss} ck={ck[`t${i}`]} onCk={() => chk(`t${i}`)} />)}
-          </Acc>
-
-          <Acc title="Completed (48h)" icon="✅" open={open.done} tog={() => tog("done")} badge={String(ISSUES.done.length)}>
-            <div style={{ padding: "10px 14px", display: "flex", gap: 6, flexWrap: "wrap" }}>
-              {ISSUES.done.map(d => (
-                <span key={d.id} style={{ fontSize: 11, fontFamily: mono, background: C.okBg, color: C.ok, padding: "3px 7px", borderRadius: 4, border: "1px solid #1e3d28" }}>{d.id}</span>
-              ))}
-            </div>
-            {ISSUES.done.map((d, i) => (
-              <div key={i} style={{ padding: "6px 14px", borderTop: `1px solid ${C.div}`, display: "flex", justifyContent: "space-between", alignItems: "center" }}>
-                <div style={{ display: "flex", gap: 8, alignItems: "center" }}>
-                  <span style={{ color: C.ok, fontSize: 13 }}>✓</span>
-                  <span style={{ fontSize: 12, fontFamily: mono, color: C.muted }}>{d.id}</span>
-                  <span style={{ fontSize: 13, color: C.mid }}>{d.title}</span>
-                </div>
-                <span style={{ fontSize: 12, color: C.muted }}>{d.at}</span>
-              </div>
-            ))}
-          </Acc>
-        </div>
-
-        {/* RIGHT COLUMN */}
-        <div style={{ display: "flex", flexDirection: "column", gap: 6 }}>
-          <Acc title="Today's Schedule" icon="📅" open={open.sched} tog={() => tog("sched")} badge={String(todayEv.length)}>
-            {todayEv.length ? todayEv.map((e, i) => <EvRow key={i} ev={e} />) : <Empty text="No events today" />}
-          </Acc>
-
-          <Acc title="Gmail" icon="📬" open={open.gmail} tog={() => tog("gmail")} badge={String(GMAIL.length)}>
-            {GMAIL.map((m, i) => (
-              <CkRow key={i} ck={ck[`g${i}`]} onCk={() => chk(`g${i}`)}>
-                <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
-                  <span style={{ fontSize: 14, fontWeight: 600, color: C.text }}>{m.from}</span>
-                  <span style={{ fontSize: 12, color: C.muted }}>{m.date}</span>
-                </div>
-                <div style={{ fontSize: 13, color: C.mid, marginTop: 2 }}>{m.subject}</div>
-                <div style={{ fontSize: 12, color: C.muted, marginTop: 2 }}>{m.note}</div>
-              </CkRow>
-            ))}
-          </Acc>
-
-          <Acc title="Week Ahead" icon="📅" open={open.week} tog={() => tog("week")}>
-            {futureDays.map(day => {
-              const evs = CALENDAR.filter(e => e.day === day);
-              if (!evs.length) return null;
-              return (
-                <div key={day}>
-                  <div style={{ padding: "6px 14px", fontSize: 12, fontWeight: 600, color: C.accent, letterSpacing: 0.5, background: "#13151d", borderTop: `1px solid ${C.div}` }}>{day}</div>
-                  {evs.map((e, i) => <EvRow key={i} ev={e} />)}
-                </div>
-              );
-            })}
-          </Acc>
-
-          <Acc title="Weekly Priorities" icon="📋" open={open.pri} tog={() => tog("pri")} badge={`${WEEKLY.filter(w => w.done).length}/${WEEKLY.length}`}>
-            {WEEKLY.map((p, i) => (
-              <div key={i} style={{ padding: "8px 14px", borderTop: i ? `1px solid ${C.div}` : "none", display: "flex", gap: 10, alignItems: "flex-start", opacity: p.done ? 0.55 : 1 }}>
-                <span style={{ fontSize: 15, marginTop: 1 }}>{p.done ? "✅" : "⬜"}</span>
-                <span style={{ fontSize: 14, color: p.done ? C.muted : C.text, textDecoration: p.done ? "line-through" : "none", lineHeight: 1.5 }}>{p.text}</span>
-              </div>
-            ))}
-          </Acc>
-
-          <Acc title="Blockers" icon="⚠️" open={open.block} tog={() => tog("block")}>
-            <div style={{ padding: "16px 14px", textAlign: "center", color: C.ok, fontSize: 14, fontWeight: 500 }}>✓ No active blockers</div>
-          </Acc>
-        </div>
-      </div>
-
-      <div style={{ textAlign: "center", padding: "14px 0 8px", fontSize: 11, color: C.muted, fontFamily: "'JetBrains Mono',monospace" }}>
-        Generated {new Date().toLocaleTimeString("en-US", { hour: "2-digit", minute: "2-digit" })} ET · Linear · Calendar · Gmail
-      </div>
+  if (!ready) return (
+    <div className="min-h-screen bg-gray-50 flex items-center justify-center text-gray-400 text-sm">
+      Loading…
     </div>
   );
-}
 
-// ─── ATOMS ───
-function MCh({ label, days, hot }) {
-  const col = hot && days <= 10 ? C.warm : C.mid;
   return (
-    <div style={{ background: C.warmBg, border: `1px solid ${col}44`, borderRadius: 8, padding: "5px 12px", display: "flex", alignItems: "center", gap: 6 }}>
-      <span style={{ fontSize: 12, color: C.mid, fontFamily: "'JetBrains Mono',monospace" }}>{label}</span>
-      <span style={{ fontSize: 20, fontWeight: 700, color: col, fontFamily: "'JetBrains Mono',monospace" }}>{days}d</span>
-    </div>
-  );
-}
+    <div className="min-h-screen bg-gray-50 text-sm font-sans">
 
-function St({ label, v, color }) {
-  return (
-    <div style={{ display: "flex", alignItems: "center", gap: 6 }}>
-      <div style={{ width: 8, height: 8, borderRadius: "50%", background: color }} />
-      <span style={{ fontSize: 13, color: C.muted }}>{label}:</span>
-      <span style={{ fontSize: 14, fontWeight: 600, color: C.text, fontFamily: "'JetBrains Mono',monospace" }}>{v}</span>
-    </div>
-  );
-}
-
-function SmBtn({ onClick, label, active }) {
-  return <button onClick={onClick} style={{ background: active ? C.okBg : "transparent", color: active ? C.ok : C.muted, border: `1px solid ${C.border}`, borderRadius: 5, padding: "3px 10px", fontSize: 11, cursor: "pointer", fontFamily: "inherit", fontWeight: 500 }}>{label}</button>;
-}
-
-function Acc({ title, icon, open, tog, badge, right, children }) {
-  return (
-    <div style={{ background: C.card, borderRadius: 10, border: `1px solid ${C.border}`, overflow: "hidden" }}>
-      <button onClick={tog} aria-expanded={open} style={{ width: "100%", padding: "10px 14px", background: "transparent", border: "none", cursor: "pointer", display: "flex", alignItems: "center", gap: 8, color: C.text, fontFamily: "inherit", textAlign: "left" }}>
-        <span style={{ fontSize: 13, transform: open ? "rotate(90deg)" : "rotate(0)", transition: "transform 0.15s", display: "inline-block", color: C.mid }}>▶</span>
-        <span style={{ fontSize: 15, fontWeight: 600 }}>{icon} {title}</span>
-        {badge && <span style={{ fontSize: 11, fontWeight: 600, background: C.accent + "22", color: C.accent, padding: "2px 7px", borderRadius: 4, fontFamily: "'JetBrains Mono',monospace" }}>{badge}</span>}
-        <div style={{ flex: 1 }} />
-        {right && <span onClick={e => e.stopPropagation()}>{right}</span>}
-      </button>
-      {open && <div style={{ borderTop: `1px solid ${C.div}` }}>{children}</div>}
-    </div>
-  );
-}
-
-function CkRow({ ck, onCk, children }) {
-  return (
-    <div style={{ padding: "10px 14px", borderTop: `1px solid ${C.div}`, display: "flex", gap: 10, alignItems: "flex-start", opacity: ck ? 0.45 : 1, transition: "opacity 0.15s" }}>
-      <input type="checkbox" checked={!!ck} onChange={onCk} aria-label="Mark complete" style={{ marginTop: 4, accentColor: C.accent, cursor: "pointer", minWidth: 16, width: 16, height: 16 }} />
-      <div style={{ flex: 1, minWidth: 0 }}>{children}</div>
-    </div>
-  );
-}
-
-function EvRow({ ev }) {
-  const s = TS[ev.type] || TS.work;
-  return (
-    <div style={{ padding: "8px 14px", borderTop: `1px solid ${C.div}`, display: "flex", alignItems: "center", gap: 10 }}>
-      <span style={{ fontSize: 11, fontWeight: 600, color: s.c, minWidth: 50, fontFamily: "'JetBrains Mono',monospace", letterSpacing: 0.3 }}>{s.l}</span>
-      <span style={{ fontSize: 14, color: C.text, fontWeight: 500, flex: 1 }}>
-        {ev.title}{ev.detail && <span style={{ color: C.mid, fontWeight: 400 }}> — {ev.detail}</span>}
-      </span>
-      <span style={{ fontSize: 12, color: C.mid, fontFamily: "'JetBrains Mono',monospace", whiteSpace: "nowrap" }}>{ev.time}</span>
-    </div>
-  );
-}
-
-function IRow({ iss, ck, onCk }) {
-  const pb = PB[iss.project] || PB.C2A;
-  const pc = PC[iss.priority];
-  return (
-    <CkRow ck={ck} onCk={onCk}>
-      <div style={{ display: "flex", alignItems: "center", gap: 6, flexWrap: "wrap", marginBottom: 3 }}>
-        <span style={{ fontSize: 12, fontFamily: "'JetBrains Mono',monospace", color: pb.c, background: pb.b, padding: "2px 6px", borderRadius: 3 }}>{iss.id}</span>
-        <span style={{ fontSize: 11, fontWeight: 700, color: pb.c, letterSpacing: 0.5 }}>{iss.project}</span>
-        {iss.milestone && <span style={{ fontSize: 11, color: C.muted, fontFamily: "'JetBrains Mono',monospace" }}>{iss.milestone}</span>}
-        {iss.priority && <span style={{ fontSize: 11, fontWeight: 600, color: pc || C.muted }}>{iss.priority}</span>}
-      </div>
-      <div style={{ fontSize: 14, color: ck ? C.muted : C.text, textDecoration: ck ? "line-through" : "none", lineHeight: 1.45 }}>{iss.title}</div>
-      {(iss.assignee || iss.due) && (
-        <div style={{ display: "flex", gap: 10, marginTop: 3 }}>
-          {iss.assignee && <span style={{ fontSize: 12, color: C.mid }}>→ {iss.assignee}</span>}
-          {iss.due && <span style={{ fontSize: 12, color: C.warm, fontFamily: "'JetBrains Mono',monospace" }}>Due {iss.due}</span>}
+      {toast && (
+        <div className="fixed top-4 right-4 z-50 bg-gray-900 text-white text-xs px-4 py-2 rounded-lg shadow-xl">
+          {toast}
         </div>
       )}
-    </CkRow>
-  );
-}
 
-function Empty({ text }) {
-  return <div style={{ padding: "16px 14px", textAlign: "center", fontSize: 14, color: C.muted }}>{text}</div>;
+      {/* ── Header ── */}
+      <div className="bg-white border-b border-gray-200 px-5 py-4">
+        <div className="max-w-4xl mx-auto flex items-center justify-between">
+          <div>
+            <div className="flex items-center gap-2">
+              <span className="text-xl">🎯</span>
+              <h1 className="text-base font-semibold text-gray-900">ThriveIEP Dashboard</h1>
+            </div>
+            <p className="text-xs text-gray-400 mt-0.5">{META.date} · {META.weekLabel}</p>
+          </div>
+          <div className="flex gap-3">
+            <div className="text-center px-3 py-1.5 rounded-lg bg-yellow-50 border border-yellow-200">
+              <div className="text-xl font-bold text-yellow-700 leading-none">{META.m2Days}</div>
+              <div className="text-xs text-yellow-600 mt-0.5">days · M2</div>
+            </div>
+            <div className="text-center px-3 py-1.5 rounded-lg bg-purple-50 border border-purple-200">
+              <div className="text-xl font-bold text-purple-700 leading-none">{META.m3Days}</div>
+              <div className="text-xs text-purple-600 mt-0.5">days · M3</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* ── Tabs ── */}
+      <div className="bg-white border-b border-gray-200 px-5">
+        <div className="max-w-4xl mx-auto flex">
+          {TABS.map(t => (
+            <button key={t.id} onClick={() => setTab(t.id)}
+              className={`px-4 py-3 text-xs font-medium border-b-2 transition-colors whitespace-nowrap ${
+                tab === t.id ? "border-blue-600 text-blue-600" : "border-transparent text-gray-500 hover:text-gray-700"
+              }`}>
+              {t.label}
+            </button>
+          ))}
+        </div>
+      </div>
+
+      {/* ── Sticky action bar ── */}
+      <div className="sticky top-0 z-20 bg-white/95 backdrop-blur border-b border-gray-100 px-5 py-2 shadow-sm">
+        <div className="max-w-4xl mx-auto flex gap-2 justify-end">
+          <button onClick={() => copy(FOCUS_PICKS.map((p,i) => `${i+1}. ${p.icon} ${p.title}\n   Source: ${p.source}\n   Why: ${p.why}`).join("\n\n"), "Focus picks copied!")}
+            className="text-xs px-3 py-1.5 rounded-md bg-blue-600 text-white hover:bg-blue-700 transition-colors">Copy Focus Picks</button>
+          <button onClick={() => copy(Object.keys(checked).filter(k => checked[k]).join(", ") || "(none)", "Copied!")}
+            className="text-xs px-3 py-1.5 rounded-md border border-gray-300 text-gray-600 hover:bg-gray-50 transition-colors">Copy Checked</button>
+          <button onClick={clearAll}
+            className="text-xs px-3 py-1.5 rounded-md border border-gray-300 text-gray-500 hover:bg-gray-50 transition-colors">Clear All</button>
+        </div>
+      </div>
+
+      {/* ── Content ── */}
+      <div className="max-w-4xl mx-auto px-5 py-6 space-y-6">
+
+        {/* TODAY */}
+        {tab === "today" && <>
+          <section>
+            <h2 className="text-xs font-semibold uppercase tracking-wider text-gray-400 mb-3">⭐ Focus Picks</h2>
+            <div className="space-y-3">
+              {FOCUS_PICKS.map((p, i) => {
+                const key = `focus-${i}`;
+                const done = !!checked[key];
+                return (
+                  <div key={i} onClick={() => toggle(key)}
+                    className={`bg-white border rounded-xl p-4 flex gap-3 cursor-pointer hover:border-blue-300 shadow-sm transition-colors ${done ? "opacity-40" : ""}`}>
+                    <input type="checkbox" checked={done} readOnly className="mt-0.5 h-4 w-4 accent-blue-600 shrink-0" />
+                    <div className="flex-1">
+                      <div className={`font-medium text-gray-900 ${done ? "line-through" : ""}`}>{p.icon} {p.title}</div>
+                      <div className="text-xs text-gray-500 mt-1.5 space-y-0.5">
+                        <div>
+                          <span className="font-medium text-gray-600">Source:</span>{" "}
+                          <a href={p.sourceUrl} target="_blank" rel="noreferrer" className="text-blue-600 hover:underline" onClick={e => e.stopPropagation()}>{p.source}</a>
+                        </div>
+                        <div><span className="font-medium text-gray-600">Why now:</span> {p.why}</div>
+                      </div>
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+          </section>
+
+          <section>
+            <h2 className="text-xs font-semibold uppercase tracking-wider text-gray-400 mb-3">📅 Today's Calendar</h2>
+            <div className="space-y-2">
+              {CALENDAR_TODAY.map((ev, i) => (
+                <div key={i} className={`border rounded-xl p-3 flex gap-3 ${EV_STYLE[ev.type] || "bg-white border-gray-200"}`}>
+                  <div className="text-xs font-mono font-medium w-16 shrink-0 pt-0.5 text-gray-500">{ev.time}</div>
+                  <div className="flex-1">
+                    <div className="font-medium text-gray-900">{ev.title}</div>
+                    {ev.attendees?.length > 0 && <div className="text-xs text-gray-500 mt-0.5">{ev.attendees.join(", ")}</div>}
+                    {ev.alert && (
+                      <div className="text-xs text-amber-700 bg-amber-50 border border-amber-200 rounded px-2 py-1 mt-1.5">⚠ {ev.alert}</div>
+                    )}
+                    {ev.zoom && (
+                      <a href={ev.zoom} target="_blank" rel="noreferrer" className="text-xs text-blue-600 hover:underline mt-1.5 block">Join Zoom →</a>
+                    )}
+                  </div>
+                </div>
+              ))}
+            </div>
+
+            <h2 className="text-xs font-semibold uppercase tracking-wider text-gray-400 mt-5 mb-3">📅 Upcoming This Week</h2>
+            <div className="space-y-2">
+              {CALENDAR_UPCOMING.map((ev, i) => (
+                <div key={i} className={`border rounded-xl p-3 flex gap-3 ${EV_STYLE[ev.type] || "bg-white border-gray-200"}`}>
+                  <div className="text-xs font-mono w-28 shrink-0 pt-0.5 text-gray-500">{ev.date}<br/>{ev.time}</div>
+                  <div className="flex-1">
+                    <div className="font-medium text-gray-900">{ev.title}</div>
+                    {ev.attendees?.length > 0 && <div className="text-xs text-gray-500 mt-0.5">{ev.attendees.join(", ")}</div>}
+                  </div>
+                </div>
+              ))}
+            </div>
+          </section>
+
+          <div className="bg-green-50 border border-green-200 rounded-xl px-4 py-3 text-xs text-green-800">
+            <span className="font-semibold">🟢 Blockers:</span> None currently.
+          </div>
+        </>}
+
+        {/* ISSUES */}
+        {tab === "issues" && <>
+          <section>
+            <h2 className="text-xs font-semibold uppercase tracking-wider text-gray-400 mb-3">🔄 In Progress ({ACTIVE_ISSUES.length})</h2>
+            <div className="space-y-2">
+              {ACTIVE_ISSUES.map(i => <IssueRow key={i.id} issue={i} checked={checked} onToggle={toggle} />)}
+            </div>
+          </section>
+          <section>
+            <h2 className="text-xs font-semibold uppercase tracking-wider text-gray-400 mb-3 mt-2">📋 Todo ({TODO_ISSUES.length})</h2>
+            <div className="space-y-2">
+              {TODO_ISSUES.map(i => <IssueRow key={i.id} issue={i} checked={checked} onToggle={toggle} />)}
+            </div>
+          </section>
+        </>}
+
+        {/* NOTION FOCUS */}
+        {tab === "focus" && (
+          <section>
+            <h2 className="text-xs font-semibold uppercase tracking-wider text-gray-400 mb-1">📌 This Week's Focus</h2>
+            <p className="text-xs text-gray-400 mb-4">{META.weekLabel} · from Notion PM Hub</p>
+            <div className="space-y-2">
+              {NOTION_FOCUS.map((item, i) => {
+                const key = `notion-${i}`;
+                const done = item.done || !!checked[key];
+                return (
+                  <div key={i} onClick={() => !item.done && toggle(key)}
+                    className={`bg-white border rounded-lg p-3 flex gap-3 cursor-pointer hover:border-blue-200 transition-colors ${done ? "opacity-40" : ""}`}>
+                    <input type="checkbox" checked={done} readOnly className="mt-0.5 h-4 w-4 accent-blue-600 shrink-0" />
+                    <span className={`text-sm text-gray-800 ${done ? "line-through text-gray-400" : ""}`}>{item.text}</span>
+                  </div>
+                );
+              })}
+            </div>
+          </section>
+        )}
+
+        {/* GMAIL */}
+        {tab === "gmail" && (
+          <section>
+            <h2 className="text-xs font-semibold uppercase tracking-wider text-gray-400 mb-3">📧 Unread Important (last 3 days)</h2>
+            <div className="space-y-3">
+              {GMAIL.map((msg, i) => (
+                <div key={i} className="bg-white border rounded-xl p-4">
+                  <div className="flex items-start justify-between gap-2">
+                    <div>
+                      <div className="font-medium text-gray-900">{msg.subject}</div>
+                      <div className="text-xs text-gray-500 mt-0.5">From: {msg.from}</div>
+                    </div>
+                    <span className={`text-xs px-2 py-0.5 rounded-full shrink-0 font-medium ${
+                      msg.action ? "bg-red-100 text-red-700" : "bg-gray-100 text-gray-500"
+                    }`}>{msg.tag}</span>
+                  </div>
+                  <p className="text-xs text-gray-600 mt-2 leading-relaxed">{msg.preview}</p>
+                </div>
+              ))}
+            </div>
+          </section>
+        )}
+
+        {/* STANDUP */}
+        {tab === "standup" && <>
+          <section>
+            <h2 className="text-xs font-semibold uppercase tracking-wider text-gray-400 mb-3">✅ Completed Last 48h</h2>
+            <div className="space-y-2">
+              {COMPLETED.map(issue => (
+                <div key={issue.id} className="bg-white border border-green-100 rounded-lg p-3 flex items-start gap-3 opacity-80">
+                  <span className="text-green-500 mt-0.5 shrink-0">✓</span>
+                  <div>
+                    <span className="font-medium text-gray-700 text-xs">{issue.id}</span>
+                    <span className="text-gray-600 text-xs"> — {issue.title}</span>
+                    <div className="text-xs text-gray-400 mt-0.5">{issue.when}</div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </section>
+
+          <section className="bg-blue-50 border border-blue-200 rounded-xl p-4">
+            <h3 className="text-xs font-semibold text-blue-800 mb-2">📣 Standup Draft</h3>
+            <pre className="text-xs text-blue-700 leading-relaxed whitespace-pre-wrap font-sans">{STANDUP_TEXT}</pre>
+            <button
+              onClick={() => copy(STANDUP_TEXT, "Standup copied!")}
+              className="mt-3 text-xs px-3 py-1.5 rounded-md bg-blue-600 text-white hover:bg-blue-700 transition-colors">
+              Copy Standup
+            </button>
+          </section>
+        </>}
+
+      </div>
+    </div>
+  );
 }
