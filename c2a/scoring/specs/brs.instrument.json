@@ -1,0 +1,56 @@
+{
+  "id": "brs",
+  "version": "1.0.0",
+  "metadata": {
+    "name": "Brief Resilience Scale",
+    "abbreviation": "BRS",
+    "authors": "Smith, B. W., Dalen, J., Wiggins, K., Steger, M. F., & Tooley, E.",
+    "year": 2008,
+    "citation": "Smith, B. W., Dalen, J., Wiggins, K., Steger, M. F., & Tooley, E. (2008). The Brief Resilience Scale: Assessing the ability to bounce back. International Journal of Behavioral Medicine, 15(3), 194-200.",
+    "item_count": 6,
+    "tier": "core",
+    "license": "Published instrument, freely available for research use",
+    "stem": null
+  },
+  "response_format": {
+    "type": "likert",
+    "min": 1,
+    "max": 5,
+    "step": 1,
+    "labels": {
+      "1": "Strongly disagree",
+      "2": "Disagree",
+      "3": "Neutral",
+      "4": "Agree",
+      "5": "Strongly agree"
+    }
+  },
+  "items": [
+    { "id": "brs_01", "position": 1, "text": "I tend to bounce back quickly after hard times.", "reverse_scored": false, "subscale": "resilience" },
+    { "id": "brs_02", "position": 2, "text": "I have a hard time making it through stressful events.", "reverse_scored": true, "subscale": "resilience" },
+    { "id": "brs_03", "position": 3, "text": "It does not take me long to recover from a stressful event.", "reverse_scored": false, "subscale": "resilience" },
+    { "id": "brs_04", "position": 4, "text": "It is hard for me to snap back when something bad happens.", "reverse_scored": true, "subscale": "resilience" },
+    { "id": "brs_05", "position": 5, "text": "I usually come through difficult times with little trouble.", "reverse_scored": false, "subscale": "resilience" },
+    { "id": "brs_06", "position": 6, "text": "I tend to take a long time to get over set-backs in my life.", "reverse_scored": true, "subscale": "resilience" }
+  ],
+  "subscales": [
+    {
+      "id": "resilience",
+      "name": "Resilience",
+      "item_ids": ["brs_01", "brs_02", "brs_03", "brs_04", "brs_05", "brs_06"]
+    }
+  ],
+  "validation": {
+    "cronbach_alpha": {
+      "resilience": 0.91
+    },
+    "sample_description": "Multiple samples including undergraduate students and cardiac rehabilitation patients (Smith et al., 2008)",
+    "normative_data": {
+      "mean": 3.53,
+      "sd": 0.81,
+      "low_resilience_cutoff": 3.00,
+      "normal_resilience_range": [3.00, 4.30],
+      "high_resilience_cutoff": 4.31
+    }
+  }
+}

@@ -1,0 +1,64 @@
+{
+  "id": "adexi",
+  "version": "1.0.0",
+  "metadata": {
+    "name": "Adult Executive Functioning Inventory",
+    "abbreviation": "ADEXI",
+    "authors": "Holst, Y. & Thorell, L. B.",
+    "year": 2018,
+    "citation": "Holst, Y., & Thorell, L. B. (2018). Adult Executive Functioning Inventory (ADEXI): Validity, reliability, and relations to ADHD. International Journal of Methods in Psychiatric Research, 27(1), e1567.",
+    "item_count": 14,
+    "tier": "core",
+    "license": "Freely available at chexi.se",
+    "stem": null
+  },
+  "response_format": {
+    "type": "likert",
+    "min": 1,
+    "max": 5,
+    "step": 1,
+    "labels": {
+      "1": "Definitely not true",
+      "2": "Not true",
+      "3": "Partly true",
+      "4": "True",
+      "5": "Definitely true"
+    }
+  },
+  "items": [
+    { "id": "adexi_01", "position": 1, "text": "I have difficulty remembering lengthy instructions.", "reverse_scored": false, "subscale": "working_memory" },
+    { "id": "adexi_02", "position": 2, "text": "I sometimes have difficulty remembering what I am doing in the middle of an activity.", "reverse_scored": false, "subscale": "working_memory" },
+    { "id": "adexi_03", "position": 3, "text": "I have a tendency to do things without first thinking about what could happen.", "reverse_scored": false, "subscale": "inhibition" },
+    { "id": "adexi_04", "position": 4, "text": "I sometimes have difficulty stopping myself from doing something that I like even though someone tells me that it is not allowed.", "reverse_scored": false, "subscale": "inhibition" },
+    { "id": "adexi_05", "position": 5, "text": "When someone asks me to do several things, I sometimes remember only the first or last.", "reverse_scored": false, "subscale": "working_memory" },
+    { "id": "adexi_06", "position": 6, "text": "I sometimes have difficulty refraining from smiling or laughing in situations where it is inappropriate.", "reverse_scored": false, "subscale": "inhibition" },
+    { "id": "adexi_07", "position": 7, "text": "I have difficulty coming up with a different way of solving a problem when I get stuck.", "reverse_scored": false, "subscale": "working_memory" },
+    { "id": "adexi_08", "position": 8, "text": "When someone asks me to fetch something, I sometimes forget what I am supposed to fetch.", "reverse_scored": false, "subscale": "working_memory" },
+    { "id": "adexi_09", "position": 9, "text": "I have difficulty planning for an activity.", "reverse_scored": false, "subscale": "working_memory" },
+    { "id": "adexi_10", "position": 10, "text": "I sometimes have difficulty stopping an activity that I like.", "reverse_scored": false, "subscale": "inhibition" },
+    { "id": "adexi_11", "position": 11, "text": "I sometimes have difficulty understanding verbal instructions unless I am also shown how to do something.", "reverse_scored": false, "subscale": "working_memory" },
+    { "id": "adexi_12", "position": 12, "text": "I have difficulties with tasks or activities that involve several steps.", "reverse_scored": false, "subscale": "working_memory" },
+    { "id": "adexi_13", "position": 13, "text": "I have difficulty thinking ahead or learning from experience.", "reverse_scored": false, "subscale": "working_memory" },
+    { "id": "adexi_14", "position": 14, "text": "People that I meet sometimes seem to think that I am more lively/wilder compared to other people my age.", "reverse_scored": false, "subscale": "inhibition" }
+  ],
+  "subscales": [
+    {
+      "id": "working_memory",
+      "name": "Working Memory",
+      "item_ids": ["adexi_01", "adexi_02", "adexi_05", "adexi_07", "adexi_08", "adexi_09", "adexi_11", "adexi_12", "adexi_13"]
+    },
+    {
+      "id": "inhibition",
+      "name": "Inhibition",
+      "item_ids": ["adexi_03", "adexi_04", "adexi_06", "adexi_10", "adexi_14"]
+    }
+  ],
+  "validation": {
+    "cronbach_alpha": {
+      "working_memory": 0.90,
+      "inhibition": 0.77
+    },
+    "sample_description": "Adult community sample (Holst & Thorell, 2018)",
+    "normative_data": null
+  }
+}

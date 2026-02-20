@@ -1,0 +1,852 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>C2A Instrument Definition Schema — v2.0 (Final)</title>
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,300;8..60,400;8..60,600;8..60,700;8..60,800&family=Outfit:wght@300;400;500;600;700;800&family=Fira+Code:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #faf9f6;
+    --surface: #ffffff;
+    --ink: #1c1917;
+    --ink-secondary: #57534e;
+    --ink-muted: #a8a29e;
+    --accent: #0c4a42;
+    --accent-light: #e6f2ef;
+    --accent-mid: #b2d8cf;
+    --border: #e7e5e4;
+    --code-bg: #1c1917;
+    --code-fg: #e7e5e4;
+    --key-color: #7dd3c0;
+    --string-color: #fbbf24;
+    --type-color: #93c5fd;
+    --desc-color: #a8a29e;
+    --enum-color: #f9a8d4;
+    --number-color: #a78bfa;
+    --required-color: #fb923c;
+    --serif: 'Source Serif 4', Georgia, serif;
+    --sans: 'Outfit', system-ui, sans-serif;
+    --mono: 'Fira Code', 'Consolas', monospace;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: var(--serif);
+    background: var(--bg);
+    color: var(--ink);
+    line-height: 1.72;
+    font-size: 17px;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* ─── Page Header ─── */
+  .page-header {
+    background: linear-gradient(165deg, #0c4a42 0%, #1a3a35 40%, #0f2b27 100%);
+    padding: 4.5rem 2rem 3.5rem;
+    color: #fff;
+    position: relative;
+    overflow: hidden;
+  }
+  .page-header::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    right: -20%;
+    width: 600px;
+    height: 600px;
+    background: radial-gradient(circle, rgba(125,211,192,0.08) 0%, transparent 70%);
+    border-radius: 50%;
+  }
+  .page-header::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, #7dd3c0, #fbbf24, #f9a8d4, #93c5fd);
+  }
+  .header-inner {
+    max-width: 820px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 1;
+  }
+  .header-inner h1 {
+    font-family: var(--sans);
+    font-weight: 800;
+    font-size: clamp(2rem, 4.5vw, 2.8rem);
+    line-height: 1.15;
+    letter-spacing: -0.03em;
+    margin-bottom: 1rem;
+  }
+  .header-meta {
+    font-family: var(--sans);
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: rgba(255,255,255,0.6);
+    letter-spacing: 0.02em;
+  }
+  .header-meta strong {
+    color: #7dd3c0;
+    font-weight: 600;
+  }
+
+  /* ─── Table of Contents ─── */
+  .toc-bar {
+    background: var(--surface);
+    border-bottom: 1px solid var(--border);
+    padding: 0.8rem 2rem;
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    backdrop-filter: blur(12px);
+    background: rgba(255,255,255,0.92);
+  }
+  .toc-inner {
+    max-width: 820px;
+    margin: 0 auto;
+    display: flex;
+    gap: 0.2rem;
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+  .toc-inner::-webkit-scrollbar { display: none; }
+  .toc-inner a {
+    font-family: var(--sans);
+    font-size: 0.72rem;
+    font-weight: 600;
+    color: var(--ink-muted);
+    text-decoration: none;
+    padding: 4px 10px;
+    border-radius: 5px;
+    white-space: nowrap;
+    transition: all 0.15s;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+  }
+  .toc-inner a:hover {
+    background: var(--accent-light);
+    color: var(--accent);
+  }
+
+  /* ─── Content ─── */
+  .content {
+    max-width: 820px;
+    margin: 0 auto;
+    padding: 3rem 2rem 6rem;
+  }
+
+  /* ─── Headings ─── */
+  h2 {
+    font-family: var(--sans);
+    font-weight: 800;
+    font-size: 1.65rem;
+    letter-spacing: -0.025em;
+    color: var(--ink);
+    margin-top: 4rem;
+    margin-bottom: 1rem;
+    padding-top: 2rem;
+    border-top: 2px solid var(--border);
+    scroll-margin-top: 4rem;
+  }
+  h2:first-of-type { border-top: none; margin-top: 0; padding-top: 0; }
+
+  /* ─── Paragraphs ─── */
+  p { margin-bottom: 1.2rem; color: var(--ink-secondary); }
+
+  /* ─── Bold + Strong ─── */
+  strong { color: var(--ink); font-weight: 700; }
+
+  /* ─── Design Principles (ordered list) ─── */
+  .principles {
+    list-style: none;
+    counter-reset: principle;
+    margin: 1rem 0 1.5rem;
+    padding: 0;
+  }
+  .principles li {
+    counter-increment: principle;
+    display: flex;
+    gap: 0.8rem;
+    align-items: flex-start;
+    margin-bottom: 0.6rem;
+    color: var(--ink-secondary);
+  }
+  .principles li::before {
+    content: counter(principle);
+    font-family: var(--sans);
+    font-weight: 800;
+    font-size: 0.7rem;
+    color: var(--accent);
+    background: var(--accent-light);
+    width: 24px;
+    height: 24px;
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+  .principles li strong { color: var(--accent); }
+
+  /* ─── Corrections list ─── */
+  .corrections {
+    list-style: none;
+    margin: 0.8rem 0 1.5rem;
+    padding: 0;
+  }
+  .corrections li {
+    padding: 0.35rem 0 0.35rem 1.2rem;
+    position: relative;
+    color: var(--ink-secondary);
+    font-size: 0.92rem;
+  }
+  .corrections li::before {
+    content: '–';
+    position: absolute;
+    left: 0;
+    color: var(--ink-muted);
+    font-weight: 700;
+  }
+
+  /* ─── Tables ─── */
+  .table-wrap {
+    overflow-x: auto;
+    margin: 1.2rem 0 1.5rem;
+    border-radius: 10px;
+    border: 1px solid var(--border);
+    background: var(--surface);
+  }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-family: var(--sans);
+    font-size: 0.82rem;
+  }
+  thead {
+    background: #f5f3f0;
+  }
+  th {
+    padding: 0.65rem 0.8rem;
+    text-align: left;
+    font-weight: 700;
+    color: var(--ink);
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    border-bottom: 2px solid var(--border);
+    white-space: nowrap;
+  }
+  td {
+    padding: 0.55rem 0.8rem;
+    border-bottom: 1px solid #f0eeeb;
+    color: var(--ink-secondary);
+    vertical-align: top;
+  }
+  tr:last-child td { border-bottom: none; }
+  tr:hover td { background: #faf8f5; }
+  .total-row td {
+    font-weight: 700;
+    color: var(--ink);
+    border-top: 2px solid var(--border);
+    background: #f5f3f0;
+  }
+  td .badge {
+    display: inline-block;
+    padding: 1px 8px;
+    border-radius: 10px;
+    font-size: 0.68rem;
+    font-weight: 700;
+  }
+  .badge-core { background: #dcfce7; color: #166534; }
+  .badge-optional { background: #fef3c7; color: #92400e; }
+
+  /* ─── Code Blocks (JSON Schema) ─── */
+  .code-block {
+    background: var(--code-bg);
+    border-radius: 12px;
+    margin: 1.2rem 0 1.8rem;
+    overflow: hidden;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+  }
+  .code-label {
+    font-family: var(--sans);
+    font-size: 0.68rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: #78716c;
+    padding: 0.6rem 1.2rem;
+    background: #292524;
+    border-bottom: 1px solid #3f3a36;
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+  }
+  .code-dot {
+    width: 8px; height: 8px; border-radius: 50%;
+  }
+  pre {
+    padding: 1.2rem 1.4rem;
+    overflow-x: auto;
+    font-family: var(--mono);
+    font-size: 0.78rem;
+    line-height: 1.65;
+    color: var(--code-fg);
+    tab-size: 2;
+  }
+  pre::-webkit-scrollbar { height: 6px; }
+  pre::-webkit-scrollbar-thumb { background: #57534e; border-radius: 3px; }
+
+  /* Syntax highlighting classes */
+  .sk { color: var(--key-color); }       /* keys */
+  .ss { color: var(--string-color); }    /* strings */
+  .st { color: var(--type-color); }      /* types */
+  .sd { color: var(--desc-color); font-style: italic; }  /* descriptions */
+  .se { color: var(--enum-color); }      /* enums */
+  .sn { color: var(--number-color); }    /* numbers */
+  .sr { color: var(--required-color); }  /* required */
+  .sp { color: #78716c; }               /* punctuation */
+  .sc { color: #6b7280; font-style: italic; } /* comments (used for annotations) */
+
+  /* ─── File Tree ─── */
+  .file-tree {
+    background: var(--code-bg);
+    border-radius: 12px;
+    padding: 1.2rem 1.4rem;
+    font-family: var(--mono);
+    font-size: 0.8rem;
+    line-height: 1.8;
+    color: var(--code-fg);
+    margin: 1.2rem 0 1.8rem;
+  }
+  .file-tree .dir { color: var(--key-color); font-weight: 600; }
+  .file-tree .file { color: var(--string-color); }
+  .file-tree .ellip { color: #78716c; }
+
+  /* ─── Callout ─── */
+  .callout {
+    border-left: 4px solid var(--accent);
+    background: var(--accent-light);
+    padding: 1rem 1.3rem;
+    border-radius: 0 8px 8px 0;
+    margin: 1.2rem 0 1.5rem;
+    font-size: 0.92rem;
+    color: var(--accent);
+  }
+  .callout strong { color: #0a3d36; }
+
+  /* ─── Inline code ─── */
+  code {
+    font-family: var(--mono);
+    font-size: 0.82em;
+    background: #f0eeeb;
+    padding: 2px 6px;
+    border-radius: 4px;
+    color: #92400e;
+    font-weight: 500;
+  }
+
+  /* ─── Next Steps ─── */
+  .steps {
+    list-style: none;
+    counter-reset: step;
+    margin: 1rem 0;
+    padding: 0;
+  }
+  .steps li {
+    counter-increment: step;
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    padding: 0.6rem 0;
+    border-bottom: 1px solid var(--border);
+    color: var(--ink-secondary);
+  }
+  .steps li:last-child { border-bottom: none; }
+  .steps li::before {
+    content: counter(step);
+    font-family: var(--sans);
+    font-weight: 800;
+    font-size: 0.85rem;
+    color: #fff;
+    background: var(--accent);
+    width: 30px;
+    height: 30px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  /* ─── Reverse scoring highlight ─── */
+  .formula-highlight {
+    display: inline-block;
+    background: #1c1917;
+    color: var(--string-color);
+    font-family: var(--mono);
+    font-size: 0.82rem;
+    padding: 4px 12px;
+    border-radius: 6px;
+    margin: 0.3rem 0;
+  }
+
+  /* ─── Responsive ─── */
+  @media (max-width: 640px) {
+    .page-header { padding: 3rem 1.2rem 2.5rem; }
+    .content { padding: 2rem 1.2rem 4rem; }
+    h2 { font-size: 1.35rem; }
+    pre { font-size: 0.7rem; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ═══════════════════════════════════════════ -->
+<!-- PAGE HEADER -->
+<!-- ═══════════════════════════════════════════ -->
+<header class="page-header">
+  <div class="header-inner">
+    <h1>C2A Instrument Definition Schema — v2.0 (Final)</h1>
+    <div class="header-meta">
+      <strong>THR-32 Deliverable</strong> &nbsp;|&nbsp; Updated: 2026-02-10 &nbsp;|&nbsp; Author: Eric (via Claude PM Copilot)
+    </div>
+  </div>
+</header>
+
+<!-- ═══════════════════════════════════════════ -->
+<!-- TABLE OF CONTENTS -->
+<!-- ═══════════════════════════════════════════ -->
+<nav class="toc-bar">
+  <div class="toc-inner">
+    <a href="#overview">Overview</a>
+    <a href="#battery">Battery Summary</a>
+    <a href="#instrument-schema">Instrument Schema</a>
+    <a href="#scoring-schema">Scoring Schema</a>
+    <a href="#sota">SOTA Validation</a>
+    <a href="#response-ref">Response Formats</a>
+    <a href="#file-naming">File Naming</a>
+    <a href="#next-steps">Next Steps</a>
+  </div>
+</nav>
+
+<!-- ═══════════════════════════════════════════ -->
+<!-- CONTENT -->
+<!-- ═══════════════════════════════════════════ -->
+<main class="content">
+
+<!-- ─── OVERVIEW ─── -->
+<h2 id="overview">Overview</h2>
+
+<p>This document defines the JSON schema for encoding psychometric instruments in the C2A assessment battery. Each instrument produces a self-describing definition file consumed by the survey UI and scoring engine.</p>
+
+<p><strong>Design Principles:</strong></p>
+<ol class="principles">
+  <li><strong>Self-describing</strong> — each file contains everything needed to administer and validate the instrument</li>
+  <li><strong>Separated from scoring</strong> — instrument definitions are immutable; scoring specifications are configurable (see Scoring Specification Schema below)</li>
+  <li><strong>Implementation-friendly</strong> — JSON consumable directly by TypeScript/Next.js</li>
+  <li><strong>Psychometrically faithful</strong> — original item numbering preserved; publication-aligned</li>
+</ol>
+
+<!-- ─── BATTERY SUMMARY ─── -->
+<h2 id="battery">Battery Summary (Corrected)</h2>
+
+<div class="table-wrap">
+<table>
+  <thead>
+    <tr><th>#</th><th>Instrument</th><th>Items</th><th>Core/Optional</th><th>Subscale Split</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>1</td><td>ADEXI</td><td>14</td><td><span class="badge badge-core">Core</span></td><td>Working Memory (9), Inhibition (5)</td></tr>
+    <tr><td>2</td><td>CFS</td><td>12</td><td><span class="badge badge-core">Core</span></td><td>Single scale (cognitive flexibility)</td></tr>
+    <tr><td>3</td><td>CAAS-SF</td><td>12</td><td><span class="badge badge-core">Core</span></td><td>Concern (3), Control (3), Curiosity (3), Confidence (3)</td></tr>
+    <tr><td>4</td><td>IRI (2 subscales)</td><td>14</td><td><span class="badge badge-core">Core</span></td><td>Perspective Taking (7), Empathic Concern (7)</td></tr>
+    <tr><td>5</td><td>SPCC</td><td>12</td><td><span class="badge badge-core">Core</span></td><td>4 contexts × 3 receivers matrix</td></tr>
+    <tr><td>6</td><td>BRS</td><td>6</td><td><span class="badge badge-core">Core</span></td><td>Single scale (resilience)</td></tr>
+    <tr><td>7</td><td>Team Psych Safety</td><td>7</td><td><span class="badge badge-core">Core</span></td><td>Single scale (psychological safety)</td></tr>
+    <tr><td>8</td><td>BPNSFS</td><td>24</td><td><span class="badge badge-optional">Optional</span></td><td>6 subscales (3 needs × satisfaction/frustration)</td></tr>
+    <tr><td>9</td><td>GMS-Bookends</td><td><strong>10</strong></td><td><span class="badge badge-optional">Optional</span></td><td>Intrinsic Motivation (3), External Regulation (4), Amotivation (3)</td></tr>
+    <tr><td>10</td><td>LCQ-6</td><td>6</td><td><span class="badge badge-optional">Optional</span></td><td>Single scale (autonomy support)</td></tr>
+    <tr class="total-row"><td></td><td><strong>Total</strong></td><td><strong>117</strong></td><td></td><td></td></tr>
+  </tbody>
+</table>
+</div>
+
+<p><strong>Corrections from v1:</strong></p>
+<ul class="corrections">
+  <li>ADEXI: 9 WM / 5 Inhibition (not 7/7)</li>
+  <li>GMS-Bookends: 10 items (not 9) — kept all 4 External Regulation items</li>
+  <li>CFS confirmed as correct name (not CFI) — THR-19 needs update</li>
+  <li>Battery total: 117 items (not 122 — original handoff arithmetic was wrong)</li>
+</ul>
+
+<!-- ─── INSTRUMENT DEFINITION SCHEMA ─── -->
+<h2 id="instrument-schema">Instrument Definition Schema</h2>
+
+<div class="code-block">
+  <div class="code-label">
+    <span class="code-dot" style="background:#ef4444"></span>
+    <span class="code-dot" style="background:#f59e0b"></span>
+    <span class="code-dot" style="background:#22c55e"></span>
+    JSON Schema — Instrument Definition
+  </div>
+<pre><span class="sp">{</span>
+  <span class="sk">"$schema"</span><span class="sp">:</span> <span class="ss">"http://json-schema.org/draft-07/schema#"</span><span class="sp">,</span>
+  <span class="sk">"title"</span><span class="sp">:</span> <span class="ss">"C2A Instrument Definition"</span><span class="sp">,</span>
+  <span class="sk">"description"</span><span class="sp">:</span> <span class="sd">"Defines a psychometric instrument for the C2A assessment battery"</span><span class="sp">,</span>
+  <span class="sk">"type"</span><span class="sp">:</span> <span class="st">"object"</span><span class="sp">,</span>
+  <span class="sk">"required"</span><span class="sp">:</span> <span class="sp">[</span><span class="sr">"id"</span><span class="sp">,</span> <span class="sr">"version"</span><span class="sp">,</span> <span class="sr">"metadata"</span><span class="sp">,</span> <span class="sr">"response_format"</span><span class="sp">,</span> <span class="sr">"items"</span><span class="sp">,</span> <span class="sr">"subscales"</span><span class="sp">],</span>
+  <span class="sk">"properties"</span><span class="sp">:</span> <span class="sp">{</span>
+
+    <span class="sk">"id"</span><span class="sp">:</span> <span class="sp">{</span>
+      <span class="sk">"type"</span><span class="sp">:</span> <span class="st">"string"</span><span class="sp">,</span>
+      <span class="sk">"description"</span><span class="sp">:</span> <span class="sd">"Unique instrument identifier (lowercase, snake_case)"</span><span class="sp">,</span>
+      <span class="sk">"examples"</span><span class="sp">:</span> <span class="sp">[</span><span class="ss">"adexi"</span><span class="sp">,</span> <span class="ss">"cfs"</span><span class="sp">,</span> <span class="ss">"brs"</span><span class="sp">,</span> <span class="ss">"gms_bookends"</span><span class="sp">]</span>
+    <span class="sp">},</span>
+
+    <span class="sk">"version"</span><span class="sp">:</span> <span class="sp">{</span>
+      <span class="sk">"type"</span><span class="sp">:</span> <span class="st">"string"</span><span class="sp">,</span>
+      <span class="sk">"description"</span><span class="sp">:</span> <span class="sd">"Semantic version of this definition file"</span><span class="sp">,</span>
+      <span class="sk">"pattern"</span><span class="sp">:</span> <span class="se">"^\\d+\\.\\d+\\.\\d+$"</span>
+    <span class="sp">},</span>
+
+    <span class="sk">"metadata"</span><span class="sp">:</span> <span class="sp">{</span>
+      <span class="sk">"type"</span><span class="sp">:</span> <span class="st">"object"</span><span class="sp">,</span>
+      <span class="sk">"required"</span><span class="sp">:</span> <span class="sp">[</span><span class="sr">"name"</span><span class="sp">,</span> <span class="sr">"abbreviation"</span><span class="sp">,</span> <span class="sr">"authors"</span><span class="sp">,</span> <span class="sr">"year"</span><span class="sp">,</span> <span class="sr">"citation"</span><span class="sp">,</span> <span class="sr">"item_count"</span><span class="sp">,</span> <span class="sr">"tier"</span><span class="sp">],</span>
+      <span class="sk">"properties"</span><span class="sp">:</span> <span class="sp">{</span>
+        <span class="sk">"name"</span><span class="sp">:</span> <span class="sp">{</span> <span class="sk">"type"</span><span class="sp">:</span> <span class="st">"string"</span> <span class="sp">},</span>
+        <span class="sk">"abbreviation"</span><span class="sp">:</span> <span class="sp">{</span> <span class="sk">"type"</span><span class="sp">:</span> <span class="st">"string"</span> <span class="sp">},</span>
+        <span class="sk">"authors"</span><span class="sp">:</span> <span class="sp">{</span> <span class="sk">"type"</span><span class="sp">:</span> <span class="st">"string"</span> <span class="sp">},</span>
+        <span class="sk">"year"</span><span class="sp">:</span> <span class="sp">{</span> <span class="sk">"type"</span><span class="sp">:</span> <span class="st">"integer"</span> <span class="sp">},</span>
+        <span class="sk">"citation"</span><span class="sp">:</span> <span class="sp">{</span> <span class="sk">"type"</span><span class="sp">:</span> <span class="st">"string"</span><span class="sp">,</span> <span class="sk">"description"</span><span class="sp">:</span> <span class="sd">"APA-style reference"</span> <span class="sp">},</span>
+        <span class="sk">"item_count"</span><span class="sp">:</span> <span class="sp">{</span> <span class="sk">"type"</span><span class="sp">:</span> <span class="st">"integer"</span> <span class="sp">},</span>
+        <span class="sk">"tier"</span><span class="sp">:</span> <span class="sp">{</span>
+          <span class="sk">"type"</span><span class="sp">:</span> <span class="st">"string"</span><span class="sp">,</span>
+          <span class="sk">"enum"</span><span class="sp">:</span> <span class="sp">[</span><span class="se">"core"</span><span class="sp">,</span> <span class="se">"optional"</span><span class="sp">],</span>
+          <span class="sk">"description"</span><span class="sp">:</span> <span class="sd">"core = scored for LE3 profile; optional = program evaluation"</span>
+        <span class="sp">},</span>
+        <span class="sk">"license"</span><span class="sp">:</span> <span class="sp">{</span>
+          <span class="sk">"type"</span><span class="sp">:</span> <span class="st">"string"</span><span class="sp">,</span>
+          <span class="sk">"description"</span><span class="sp">:</span> <span class="sd">"Licensing status and requirements"</span>
+        <span class="sp">},</span>
+        <span class="sk">"stem"</span><span class="sp">:</span> <span class="sp">{</span>
+          <span class="sk">"type"</span><span class="sp">:</span> <span class="sp">[</span><span class="st">"string"</span><span class="sp">,</span> <span class="st">"null"</span><span class="sp">],</span>
+          <span class="sk">"description"</span><span class="sp">:</span> <span class="sd">"Common stem text displayed above all items (e.g., 'In general, I do things...')"</span>
+        <span class="sp">}</span>
+      <span class="sp">}</span>
+    <span class="sp">},</span>
+
+    <span class="sk">"response_format"</span><span class="sp">:</span> <span class="sp">{</span>
+      <span class="sk">"type"</span><span class="sp">:</span> <span class="st">"object"</span><span class="sp">,</span>
+      <span class="sk">"required"</span><span class="sp">:</span> <span class="sp">[</span><span class="sr">"type"</span><span class="sp">,</span> <span class="sr">"min"</span><span class="sp">,</span> <span class="sr">"max"</span><span class="sp">],</span>
+      <span class="sk">"properties"</span><span class="sp">:</span> <span class="sp">{</span>
+        <span class="sk">"type"</span><span class="sp">:</span> <span class="sp">{</span>
+          <span class="sk">"type"</span><span class="sp">:</span> <span class="st">"string"</span><span class="sp">,</span>
+          <span class="sk">"enum"</span><span class="sp">:</span> <span class="sp">[</span><span class="se">"likert"</span><span class="sp">,</span> <span class="se">"self_estimation"</span><span class="sp">],</span>
+          <span class="sk">"description"</span><span class="sp">:</span> <span class="sd">"likert = discrete scale; self_estimation = continuous 0-100"</span>
+        <span class="sp">},</span>
+        <span class="sk">"min"</span><span class="sp">:</span> <span class="sp">{</span> <span class="sk">"type"</span><span class="sp">:</span> <span class="st">"number"</span> <span class="sp">},</span>
+        <span class="sk">"max"</span><span class="sp">:</span> <span class="sp">{</span> <span class="sk">"type"</span><span class="sp">:</span> <span class="st">"number"</span> <span class="sp">},</span>
+        <span class="sk">"step"</span><span class="sp">:</span> <span class="sp">{</span>
+          <span class="sk">"type"</span><span class="sp">:</span> <span class="sp">[</span><span class="st">"number"</span><span class="sp">,</span> <span class="st">"null"</span><span class="sp">],</span>
+          <span class="sk">"description"</span><span class="sp">:</span> <span class="sd">"Increment between valid responses. 1 for Likert, null for continuous"</span>
+        <span class="sp">},</span>
+        <span class="sk">"labels"</span><span class="sp">:</span> <span class="sp">{</span>
+          <span class="sk">"type"</span><span class="sp">:</span> <span class="st">"object"</span><span class="sp">,</span>
+          <span class="sk">"description"</span><span class="sp">:</span> <span class="sd">"Anchor labels keyed by numeric value"</span><span class="sp">,</span>
+          <span class="sk">"additionalProperties"</span><span class="sp">:</span> <span class="sp">{</span> <span class="sk">"type"</span><span class="sp">:</span> <span class="st">"string"</span> <span class="sp">}</span>
+        <span class="sp">}</span>
+      <span class="sp">}</span>
+    <span class="sp">},</span>
+
+    <span class="sk">"items"</span><span class="sp">:</span> <span class="sp">{</span>
+      <span class="sk">"type"</span><span class="sp">:</span> <span class="st">"array"</span><span class="sp">,</span>
+      <span class="sk">"description"</span><span class="sp">:</span> <span class="sd">"All items in the instrument"</span><span class="sp">,</span>
+      <span class="sk">"items"</span><span class="sp">:</span> <span class="sp">{</span>
+        <span class="sk">"type"</span><span class="sp">:</span> <span class="st">"object"</span><span class="sp">,</span>
+        <span class="sk">"required"</span><span class="sp">:</span> <span class="sp">[</span><span class="sr">"id"</span><span class="sp">,</span> <span class="sr">"position"</span><span class="sp">,</span> <span class="sr">"text"</span><span class="sp">,</span> <span class="sr">"subscale"</span><span class="sp">],</span>
+        <span class="sk">"properties"</span><span class="sp">:</span> <span class="sp">{</span>
+          <span class="sk">"id"</span><span class="sp">:</span> <span class="sp">{</span>
+            <span class="sk">"type"</span><span class="sp">:</span> <span class="st">"string"</span><span class="sp">,</span>
+            <span class="sk">"description"</span><span class="sp">:</span> <span class="sd">"Original publication item ID (e.g., 'iri_03' preserving Davis numbering)"</span>
+          <span class="sp">},</span>
+          <span class="sk">"position"</span><span class="sp">:</span> <span class="sp">{</span>
+            <span class="sk">"type"</span><span class="sp">:</span> <span class="st">"integer"</span><span class="sp">,</span>
+            <span class="sk">"description"</span><span class="sp">:</span> <span class="sd">"Sequential 1-based position for survey UI rendering"</span>
+          <span class="sp">},</span>
+          <span class="sk">"text"</span><span class="sp">:</span> <span class="sp">{</span> <span class="sk">"type"</span><span class="sp">:</span> <span class="st">"string"</span> <span class="sp">},</span>
+          <span class="sk">"reverse_scored"</span><span class="sp">:</span> <span class="sp">{</span>
+            <span class="sk">"type"</span><span class="sp">:</span> <span class="st">"boolean"</span><span class="sp">,</span>
+            <span class="sk">"default"</span><span class="sp">:</span> <span class="sn">false</span>
+          <span class="sp">},</span>
+          <span class="sk">"subscale"</span><span class="sp">:</span> <span class="sp">{</span>
+            <span class="sk">"type"</span><span class="sp">:</span> <span class="st">"string"</span><span class="sp">,</span>
+            <span class="sk">"description"</span><span class="sp">:</span> <span class="sd">"ID of the subscale this item belongs to"</span>
+          <span class="sp">}</span>
+        <span class="sp">}</span>
+      <span class="sp">}</span>
+    <span class="sp">},</span>
+
+    <span class="sk">"subscales"</span><span class="sp">:</span> <span class="sp">{</span>
+      <span class="sk">"type"</span><span class="sp">:</span> <span class="st">"array"</span><span class="sp">,</span>
+      <span class="sk">"description"</span><span class="sp">:</span> <span class="sd">"Groupings of items into scored constructs"</span><span class="sp">,</span>
+      <span class="sk">"items"</span><span class="sp">:</span> <span class="sp">{</span>
+        <span class="sk">"type"</span><span class="sp">:</span> <span class="st">"object"</span><span class="sp">,</span>
+        <span class="sk">"required"</span><span class="sp">:</span> <span class="sp">[</span><span class="sr">"id"</span><span class="sp">,</span> <span class="sr">"name"</span><span class="sp">,</span> <span class="sr">"item_ids"</span><span class="sp">],</span>
+        <span class="sk">"properties"</span><span class="sp">:</span> <span class="sp">{</span>
+          <span class="sk">"id"</span><span class="sp">:</span> <span class="sp">{</span> <span class="sk">"type"</span><span class="sp">:</span> <span class="st">"string"</span> <span class="sp">},</span>
+          <span class="sk">"name"</span><span class="sp">:</span> <span class="sp">{</span> <span class="sk">"type"</span><span class="sp">:</span> <span class="st">"string"</span> <span class="sp">},</span>
+          <span class="sk">"item_ids"</span><span class="sp">:</span> <span class="sp">{</span>
+            <span class="sk">"type"</span><span class="sp">:</span> <span class="st">"array"</span><span class="sp">,</span>
+            <span class="sk">"items"</span><span class="sp">:</span> <span class="sp">{</span> <span class="sk">"type"</span><span class="sp">:</span> <span class="st">"string"</span> <span class="sp">}</span>
+          <span class="sp">},</span>
+          <span class="sk">"type"</span><span class="sp">:</span> <span class="sp">{</span>
+            <span class="sk">"type"</span><span class="sp">:</span> <span class="sp">[</span><span class="st">"string"</span><span class="sp">,</span> <span class="st">"null"</span><span class="sp">],</span>
+            <span class="sk">"description"</span><span class="sp">:</span> <span class="sd">"For matrix instruments like SPCC: 'context' or 'receiver'"</span>
+          <span class="sp">}</span>
+        <span class="sp">}</span>
+      <span class="sp">}</span>
+    <span class="sp">},</span>
+
+    <span class="sk">"validation"</span><span class="sp">:</span> <span class="sp">{</span>
+      <span class="sk">"type"</span><span class="sp">:</span> <span class="st">"object"</span><span class="sp">,</span>
+      <span class="sk">"description"</span><span class="sp">:</span> <span class="sd">"Psychometric properties from published literature"</span><span class="sp">,</span>
+      <span class="sk">"properties"</span><span class="sp">:</span> <span class="sp">{</span>
+        <span class="sk">"cronbach_alpha"</span><span class="sp">:</span> <span class="sp">{</span>
+          <span class="sk">"type"</span><span class="sp">:</span> <span class="st">"object"</span><span class="sp">,</span>
+          <span class="sk">"description"</span><span class="sp">:</span> <span class="sd">"Reliability coefficients keyed by subscale ID"</span><span class="sp">,</span>
+          <span class="sk">"additionalProperties"</span><span class="sp">:</span> <span class="sp">{</span> <span class="sk">"type"</span><span class="sp">:</span> <span class="st">"number"</span> <span class="sp">}</span>
+        <span class="sp">},</span>
+        <span class="sk">"sample_description"</span><span class="sp">:</span> <span class="sp">{</span> <span class="sk">"type"</span><span class="sp">:</span> <span class="st">"string"</span> <span class="sp">},</span>
+        <span class="sk">"normative_data"</span><span class="sp">:</span> <span class="sp">{</span>
+          <span class="sk">"type"</span><span class="sp">:</span> <span class="sp">[</span><span class="st">"object"</span><span class="sp">,</span> <span class="st">"null"</span><span class="sp">],</span>
+          <span class="sk">"description"</span><span class="sp">:</span> <span class="sd">"Published norms if available"</span>
+        <span class="sp">}</span>
+      <span class="sp">}</span>
+    <span class="sp">}</span>
+  <span class="sp">}</span>
+<span class="sp">}</span></pre>
+</div>
+
+<!-- ─── SCORING SPECIFICATION SCHEMA ─── -->
+<h2 id="scoring-schema">Scoring Specification Schema</h2>
+
+<p>Separated from instrument definitions because scoring methods may change based on product context (e.g., mean vs sum, different cutoff bands for pilot data, construct mapping revisions).</p>
+
+<div class="code-block">
+  <div class="code-label">
+    <span class="code-dot" style="background:#ef4444"></span>
+    <span class="code-dot" style="background:#f59e0b"></span>
+    <span class="code-dot" style="background:#22c55e"></span>
+    JSON Schema — Scoring Specification
+  </div>
+<pre><span class="sp">{</span>
+  <span class="sk">"$schema"</span><span class="sp">:</span> <span class="ss">"http://json-schema.org/draft-07/schema#"</span><span class="sp">,</span>
+  <span class="sk">"title"</span><span class="sp">:</span> <span class="ss">"C2A Scoring Specification"</span><span class="sp">,</span>
+  <span class="sk">"type"</span><span class="sp">:</span> <span class="st">"object"</span><span class="sp">,</span>
+  <span class="sk">"required"</span><span class="sp">:</span> <span class="sp">[</span><span class="sr">"instrument_id"</span><span class="sp">,</span> <span class="sr">"spec_version"</span><span class="sp">,</span> <span class="sr">"context"</span><span class="sp">,</span> <span class="sr">"subscale_scoring"</span><span class="sp">],</span>
+  <span class="sk">"properties"</span><span class="sp">:</span> <span class="sp">{</span>
+
+    <span class="sk">"instrument_id"</span><span class="sp">:</span> <span class="sp">{</span>
+      <span class="sk">"type"</span><span class="sp">:</span> <span class="st">"string"</span><span class="sp">,</span>
+      <span class="sk">"description"</span><span class="sp">:</span> <span class="sd">"Must match an instrument definition ID"</span>
+    <span class="sp">},</span>
+
+    <span class="sk">"spec_version"</span><span class="sp">:</span> <span class="sp">{</span>
+      <span class="sk">"type"</span><span class="sp">:</span> <span class="st">"string"</span><span class="sp">,</span>
+      <span class="sk">"pattern"</span><span class="sp">:</span> <span class="se">"^\\d+\\.\\d+\\.\\d+$"</span>
+    <span class="sp">},</span>
+
+    <span class="sk">"context"</span><span class="sp">:</span> <span class="sp">{</span>
+      <span class="sk">"type"</span><span class="sp">:</span> <span class="st">"string"</span><span class="sp">,</span>
+      <span class="sk">"description"</span><span class="sp">:</span> <span class="sd">"Deployment context for this scoring spec"</span><span class="sp">,</span>
+      <span class="sk">"examples"</span><span class="sp">:</span> <span class="sp">[</span><span class="ss">"c2a_mvp"</span><span class="sp">,</span> <span class="ss">"clinical_research"</span><span class="sp">]</span>
+    <span class="sp">},</span>
+
+    <span class="sk">"reverse_scoring"</span><span class="sp">:</span> <span class="sp">{</span>
+      <span class="sk">"type"</span><span class="sp">:</span> <span class="st">"object"</span><span class="sp">,</span>
+      <span class="sk">"properties"</span><span class="sp">:</span> <span class="sp">{</span>
+        <span class="sk">"formula"</span><span class="sp">:</span> <span class="sp">{</span>
+          <span class="sk">"type"</span><span class="sp">:</span> <span class="st">"string"</span><span class="sp">,</span>
+          <span class="sk">"description"</span><span class="sp">:</span> <span class="sd">"Universal: '(max + min) - raw' works across all scale types"</span>
+        <span class="sp">}</span>
+      <span class="sp">}</span>
+    <span class="sp">},</span>
+
+    <span class="sk">"subscale_scoring"</span><span class="sp">:</span> <span class="sp">{</span>
+      <span class="sk">"type"</span><span class="sp">:</span> <span class="st">"array"</span><span class="sp">,</span>
+      <span class="sk">"items"</span><span class="sp">:</span> <span class="sp">{</span>
+        <span class="sk">"type"</span><span class="sp">:</span> <span class="st">"object"</span><span class="sp">,</span>
+        <span class="sk">"required"</span><span class="sp">:</span> <span class="sp">[</span><span class="sr">"subscale_id"</span><span class="sp">,</span> <span class="sr">"method"</span><span class="sp">,</span> <span class="sr">"score_range"</span><span class="sp">],</span>
+        <span class="sk">"properties"</span><span class="sp">:</span> <span class="sp">{</span>
+          <span class="sk">"subscale_id"</span><span class="sp">:</span> <span class="sp">{</span> <span class="sk">"type"</span><span class="sp">:</span> <span class="st">"string"</span> <span class="sp">},</span>
+          <span class="sk">"method"</span><span class="sp">:</span> <span class="sp">{</span>
+            <span class="sk">"type"</span><span class="sp">:</span> <span class="st">"string"</span><span class="sp">,</span>
+            <span class="sk">"enum"</span><span class="sp">:</span> <span class="sp">[</span><span class="se">"mean"</span><span class="sp">,</span> <span class="se">"sum"</span><span class="sp">],</span>
+            <span class="sk">"description"</span><span class="sp">:</span> <span class="sd">"Aggregation method for items in the subscale"</span>
+          <span class="sp">},</span>
+          <span class="sk">"score_range"</span><span class="sp">:</span> <span class="sp">{</span>
+            <span class="sk">"type"</span><span class="sp">:</span> <span class="st">"array"</span><span class="sp">,</span>
+            <span class="sk">"items"</span><span class="sp">:</span> <span class="sp">{</span> <span class="sk">"type"</span><span class="sp">:</span> <span class="st">"number"</span> <span class="sp">},</span>
+            <span class="sk">"minItems"</span><span class="sp">:</span> <span class="sn">2</span><span class="sp">,</span>
+            <span class="sk">"maxItems"</span><span class="sp">:</span> <span class="sn">2</span><span class="sp">,</span>
+            <span class="sk">"description"</span><span class="sp">:</span> <span class="sd">"[min_possible, max_possible]"</span>
+          <span class="sp">},</span>
+          <span class="sk">"interpretation"</span><span class="sp">:</span> <span class="sp">{</span>
+            <span class="sk">"type"</span><span class="sp">:</span> <span class="st">"object"</span><span class="sp">,</span>
+            <span class="sk">"properties"</span><span class="sp">:</span> <span class="sp">{</span>
+              <span class="sk">"direction"</span><span class="sp">:</span> <span class="sp">{</span>
+                <span class="sk">"type"</span><span class="sp">:</span> <span class="st">"string"</span><span class="sp">,</span>
+                <span class="sk">"enum"</span><span class="sp">:</span> <span class="sp">[</span><span class="se">"high_is_positive"</span><span class="sp">,</span> <span class="se">"high_is_deficit"</span><span class="sp">,</span> <span class="se">"high_is_negative"</span><span class="sp">],</span>
+                <span class="sk">"description"</span><span class="sp">:</span> <span class="sd">"What a high score means clinically/conceptually"</span>
+              <span class="sp">},</span>
+              <span class="sk">"bands"</span><span class="sp">:</span> <span class="sp">{</span>
+                <span class="sk">"type"</span><span class="sp">:</span> <span class="sp">[</span><span class="st">"array"</span><span class="sp">,</span> <span class="st">"null"</span><span class="sp">],</span>
+                <span class="sk">"items"</span><span class="sp">:</span> <span class="sp">{</span>
+                  <span class="sk">"type"</span><span class="sp">:</span> <span class="st">"object"</span><span class="sp">,</span>
+                  <span class="sk">"properties"</span><span class="sp">:</span> <span class="sp">{</span>
+                    <span class="sk">"label"</span><span class="sp">:</span> <span class="sp">{</span> <span class="sk">"type"</span><span class="sp">:</span> <span class="st">"string"</span> <span class="sp">},</span>
+                    <span class="sk">"min"</span><span class="sp">:</span> <span class="sp">{</span> <span class="sk">"type"</span><span class="sp">:</span> <span class="st">"number"</span> <span class="sp">},</span>
+                    <span class="sk">"max"</span><span class="sp">:</span> <span class="sp">{</span> <span class="sk">"type"</span><span class="sp">:</span> <span class="st">"number"</span> <span class="sp">}</span>
+                  <span class="sp">}</span>
+                <span class="sp">}</span>
+              <span class="sp">}</span>
+            <span class="sp">}</span>
+          <span class="sp">}</span>
+        <span class="sp">}</span>
+      <span class="sp">}</span>
+    <span class="sp">},</span>
+
+    <span class="sk">"total_scoring"</span><span class="sp">:</span> <span class="sp">{</span>
+      <span class="sk">"type"</span><span class="sp">:</span> <span class="sp">[</span><span class="st">"object"</span><span class="sp">,</span> <span class="st">"null"</span><span class="sp">],</span>
+      <span class="sk">"description"</span><span class="sp">:</span> <span class="sd">"How to produce a single instrument-level score (null if subscale-only)"</span><span class="sp">,</span>
+      <span class="sk">"properties"</span><span class="sp">:</span> <span class="sp">{</span>
+        <span class="sk">"method"</span><span class="sp">:</span> <span class="sp">{</span>
+          <span class="sk">"type"</span><span class="sp">:</span> <span class="st">"string"</span><span class="sp">,</span>
+          <span class="sk">"enum"</span><span class="sp">:</span> <span class="sp">[</span><span class="se">"mean"</span><span class="sp">,</span> <span class="se">"sum"</span><span class="sp">,</span> <span class="se">"mean_of_subscale_means"</span><span class="sp">,</span> <span class="se">"weighted_composite"</span><span class="sp">,</span> <span class="se">"matrix"</span><span class="sp">],</span>
+          <span class="sk">"description"</span><span class="sp">:</span> <span class="sd">"matrix = SPCC; weighted_composite = GMS RAI"</span>
+        <span class="sp">},</span>
+        <span class="sk">"formula"</span><span class="sp">:</span> <span class="sp">{</span>
+          <span class="sk">"type"</span><span class="sp">:</span> <span class="sp">[</span><span class="st">"string"</span><span class="sp">,</span> <span class="st">"null"</span><span class="sp">],</span>
+          <span class="sk">"description"</span><span class="sp">:</span> <span class="sd">"For weighted composites: e.g., '(2 * intrinsic_motivation) + (0 * external_regulation) + (-2 * amotivation)'"</span>
+        <span class="sp">},</span>
+        <span class="sk">"score_range"</span><span class="sp">:</span> <span class="sp">{</span>
+          <span class="sk">"type"</span><span class="sp">:</span> <span class="sp">[</span><span class="st">"array"</span><span class="sp">,</span> <span class="st">"null"</span><span class="sp">],</span>
+          <span class="sk">"items"</span><span class="sp">:</span> <span class="sp">{</span> <span class="sk">"type"</span><span class="sp">:</span> <span class="st">"number"</span> <span class="sp">},</span>
+          <span class="sk">"minItems"</span><span class="sp">:</span> <span class="sn">2</span><span class="sp">,</span>
+          <span class="sk">"maxItems"</span><span class="sp">:</span> <span class="sn">2</span>
+        <span class="sp">}</span>
+      <span class="sp">}</span>
+    <span class="sp">},</span>
+
+    <span class="sk">"construct_mapping"</span><span class="sp">:</span> <span class="sp">{</span>
+      <span class="sk">"type"</span><span class="sp">:</span> <span class="st">"object"</span><span class="sp">,</span>
+      <span class="sk">"description"</span><span class="sp">:</span> <span class="sd">"Maps subscales to LE3 durable skills (Layer 1→2). Managed by THR-131."</span><span class="sp">,</span>
+      <span class="sk">"additionalProperties"</span><span class="sp">:</span> <span class="sp">{</span>
+        <span class="sk">"type"</span><span class="sp">:</span> <span class="st">"array"</span><span class="sp">,</span>
+        <span class="sk">"items"</span><span class="sp">:</span> <span class="sp">{</span> <span class="sk">"type"</span><span class="sp">:</span> <span class="st">"string"</span> <span class="sp">},</span>
+        <span class="sk">"description"</span><span class="sp">:</span> <span class="sd">"Array of LE3 skill IDs this subscale maps to"</span>
+      <span class="sp">}</span>
+    <span class="sp">}</span>
+  <span class="sp">}</span>
+<span class="sp">}</span></pre>
+</div>
+
+<!-- ─── SOTA VALIDATION ─── -->
+<h2 id="sota">SOTA Validation</h2>
+
+<p>Our schema aligns with industry standards where appropriate:</p>
+
+<div class="table-wrap">
+<table>
+  <thead>
+    <tr><th>Standard</th><th>Pattern We Adopted</th><th>Pattern We Skipped</th></tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong>FHIR Questionnaire</strong></td>
+      <td>Definition/response separation; hierarchical item grouping; item weighting</td>
+      <td>Verbose XML structure; enableWhen skip logic; canonical URLs</td>
+    </tr>
+    <tr>
+      <td><strong>REDCap</strong></td>
+      <td>Matrix field concept (for SPCC)</td>
+      <td>Bundled scoring-in-definition approach</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+<div class="callout">
+  <strong>FHIR specifically validates our two-file split</strong> — Questionnaire (definition) and QuestionnaireResponse (data) are separate resources with different lifecycles.
+</div>
+
+<!-- ─── RESPONSE FORMAT REFERENCE ─── -->
+<h2 id="response-ref">Response Format Reference</h2>
+
+<div class="table-wrap">
+<table>
+  <thead>
+    <tr><th>Type</th><th>Instruments</th><th>Min</th><th>Max</th><th>Step</th><th>Anchor Labels</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>Likert-5</td><td>ADEXI</td><td>1</td><td>5</td><td>1</td><td>1=Definitely not true, 5=Definitely true</td></tr>
+    <tr><td>Likert-5</td><td>BRS</td><td>1</td><td>5</td><td>1</td><td>1=Strongly disagree, 5=Strongly agree</td></tr>
+    <tr><td>Likert-5</td><td>CAAS-SF</td><td>1</td><td>5</td><td>1</td><td>1=Not strong, 5=Strongest</td></tr>
+    <tr><td>Likert-5</td><td>Team Psych Safety</td><td>1</td><td>5</td><td>1</td><td>1=Strongly disagree, 5=Strongly agree</td></tr>
+    <tr><td>Likert-6</td><td>CFS</td><td>1</td><td>6</td><td>1</td><td>1=Strongly disagree, 6=Strongly agree</td></tr>
+    <tr><td>Likert-7</td><td>IRI</td><td>1</td><td>7</td><td>1</td><td>1=Does not describe me well, 7=Describes me very well</td></tr>
+    <tr><td>Likert-7</td><td>BPNSFS</td><td>1</td><td>7</td><td>1</td><td>1=Not true at all, 7=Completely true</td></tr>
+    <tr><td>Likert-7</td><td>GMS-Bookends</td><td>1</td><td>7</td><td>1</td><td>1=Does not correspond at all, 7=Corresponds completely</td></tr>
+    <tr><td>Likert-7</td><td>LCQ-6</td><td>1</td><td>7</td><td>1</td><td>1=Strongly disagree, 7=Strongly agree</td></tr>
+    <tr><td>Self-estimation</td><td>SPCC</td><td>0</td><td>100</td><td>null</td><td>0=Completely incompetent, 100=Competent</td></tr>
+  </tbody>
+</table>
+</div>
+
+<p><strong>Reverse scoring formula (universal):</strong> <span class="formula-highlight">scored_value = (max + min) - raw_value</span></p>
+
+<!-- ─── FILE NAMING CONVENTION ─── -->
+<h2 id="file-naming">File Naming Convention</h2>
+
+<div class="file-tree">
+<span class="dir">instruments/</span>
+  <span class="dir">  definitions/</span>
+    <span class="file">    adexi.json</span>
+    <span class="file">    cfs.json</span>
+    <span class="file">    caas_sf.json</span>
+    <span class="file">    iri.json</span>
+    <span class="file">    spcc.json</span>
+    <span class="file">    brs.json</span>
+    <span class="file">    team_psych_safety.json</span>
+    <span class="file">    bpnsfs.json</span>
+    <span class="file">    gms_bookends.json</span>
+    <span class="file">    lcq6.json</span>
+  <span class="dir">  scoring/</span>
+    <span class="file">    adexi.scoring.json</span>
+    <span class="file">    cfs.scoring.json</span>
+    <span class="ellip">    ...</span>
+</div>
+
+<!-- ─── NEXT STEPS ─── -->
+<h2 id="next-steps">Next Steps</h2>
+
+<ol class="steps">
+  <li>Create 10 instrument definition JSON files (this session)</li>
+  <li>Create 10 scoring specification JSON files</li>
+  <li>Update THR-19 (CFS naming correction)</li>
+  <li>Hand off to THR-31 (Scoring Engine implementation)</li>
+  <li>Hand off to THR-131 (Construct Mapping, Layer 1→2)</li>
+</ol>
+
+</main>
+
+</body>
+</html>

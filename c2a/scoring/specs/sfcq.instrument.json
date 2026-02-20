@@ -1,0 +1,129 @@
+{
+  "id": "sfcq",
+  "version": "1.0.0",
+  "metadata": {
+    "name": "Short Form Cultural Intelligence Scale",
+    "abbreviation": "SFCQ",
+    "authors": "Thomas, D. C., Liao, Y., Aycan, Z., Cerdin, J.-L., Pekerti, A. A., Ravlin, E. C., Stahl, G. K., Lazarova, M. B., Fock, H., Arli, D., Moeller, M., Okimoto, T. B., & van de Vijver, F.",
+    "year": 2015,
+    "citation": "Thomas, D. C., Liao, Y., Aycan, Z., Cerdin, J.-L., Pekerti, A. A., Ravlin, E. C., Stahl, G. K., Lazarova, M. B., Fock, H., Arli, D., Moeller, M., Okimoto, T. B., & van de Vijver, F. (2015). Cultural intelligence: A theory-based, short form measure. Journal of International Business Studies, 46(9), 1099–1118.",
+    "item_count": 10,
+    "tier": "core",
+    "license": "Free for non-commercial research purposes per GESIS ZIS documentation (doi:10.6102/zis248). For other uses, consent of the authors is required. Contact: David C. Thomas, dcthomas@sfu.ca.",
+    "stem": "Below are 10 statements about one's experience when interacting with people from other cultures. Please indicate to what extent each of the following statements describes you."
+  },
+  "response_format": {
+    "type": "likert",
+    "min": 1,
+    "max": 5,
+    "step": 1,
+    "labels": {
+      "1": "Not at all",
+      "2": "A little",
+      "3": "Somewhat",
+      "4": "A lot",
+      "5": "Extremely well"
+    }
+  },
+  "items": [
+    {
+      "id": "sfcq_01",
+      "position": 1,
+      "text": "I know the ways in which cultures around the world are different.",
+      "reverse_scored": false,
+      "subscale": "knowledge"
+    },
+    {
+      "id": "sfcq_02",
+      "position": 2,
+      "text": "I can give examples of cultural differences from my personal experience, reading, and so on.",
+      "reverse_scored": false,
+      "subscale": "knowledge"
+    },
+    {
+      "id": "sfcq_03",
+      "position": 3,
+      "text": "I enjoy talking with people from different cultures.",
+      "reverse_scored": false,
+      "subscale": "skills"
+    },
+    {
+      "id": "sfcq_04",
+      "position": 4,
+      "text": "I have the ability to accurately understand the feelings of people from other cultures.",
+      "reverse_scored": false,
+      "subscale": "skills"
+    },
+    {
+      "id": "sfcq_05",
+      "position": 5,
+      "text": "I sometimes try to understand people from another culture by imagining how something looks from their perspective.",
+      "reverse_scored": false,
+      "subscale": "skills"
+    },
+    {
+      "id": "sfcq_06",
+      "position": 6,
+      "text": "I can change my behavior to suit different cultural situations and people.",
+      "reverse_scored": false,
+      "subscale": "skills"
+    },
+    {
+      "id": "sfcq_07",
+      "position": 7,
+      "text": "I accept delays without becoming upset when in different cultural situations and with culturally different people.",
+      "reverse_scored": false,
+      "subscale": "skills"
+    },
+    {
+      "id": "sfcq_08",
+      "position": 8,
+      "text": "I am aware of the cultural knowledge I use when interacting with someone from another culture.",
+      "reverse_scored": false,
+      "subscale": "metacognition"
+    },
+    {
+      "id": "sfcq_09",
+      "position": 9,
+      "text": "I think a lot about the influence that culture has on my behavior and that of others who are culturally different.",
+      "reverse_scored": false,
+      "subscale": "metacognition"
+    },
+    {
+      "id": "sfcq_10",
+      "position": 10,
+      "text": "I am aware that I need to plan my course of action when in different cultural situations and with culturally different people.",
+      "reverse_scored": false,
+      "subscale": "metacognition"
+    }
+  ],
+  "subscales": [
+    {
+      "id": "knowledge",
+      "name": "Cultural Knowledge",
+      "item_ids": ["sfcq_01", "sfcq_02"]
+    },
+    {
+      "id": "skills",
+      "name": "Cross-Cultural Skills",
+      "item_ids": ["sfcq_03", "sfcq_04", "sfcq_05", "sfcq_06", "sfcq_07"]
+    },
+    {
+      "id": "metacognition",
+      "name": "Cultural Metacognition",
+      "item_ids": ["sfcq_08", "sfcq_09", "sfcq_10"]
+    }
+  ],
+  "validation": {
+    "cronbach_alpha": {
+      "total": 0.85
+    },
+    "sample_description": "N = 3,526 across 14 samples worldwide, 5 language groups (English, French, Indonesian, Turkish, traditional Chinese). Average α = .85 (range .77–.93). Composite reliability Ωh = .93. Subscale reliabilities: Knowledge Ω = .76, Skills Ω = .90, Metacognition Ω = .83. Second-order factor model (CQ → K, S, M) confirmed with good fit (NNFI = .93, CFI = .95, SRMR = .04, RMSEA = .08). Metric invariance supported across all five language groups (Thomas et al., 2015).",
+    "normative_data": {
+      "source": "Thomas et al. (2015), Table 3",
+      "total_mean": 3.55,
+      "total_sd": 0.57,
+      "note": "Average across 14 samples (N = 3,526). Distribution approximately normal (Kurtosis = 0.29, Skewness = -0.23)."
+    }
+  }
+}

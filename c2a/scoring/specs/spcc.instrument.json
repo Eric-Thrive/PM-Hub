@@ -1,0 +1,68 @@
+{
+  "id": "spcc",
+  "version": "1.0.0",
+  "metadata": {
+    "name": "Self-Perceived Communication Competence Scale",
+    "abbreviation": "SPCC",
+    "authors": "McCroskey, J. C. & McCroskey, L. L.",
+    "year": 1988,
+    "citation": "McCroskey, J. C., & McCroskey, L. L. (1988). Self-report as an approach to measuring communication competence. Communication Research Reports, 5(2), 108-113.",
+    "item_count": 12,
+    "tier": "core",
+    "license": "Published instrument, freely available for research use",
+    "stem": "Indicate how competent you believe you are in each of the following communication situations. 0 = completely incompetent, 100 = competent."
+  },
+  "response_format": {
+    "type": "self_estimation",
+    "min": 0,
+    "max": 100,
+    "step": null,
+    "labels": {
+      "0": "Completely incompetent",
+      "100": "Competent"
+    }
+  },
+  "items": [
+    { "id": "spcc_01", "position": 1, "text": "Present a talk to a group of strangers.", "reverse_scored": false, "subscale": "public_speaking" },
+    { "id": "spcc_02", "position": 2, "text": "Talk with an acquaintance.", "reverse_scored": false, "subscale": "dyad" },
+    { "id": "spcc_03", "position": 3, "text": "Talk in a large meeting of friends.", "reverse_scored": false, "subscale": "meeting" },
+    { "id": "spcc_04", "position": 4, "text": "Talk in a small group of strangers.", "reverse_scored": false, "subscale": "group" },
+    { "id": "spcc_05", "position": 5, "text": "Talk with a friend.", "reverse_scored": false, "subscale": "dyad" },
+    { "id": "spcc_06", "position": 6, "text": "Talk in a large meeting of acquaintances.", "reverse_scored": false, "subscale": "meeting" },
+    { "id": "spcc_07", "position": 7, "text": "Talk with a stranger.", "reverse_scored": false, "subscale": "dyad" },
+    { "id": "spcc_08", "position": 8, "text": "Present a talk to a group of friends.", "reverse_scored": false, "subscale": "public_speaking" },
+    { "id": "spcc_09", "position": 9, "text": "Talk in a small group of acquaintances.", "reverse_scored": false, "subscale": "group" },
+    { "id": "spcc_10", "position": 10, "text": "Talk in a large meeting of strangers.", "reverse_scored": false, "subscale": "meeting" },
+    { "id": "spcc_11", "position": 11, "text": "Talk in a small group of friends.", "reverse_scored": false, "subscale": "group" },
+    { "id": "spcc_12", "position": 12, "text": "Present a talk to a group of acquaintances.", "reverse_scored": false, "subscale": "public_speaking" }
+  ],
+  "subscales": [
+    { "id": "public_speaking", "name": "Public Speaking", "item_ids": ["spcc_01", "spcc_08", "spcc_12"], "type": "context" },
+    { "id": "meeting", "name": "Meeting", "item_ids": ["spcc_03", "spcc_06", "spcc_10"], "type": "context" },
+    { "id": "group", "name": "Group", "item_ids": ["spcc_04", "spcc_09", "spcc_11"], "type": "context" },
+    { "id": "dyad", "name": "Dyad", "item_ids": ["spcc_02", "spcc_05", "spcc_07"], "type": "context" },
+    { "id": "stranger", "name": "Stranger", "item_ids": ["spcc_01", "spcc_04", "spcc_07", "spcc_10"], "type": "receiver" },
+    { "id": "acquaintance", "name": "Acquaintance", "item_ids": ["spcc_02", "spcc_06", "spcc_09", "spcc_12"], "type": "receiver" },
+    { "id": "friend", "name": "Friend", "item_ids": ["spcc_03", "spcc_05", "spcc_08", "spcc_11"], "type": "receiver" }
+  ],
+  "validation": {
+    "cronbach_alpha": {
+      "total": 0.92,
+      "public_speaking": 0.83,
+      "meeting": 0.85,
+      "group": 0.83,
+      "dyad": 0.80,
+      "stranger": 0.88,
+      "acquaintance": 0.85,
+      "friend": 0.82
+    },
+    "sample_description": "College student samples (McCroskey & McCroskey, 1988)",
+    "normative_data": {
+      "total_mean": 73.7,
+      "total_sd": 14.2,
+      "high_cutoff": 87,
+      "low_cutoff": 59,
+      "friend_stranger_gap": 32.7
+    }
+  }
+}

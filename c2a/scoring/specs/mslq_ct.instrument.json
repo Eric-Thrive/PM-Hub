@@ -1,0 +1,94 @@
+{
+  "id": "mslq_ct",
+  "version": "1.0.0",
+  "metadata": {
+    "name": "Motivated Strategies for Learning Questionnaire – Critical Thinking Subscale",
+    "abbreviation": "MSLQ-CT",
+    "authors": "Pintrich, P. R., Smith, D. A. F., Garcia, T., & McKeachie, W. J.",
+    "year": 1991,
+    "citation": "Pintrich, P. R., Smith, D. A. F., Garcia, T., & McKeachie, W. J. (1991). A manual for the use of the Motivated Strategies for Learning Questionnaire (MSLQ). National Center for Research to Improve Postsecondary Teaching and Learning, University of Michigan. (Technical Report No. 91-B-004).",
+    "item_count": 5,
+    "tier": "core",
+    "license": "Public domain. The MSLQ was developed with federal funding (OERI/ED Grant OERI-86-0010) and is freely available for research and educational use. Modular subscale use is explicitly supported by the authors (Pintrich et al., 1991; Duncan & McKeachie, 2005).",
+    "stem": null
+  },
+  "response_format": {
+    "type": "likert",
+    "min": 1,
+    "max": 7,
+    "step": 1,
+    "labels": {
+      "1": "Not at all true of me",
+      "7": "Very true of me"
+    }
+  },
+  "items": [
+    {
+      "id": "mslq_38",
+      "position": 1,
+      "text": "I often find myself questioning things I hear or read in this course to decide if I find them convincing.",
+      "reverse_scored": false,
+      "subscale": "critical_thinking"
+    },
+    {
+      "id": "mslq_47",
+      "position": 2,
+      "text": "When a theory, interpretation, or conclusion is presented in class or in the readings, I try to decide if there is good supporting evidence.",
+      "reverse_scored": false,
+      "subscale": "critical_thinking"
+    },
+    {
+      "id": "mslq_51",
+      "position": 3,
+      "text": "I treat the course material as a starting point and try to develop my own ideas about it.",
+      "reverse_scored": false,
+      "subscale": "critical_thinking"
+    },
+    {
+      "id": "mslq_66",
+      "position": 4,
+      "text": "I try to play around with ideas of my own related to what I am learning in this course.",
+      "reverse_scored": false,
+      "subscale": "critical_thinking"
+    },
+    {
+      "id": "mslq_71",
+      "position": 5,
+      "text": "Whenever I read or hear an assertion or conclusion in this class, I think about possible alternatives.",
+      "reverse_scored": false,
+      "subscale": "critical_thinking"
+    }
+  ],
+  "subscales": [
+    {
+      "id": "critical_thinking",
+      "name": "Critical Thinking",
+      "item_ids": ["mslq_38", "mslq_47", "mslq_51", "mslq_66", "mslq_71"]
+    }
+  ],
+  "validation": {
+    "cronbach_alpha": {
+      "critical_thinking": 0.80
+    },
+    "sample_description": "N = 380 Midwestern college students (356 from public 4-year university, 24 from community college), 37 classrooms, 14 subject domains, 5 disciplines. Winter 1990. Scale mean = 4.16, SD = 1.28, r with final grade = .15 (Pintrich et al., 1991).",
+    "normative_data": {
+      "source": "Pintrich et al. (1991) MSLQ Manual",
+      "scale_mean": 4.16,
+      "scale_sd": 1.28,
+      "item_means": {
+        "mslq_38": 3.83,
+        "mslq_47": 4.36,
+        "mslq_51": 3.81,
+        "mslq_66": 4.66,
+        "mslq_71": 4.15
+      },
+      "item_sds": {
+        "mslq_38": 1.77,
+        "mslq_47": 1.68,
+        "mslq_51": 1.85,
+        "mslq_66": 1.74,
+        "mslq_71": 1.49
+      }
+    }
+  }
+}

@@ -1,0 +1,59 @@
+{
+  "id": "caas_sf",
+  "version": "1.0.0",
+  "metadata": {
+    "name": "Career Adapt-Abilities Scale — Short Form",
+    "abbreviation": "CAAS-SF",
+    "authors": "Maggiori, C., Rossier, J., & Savickas, M. L.",
+    "year": 2017,
+    "citation": "Maggiori, C., Rossier, J., & Savickas, M. L. (2017). Career Adapt-Abilities Scale–Short Form (CAAS-SF): Construction and validation. Journal of Career Assessment, 25(2), 312-325.",
+    "item_count": 12,
+    "tier": "core",
+    "license": "Published instrument; original CAAS developed by Savickas & Porfeli (2012)",
+    "stem": "Different people use different strengths to build their careers. No one is good at everything, each of us emphasizes some strengths more than others. Please rate how strongly you have developed each of the following abilities using the scale below."
+  },
+  "response_format": {
+    "type": "likert",
+    "min": 1,
+    "max": 5,
+    "step": 1,
+    "labels": {
+      "1": "Not strong",
+      "2": "Somewhat strong",
+      "3": "Strong",
+      "4": "Very strong",
+      "5": "Strongest"
+    }
+  },
+  "items": [
+    { "id": "caas_01", "position": 1, "text": "Thinking about what my future will be like.", "reverse_scored": false, "subscale": "concern" },
+    { "id": "caas_02", "position": 2, "text": "Realizing that today's choices shape my future.", "reverse_scored": false, "subscale": "concern" },
+    { "id": "caas_03", "position": 3, "text": "Preparing for the future.", "reverse_scored": false, "subscale": "concern" },
+    { "id": "caas_04", "position": 4, "text": "Making decisions by myself.", "reverse_scored": false, "subscale": "control" },
+    { "id": "caas_05", "position": 5, "text": "Taking responsibility for my actions.", "reverse_scored": false, "subscale": "control" },
+    { "id": "caas_06", "position": 6, "text": "Counting on myself.", "reverse_scored": false, "subscale": "control" },
+    { "id": "caas_07", "position": 7, "text": "Exploring my surroundings.", "reverse_scored": false, "subscale": "curiosity" },
+    { "id": "caas_08", "position": 8, "text": "Looking for opportunities to grow as a person.", "reverse_scored": false, "subscale": "curiosity" },
+    { "id": "caas_09", "position": 9, "text": "Investigating options before making a choice.", "reverse_scored": false, "subscale": "curiosity" },
+    { "id": "caas_10", "position": 10, "text": "Performing tasks efficiently.", "reverse_scored": false, "subscale": "confidence" },
+    { "id": "caas_11", "position": 11, "text": "Learning new skills.", "reverse_scored": false, "subscale": "confidence" },
+    { "id": "caas_12", "position": 12, "text": "Working up to my ability.", "reverse_scored": false, "subscale": "confidence" }
+  ],
+  "subscales": [
+    { "id": "concern", "name": "Concern", "item_ids": ["caas_01", "caas_02", "caas_03"] },
+    { "id": "control", "name": "Control", "item_ids": ["caas_04", "caas_05", "caas_06"] },
+    { "id": "curiosity", "name": "Curiosity", "item_ids": ["caas_07", "caas_08", "caas_09"] },
+    { "id": "confidence", "name": "Confidence", "item_ids": ["caas_10", "caas_11", "caas_12"] }
+  ],
+  "validation": {
+    "cronbach_alpha": {
+      "concern": 0.79,
+      "control": 0.74,
+      "curiosity": 0.78,
+      "confidence": 0.75,
+      "total": 0.90
+    },
+    "sample_description": "Swiss adult sample, N=2799 (Maggiori et al., 2017)",
+    "normative_data": null
+  }
+}

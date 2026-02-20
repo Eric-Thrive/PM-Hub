@@ -1,0 +1,57 @@
+{
+  "id": "cfs",
+  "version": "1.0.0",
+  "metadata": {
+    "name": "Cognitive Flexibility Scale",
+    "abbreviation": "CFS",
+    "authors": "Martin, M. M. & Rubin, R. B.",
+    "year": 1995,
+    "citation": "Martin, M. M., & Rubin, R. B. (1995). A new measure of cognitive flexibility. Psychological Reports, 76(2), 623-626.",
+    "item_count": 12,
+    "tier": "core",
+    "license": "Published instrument, freely available for research use",
+    "stem": null
+  },
+  "response_format": {
+    "type": "likert",
+    "min": 1,
+    "max": 6,
+    "step": 1,
+    "labels": {
+      "1": "Strongly disagree",
+      "2": "Disagree",
+      "3": "Slightly disagree",
+      "4": "Slightly agree",
+      "5": "Agree",
+      "6": "Strongly agree"
+    }
+  },
+  "items": [
+    { "id": "cfs_01", "position": 1, "text": "I can communicate an idea in many different ways.", "reverse_scored": false, "subscale": "cognitive_flexibility" },
+    { "id": "cfs_02", "position": 2, "text": "I avoid new and unusual situations.", "reverse_scored": true, "subscale": "cognitive_flexibility" },
+    { "id": "cfs_03", "position": 3, "text": "I feel like I never get to make decisions.", "reverse_scored": true, "subscale": "cognitive_flexibility" },
+    { "id": "cfs_04", "position": 4, "text": "I can find workable solutions to seemingly unsolvable problems.", "reverse_scored": false, "subscale": "cognitive_flexibility" },
+    { "id": "cfs_05", "position": 5, "text": "I seldom have choices when deciding how to behave.", "reverse_scored": true, "subscale": "cognitive_flexibility" },
+    { "id": "cfs_06", "position": 6, "text": "I am willing to work at creative solutions to problems.", "reverse_scored": false, "subscale": "cognitive_flexibility" },
+    { "id": "cfs_07", "position": 7, "text": "In any given situation, I am able to act appropriately.", "reverse_scored": false, "subscale": "cognitive_flexibility" },
+    { "id": "cfs_08", "position": 8, "text": "My behavior is a result of conscious decisions that I make.", "reverse_scored": false, "subscale": "cognitive_flexibility" },
+    { "id": "cfs_09", "position": 9, "text": "I have many possible ways of behaving in any given situation.", "reverse_scored": false, "subscale": "cognitive_flexibility" },
+    { "id": "cfs_10", "position": 10, "text": "I have difficulty using my knowledge on a given topic in real life situations.", "reverse_scored": true, "subscale": "cognitive_flexibility" },
+    { "id": "cfs_11", "position": 11, "text": "I am willing to listen and consider alternatives for handling a problem.", "reverse_scored": false, "subscale": "cognitive_flexibility" },
+    { "id": "cfs_12", "position": 12, "text": "I have the self-confidence necessary to try different ways of behaving.", "reverse_scored": false, "subscale": "cognitive_flexibility" }
+  ],
+  "subscales": [
+    {
+      "id": "cognitive_flexibility",
+      "name": "Cognitive Flexibility",
+      "item_ids": ["cfs_01", "cfs_02", "cfs_03", "cfs_04", "cfs_05", "cfs_06", "cfs_07", "cfs_08", "cfs_09", "cfs_10", "cfs_11", "cfs_12"]
+    }
+  ],
+  "validation": {
+    "cronbach_alpha": {
+      "cognitive_flexibility": 0.76
+    },
+    "sample_description": "Undergraduate students (Martin & Rubin, 1995)",
+    "normative_data": null
+  }
+}

@@ -1,0 +1,51 @@
+{
+  "id": "team_psych_safety",
+  "version": "1.0.0",
+  "metadata": {
+    "name": "Team Psychological Safety Scale",
+    "abbreviation": "TPS",
+    "authors": "Edmondson, A. C.",
+    "year": 1999,
+    "citation": "Edmondson, A. C. (1999). Psychological safety and learning behavior in work teams. Administrative Science Quarterly, 44(2), 350-383.",
+    "item_count": 7,
+    "tier": "core",
+    "license": "Published instrument, widely used in organizational research",
+    "stem": "How much do you agree or disagree with each statement about your team?"
+  },
+  "response_format": {
+    "type": "likert",
+    "min": 1,
+    "max": 5,
+    "step": 1,
+    "labels": {
+      "1": "Strongly disagree",
+      "2": "Disagree",
+      "3": "Neither agree nor disagree",
+      "4": "Agree",
+      "5": "Strongly agree"
+    }
+  },
+  "items": [
+    { "id": "tps_01", "position": 1, "text": "If you make a mistake on this team, it is often held against you.", "reverse_scored": true, "subscale": "psychological_safety" },
+    { "id": "tps_02", "position": 2, "text": "Members of this team are able to bring up problems and tough issues.", "reverse_scored": false, "subscale": "psychological_safety" },
+    { "id": "tps_03", "position": 3, "text": "People on this team sometimes reject others for being different.", "reverse_scored": true, "subscale": "psychological_safety" },
+    { "id": "tps_04", "position": 4, "text": "It is safe to take a risk on this team.", "reverse_scored": false, "subscale": "psychological_safety" },
+    { "id": "tps_05", "position": 5, "text": "It is difficult to ask other members of this team for help.", "reverse_scored": true, "subscale": "psychological_safety" },
+    { "id": "tps_06", "position": 6, "text": "No one on this team would deliberately act in a way that undermines my efforts.", "reverse_scored": false, "subscale": "psychological_safety" },
+    { "id": "tps_07", "position": 7, "text": "Working with members of this team, my unique skills and talents are valued and utilized.", "reverse_scored": false, "subscale": "psychological_safety" }
+  ],
+  "subscales": [
+    {
+      "id": "psychological_safety",
+      "name": "Psychological Safety",
+      "item_ids": ["tps_01", "tps_02", "tps_03", "tps_04", "tps_05", "tps_06", "tps_07"]
+    }
+  ],
+  "validation": {
+    "cronbach_alpha": {
+      "psychological_safety": 0.82
+    },
+    "sample_description": "Work teams across manufacturing company (Edmondson, 1999)",
+    "normative_data": null
+  }
+}

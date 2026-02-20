@@ -1,0 +1,72 @@
+{
+  "id": "bpnsfs",
+  "version": "1.0.0",
+  "metadata": {
+    "name": "Basic Psychological Need Satisfaction and Frustration Scale",
+    "abbreviation": "BPNSFS",
+    "authors": "Chen, B., Vansteenkiste, M., Beyers, W., Boone, L., Deci, E. L., Van der Kaap-Deeder, J., ... & Verstuyf, J.",
+    "year": 2015,
+    "citation": "Chen, B., et al. (2015). Basic psychological need satisfaction, need frustration, and need strength across four cultures. Motivation and Emotion, 39(2), 216-236.",
+    "item_count": 24,
+    "tier": "optional",
+    "license": "Published instrument, available from SDT Center (selfdeterminationtheory.org)",
+    "stem": "Please read each of the following items carefully, thinking about how it relates to your life, and then indicate how true it is for you."
+  },
+  "response_format": {
+    "type": "likert",
+    "min": 1,
+    "max": 7,
+    "step": 1,
+    "labels": {
+      "1": "Not true at all",
+      "4": "Somewhat true",
+      "7": "Completely true"
+    }
+  },
+  "items": [
+    { "id": "bpnsfs_01", "position": 1, "text": "I feel a sense of choice and freedom in the things I undertake.", "reverse_scored": false, "subscale": "autonomy_satisfaction" },
+    { "id": "bpnsfs_02", "position": 2, "text": "I feel that my decisions reflect what I really want.", "reverse_scored": false, "subscale": "autonomy_satisfaction" },
+    { "id": "bpnsfs_03", "position": 3, "text": "I feel my choices express who I really am.", "reverse_scored": false, "subscale": "autonomy_satisfaction" },
+    { "id": "bpnsfs_04", "position": 4, "text": "I feel forced to do many things I wouldn't choose to do.", "reverse_scored": false, "subscale": "autonomy_frustration" },
+    { "id": "bpnsfs_05", "position": 5, "text": "I feel pressured to do too many things.", "reverse_scored": false, "subscale": "autonomy_frustration" },
+    { "id": "bpnsfs_06", "position": 6, "text": "My daily activities feel like a chain of obligations.", "reverse_scored": false, "subscale": "autonomy_frustration" },
+    { "id": "bpnsfs_07", "position": 7, "text": "I feel confident that I can do things well.", "reverse_scored": false, "subscale": "competence_satisfaction" },
+    { "id": "bpnsfs_08", "position": 8, "text": "I feel capable at what I do.", "reverse_scored": false, "subscale": "competence_satisfaction" },
+    { "id": "bpnsfs_09", "position": 9, "text": "I feel competent to achieve my goals.", "reverse_scored": false, "subscale": "competence_satisfaction" },
+    { "id": "bpnsfs_10", "position": 10, "text": "I have serious doubts about whether I can do things well.", "reverse_scored": false, "subscale": "competence_frustration" },
+    { "id": "bpnsfs_11", "position": 11, "text": "I feel disappointed with many of my performance.", "reverse_scored": false, "subscale": "competence_frustration" },
+    { "id": "bpnsfs_12", "position": 12, "text": "I feel insecure about my abilities.", "reverse_scored": false, "subscale": "competence_frustration" },
+    { "id": "bpnsfs_13", "position": 13, "text": "I feel that the people I care about also care about me.", "reverse_scored": false, "subscale": "relatedness_satisfaction" },
+    { "id": "bpnsfs_14", "position": 14, "text": "I feel connected with people who care for me, and for whom I care.", "reverse_scored": false, "subscale": "relatedness_satisfaction" },
+    { "id": "bpnsfs_15", "position": 15, "text": "I feel close and connected with other people who are important to me.", "reverse_scored": false, "subscale": "relatedness_satisfaction" },
+    { "id": "bpnsfs_16", "position": 16, "text": "I feel excluded from the group I want to belong to.", "reverse_scored": false, "subscale": "relatedness_frustration" },
+    { "id": "bpnsfs_17", "position": 17, "text": "I feel that people who are important to me are cold and distant towards me.", "reverse_scored": false, "subscale": "relatedness_frustration" },
+    { "id": "bpnsfs_18", "position": 18, "text": "I have the impression that people I spend time with dislike me.", "reverse_scored": false, "subscale": "relatedness_frustration" },
+    { "id": "bpnsfs_19", "position": 19, "text": "I feel that my choices are based on my true interests and values.", "reverse_scored": false, "subscale": "autonomy_satisfaction" },
+    { "id": "bpnsfs_20", "position": 20, "text": "I feel under pressure to do what others tell me.", "reverse_scored": false, "subscale": "autonomy_frustration" },
+    { "id": "bpnsfs_21", "position": 21, "text": "I feel I can successfully complete difficult tasks.", "reverse_scored": false, "subscale": "competence_satisfaction" },
+    { "id": "bpnsfs_22", "position": 22, "text": "I feel like a failure because of the mistakes I make.", "reverse_scored": false, "subscale": "competence_frustration" },
+    { "id": "bpnsfs_23", "position": 23, "text": "I experience a warm feeling with the people I spend time with.", "reverse_scored": false, "subscale": "relatedness_satisfaction" },
+    { "id": "bpnsfs_24", "position": 24, "text": "I feel the relationships I have are just superficial.", "reverse_scored": false, "subscale": "relatedness_frustration" }
+  ],
+  "subscales": [
+    { "id": "autonomy_satisfaction", "name": "Autonomy Satisfaction", "item_ids": ["bpnsfs_01", "bpnsfs_02", "bpnsfs_03", "bpnsfs_19"] },
+    { "id": "autonomy_frustration", "name": "Autonomy Frustration", "item_ids": ["bpnsfs_04", "bpnsfs_05", "bpnsfs_06", "bpnsfs_20"] },
+    { "id": "competence_satisfaction", "name": "Competence Satisfaction", "item_ids": ["bpnsfs_07", "bpnsfs_08", "bpnsfs_09", "bpnsfs_21"] },
+    { "id": "competence_frustration", "name": "Competence Frustration", "item_ids": ["bpnsfs_10", "bpnsfs_11", "bpnsfs_12", "bpnsfs_22"] },
+    { "id": "relatedness_satisfaction", "name": "Relatedness Satisfaction", "item_ids": ["bpnsfs_13", "bpnsfs_14", "bpnsfs_15", "bpnsfs_23"] },
+    { "id": "relatedness_frustration", "name": "Relatedness Frustration", "item_ids": ["bpnsfs_16", "bpnsfs_17", "bpnsfs_18", "bpnsfs_24"] }
+  ],
+  "validation": {
+    "cronbach_alpha": {
+      "autonomy_satisfaction": 0.81,
+      "autonomy_frustration": 0.77,
+      "competence_satisfaction": 0.85,
+      "competence_frustration": 0.84,
+      "relatedness_satisfaction": 0.86,
+      "relatedness_frustration": 0.80
+    },
+    "sample_description": "Cross-cultural validation across Belgium, China, USA, Peru (Chen et al., 2015)",
+    "normative_data": null
+  }
+}

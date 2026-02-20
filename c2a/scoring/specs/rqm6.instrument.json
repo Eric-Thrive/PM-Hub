@@ -1,0 +1,84 @@
+{
+  "id": "rqm6",
+  "version": "1.0.0",
+  "metadata": {
+    "name": "Relationship Quality & Maintenance Scale",
+    "abbreviation": "RQM-6",
+    "authors": "ThriveIEP / LE3 (adapted from Stafford, 2011; Liang et al., 2002; Cutrona & Russell, 1987)",
+    "year": 2026,
+    "citation": "ThriveIEP. (2026). Relationship Quality & Maintenance Scale (RQM-6). Based on Stafford, L. (2011). Measuring relationship maintenance behaviors. Journal of Social and Personal Relationships, 28, 278–303; Liang, B., et al. (2002). The Relational Health Indices. Psychology of Women Quarterly, 26, 25–35; Cutrona, C. E., & Russell, D. (1987). The provisions of social relationships and adaptation to stress.",
+    "item_count": 6,
+    "tier": "rnd",
+    "license": "Original scale developed by ThriveIEP for C2A battery. Integrates constructs from relationship maintenance (Stafford, 2011), relational health (Liang et al., 2002), social provisions (Cutrona & Russell, 1987), and gratitude research (Gordon et al., 2012).",
+    "stem": "Please indicate how often you have done each of the following in the past month."
+  },
+  "response_format": {
+    "type": "likert",
+    "min": 1,
+    "max": 5,
+    "step": 1,
+    "labels": {
+      "1": "Never",
+      "2": "Rarely",
+      "3": "Sometimes",
+      "4": "Often",
+      "5": "Very Often"
+    }
+  },
+  "items": [
+    {
+      "id": "rqm_01",
+      "position": 1,
+      "text": "In the past month, how often have you checked in on a classmate, colleague, or peer to see how they were doing — without being asked?",
+      "reverse_scored": false,
+      "subscale": "relationship_quality_maintenance"
+    },
+    {
+      "id": "rqm_02",
+      "position": 2,
+      "text": "In the past month, how often have you remembered and asked someone about something important going on in their life — like a project, interview, or personal situation they told you about?",
+      "reverse_scored": false,
+      "subscale": "relationship_quality_maintenance"
+    },
+    {
+      "id": "rqm_03",
+      "position": 3,
+      "text": "In the past month, how often have you opened up to a classmate, colleague, or peer about a challenge you were facing?",
+      "reverse_scored": false,
+      "subscale": "relationship_quality_maintenance"
+    },
+    {
+      "id": "rqm_04",
+      "position": 4,
+      "text": "In the past month, how often have you expressed appreciation or recognition to someone for their help, effort, or contribution?",
+      "reverse_scored": false,
+      "subscale": "relationship_quality_maintenance"
+    },
+    {
+      "id": "rqm_05",
+      "position": 5,
+      "text": "In the past month, how often have you made time to have a meaningful conversation with a peer, mentor, or colleague — beyond what was required?",
+      "reverse_scored": false,
+      "subscale": "relationship_quality_maintenance"
+    },
+    {
+      "id": "rqm_06",
+      "position": 6,
+      "text": "In the past month, how often have you suggested to someone that they talk to another person you know who might be helpful to them?",
+      "reverse_scored": false,
+      "subscale": "relationship_quality_maintenance"
+    }
+  ],
+  "subscales": [
+    {
+      "id": "relationship_quality_maintenance",
+      "name": "Relationship Quality & Maintenance",
+      "item_ids": ["rqm_01", "rqm_02", "rqm_03", "rqm_04", "rqm_05", "rqm_06"]
+    }
+  ],
+  "validation": {
+    "cronbach_alpha": {},
+    "sample_description": "Pilot instrument — no published validation data. Initial target α ≥ .65, refinement target α ≥ .70. Items drawn from relationship maintenance (Stafford, 2011), relational health (Liang et al., 2002), social provisions (Cutrona & Russell, 1987), and gratitude (Gordon et al., 2012) traditions.",
+    "normative_data": null
+  }
+}

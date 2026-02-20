@@ -1,0 +1,48 @@
+{
+  "id": "lcq6",
+  "version": "1.0.0",
+  "metadata": {
+    "name": "Learning Climate Questionnaire — Short Form",
+    "abbreviation": "LCQ-6",
+    "authors": "Williams, G. C. & Deci, E. L.",
+    "year": 1996,
+    "citation": "Williams, G. C., & Deci, E. L. (1996). Internalization of biopsychosocial values by medical students: A test of self-determination theory. Journal of Personality and Social Psychology, 70(4), 767-779.",
+    "item_count": 6,
+    "tier": "optional",
+    "license": "Published instrument, available from SDT Center (selfdeterminationtheory.org). Short form adapted from 15-item LCQ.",
+    "stem": "This questionnaire contains items that are related to your experience with your instructor in this class. Instructors have different styles in dealing with students. We would like to know more about how you have felt about your encounters with your instructor. Please indicate how true each statement is for you."
+  },
+  "response_format": {
+    "type": "likert",
+    "min": 1,
+    "max": 7,
+    "step": 1,
+    "labels": {
+      "1": "Strongly disagree",
+      "4": "Neutral",
+      "7": "Strongly agree"
+    }
+  },
+  "items": [
+    { "id": "lcq_01", "position": 1, "text": "I feel that my instructor provides me choices and options.", "reverse_scored": false, "subscale": "autonomy_support" },
+    { "id": "lcq_02", "position": 2, "text": "I feel understood by my instructor.", "reverse_scored": false, "subscale": "autonomy_support" },
+    { "id": "lcq_03", "position": 3, "text": "My instructor conveyed confidence in my ability to do well in the course.", "reverse_scored": false, "subscale": "autonomy_support" },
+    { "id": "lcq_04", "position": 4, "text": "My instructor encouraged me to ask questions.", "reverse_scored": false, "subscale": "autonomy_support" },
+    { "id": "lcq_05", "position": 5, "text": "My instructor listens to how I would like to do things.", "reverse_scored": false, "subscale": "autonomy_support" },
+    { "id": "lcq_06", "position": 6, "text": "My instructor tries to understand how I see things before suggesting a new way to do things.", "reverse_scored": false, "subscale": "autonomy_support" }
+  ],
+  "subscales": [
+    {
+      "id": "autonomy_support",
+      "name": "Autonomy Support",
+      "item_ids": ["lcq_01", "lcq_02", "lcq_03", "lcq_04", "lcq_05", "lcq_06"]
+    }
+  ],
+  "validation": {
+    "cronbach_alpha": {
+      "autonomy_support": 0.93
+    },
+    "sample_description": "Medical students (Williams & Deci, 1996). Short form from 15-item LCQ.",
+    "normative_data": null
+  }
+}

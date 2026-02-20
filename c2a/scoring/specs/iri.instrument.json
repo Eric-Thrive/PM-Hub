@@ -1,0 +1,67 @@
+{
+  "id": "iri",
+  "version": "1.0.0",
+  "metadata": {
+    "name": "Interpersonal Reactivity Index — Perspective Taking & Empathic Concern Subscales",
+    "abbreviation": "IRI (PT+EC)",
+    "authors": "Davis, M. H.",
+    "year": 1983,
+    "citation": "Davis, M. H. (1983). Measuring individual differences in empathy: Evidence for a multidimensional approach. Journal of Personality and Social Psychology, 44(1), 113-126.",
+    "item_count": 14,
+    "tier": "core",
+    "license": "Published instrument, widely used in research. Full IRI has 28 items (4 subscales); we use 2 subscales (14 items).",
+    "stem": "The following statements inquire about your thoughts and feelings in a variety of situations. For each item, indicate how well it describes you."
+  },
+  "response_format": {
+    "type": "likert",
+    "min": 1,
+    "max": 7,
+    "step": 1,
+    "labels": {
+      "1": "Does not describe me well",
+      "4": "Neutral",
+      "7": "Describes me very well"
+    }
+  },
+  "items": [
+    { "id": "iri_03", "position": 1, "text": "I sometimes find it difficult to see things from the 'other guy's' point of view.", "reverse_scored": true, "subscale": "perspective_taking" },
+    { "id": "iri_08", "position": 2, "text": "I try to look at everybody's side of a disagreement before I make a decision.", "reverse_scored": false, "subscale": "perspective_taking" },
+    { "id": "iri_11", "position": 3, "text": "I sometimes try to understand my friends better by imagining how things look from their perspective.", "reverse_scored": false, "subscale": "perspective_taking" },
+    { "id": "iri_15", "position": 4, "text": "If I'm sure I'm right about something, I don't waste much time listening to other people's arguments.", "reverse_scored": true, "subscale": "perspective_taking" },
+    { "id": "iri_21", "position": 5, "text": "I believe that there are two sides to every question and try to look at them both.", "reverse_scored": false, "subscale": "perspective_taking" },
+    { "id": "iri_25", "position": 6, "text": "When I'm upset at someone, I usually try to 'put myself in his shoes' for a while.", "reverse_scored": false, "subscale": "perspective_taking" },
+    { "id": "iri_28", "position": 7, "text": "Before criticizing somebody, I try to imagine how I would feel if I were in their place.", "reverse_scored": false, "subscale": "perspective_taking" },
+    { "id": "iri_02", "position": 8, "text": "I often have tender, concerned feelings for people less fortunate than me.", "reverse_scored": false, "subscale": "empathic_concern" },
+    { "id": "iri_04", "position": 9, "text": "Sometimes I don't feel very sorry for other people when they are having problems.", "reverse_scored": true, "subscale": "empathic_concern" },
+    { "id": "iri_09", "position": 10, "text": "When I see someone being taken advantage of, I feel kind of protective towards them.", "reverse_scored": false, "subscale": "empathic_concern" },
+    { "id": "iri_14", "position": 11, "text": "Other people's misfortunes do not usually disturb me a great deal.", "reverse_scored": true, "subscale": "empathic_concern" },
+    { "id": "iri_18", "position": 12, "text": "When I see someone being treated unfairly, I sometimes don't feel very much pity for them.", "reverse_scored": true, "subscale": "empathic_concern" },
+    { "id": "iri_20", "position": 13, "text": "I am often quite touched by things that I see happen.", "reverse_scored": false, "subscale": "empathic_concern" },
+    { "id": "iri_22", "position": 14, "text": "I would describe myself as a pretty soft-hearted person.", "reverse_scored": false, "subscale": "empathic_concern" }
+  ],
+  "subscales": [
+    {
+      "id": "perspective_taking",
+      "name": "Perspective Taking",
+      "item_ids": ["iri_03", "iri_08", "iri_11", "iri_15", "iri_21", "iri_25", "iri_28"]
+    },
+    {
+      "id": "empathic_concern",
+      "name": "Empathic Concern",
+      "item_ids": ["iri_02", "iri_04", "iri_09", "iri_14", "iri_18", "iri_20", "iri_22"]
+    }
+  ],
+  "validation": {
+    "cronbach_alpha": {
+      "perspective_taking": 0.78,
+      "empathic_concern": 0.73
+    },
+    "sample_description": "Undergraduate students (Davis, 1983). Note: uses original Davis item numbering from full 28-item IRI.",
+    "normative_data": {
+      "perspective_taking_mean_male": 4.19,
+      "perspective_taking_mean_female": 4.53,
+      "empathic_concern_mean_male": 4.23,
+      "empathic_concern_mean_female": 4.77
+    }
+  }
+}

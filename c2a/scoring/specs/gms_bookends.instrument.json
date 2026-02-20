@@ -1,0 +1,124 @@
+{
+  "id": "gms_bookends",
+  "version": "1.0.0",
+  "metadata": {
+    "name": "Global Motivation Scale — Bookends Adaptation",
+    "abbreviation": "GMS-Bookends",
+    "authors": "Guay, F., Mageau, G. A., & Vallerand, R. J.",
+    "year": 2003,
+    "citation": "Guay, F., Mageau, G. A., & Vallerand, R. J. (2003). On the hierarchical structure of self-determined motivation: A test of top-down and bottom-up effects. Personality and Social Psychology Bulletin, 29(8), 992-1004.",
+    "item_count": 10,
+    "tier": "optional",
+    "license": "Published instrument (GMS-28). Bookends adaptation selects 10 items from SDT continuum endpoints (IM, ER, Amotivation).",
+    "stem": "In general, I do things..."
+  },
+  "response_format": {
+    "type": "likert",
+    "min": 1,
+    "max": 7,
+    "step": 1,
+    "labels": {
+      "1": "Does not correspond at all",
+      "4": "Corresponds moderately",
+      "7": "Corresponds completely"
+    }
+  },
+  "items": [
+    {
+      "id": "gms_18",
+      "position": 1,
+      "text": "...for the pleasure of learning new, interesting things.",
+      "reverse_scored": false,
+      "subscale": "intrinsic_motivation"
+    },
+    {
+      "id": "gms_13",
+      "position": 2,
+      "text": "...for the pleasure I feel mastering what I am doing.",
+      "reverse_scored": false,
+      "subscale": "intrinsic_motivation"
+    },
+    {
+      "id": "gms_22",
+      "position": 3,
+      "text": "...for the enjoyable feelings I experience.",
+      "reverse_scored": false,
+      "subscale": "intrinsic_motivation"
+    },
+    {
+      "id": "gms_02",
+      "position": 4,
+      "text": "...because I do not want to disappoint certain people.",
+      "reverse_scored": false,
+      "subscale": "external_regulation"
+    },
+    {
+      "id": "gms_09",
+      "position": 5,
+      "text": "...because I want to be viewed more positively by certain people.",
+      "reverse_scored": false,
+      "subscale": "external_regulation"
+    },
+    {
+      "id": "gms_16",
+      "position": 6,
+      "text": "...in order to show others what I am capable of.",
+      "reverse_scored": false,
+      "subscale": "external_regulation"
+    },
+    {
+      "id": "gms_23",
+      "position": 7,
+      "text": "...in order to attain prestige.",
+      "reverse_scored": false,
+      "subscale": "external_regulation"
+    },
+    {
+      "id": "gms_07",
+      "position": 8,
+      "text": "...although I do not see the benefit in what I am doing.",
+      "reverse_scored": false,
+      "subscale": "amotivation"
+    },
+    {
+      "id": "gms_14",
+      "position": 9,
+      "text": "...although it does not make a difference whether I do them or not.",
+      "reverse_scored": false,
+      "subscale": "amotivation"
+    },
+    {
+      "id": "gms_21",
+      "position": 10,
+      "text": "...even though I do not have a good reason for doing them.",
+      "reverse_scored": false,
+      "subscale": "amotivation"
+    }
+  ],
+  "subscales": [
+    {
+      "id": "intrinsic_motivation",
+      "name": "Intrinsic Motivation",
+      "item_ids": ["gms_18", "gms_13", "gms_22"]
+    },
+    {
+      "id": "external_regulation",
+      "name": "External Regulation",
+      "item_ids": ["gms_02", "gms_09", "gms_16", "gms_23"]
+    },
+    {
+      "id": "amotivation",
+      "name": "Amotivation",
+      "item_ids": ["gms_07", "gms_14", "gms_21"]
+    }
+  ],
+  "validation": {
+    "cronbach_alpha": {
+      "intrinsic_motivation": 0.85,
+      "external_regulation": 0.78,
+      "amotivation": 0.73
+    },
+    "sample_description": "GMS-28 full scale alphas from Guay et al. (2003); Bookends subset alphas estimated from parent subscales. IM alpha averaged across 3 IM subtypes (Knowledge α=.84, Accomplishment α=.85, Stimulation α=.86). ER and Amot from full 4-item subscales; 3-4 item subset may differ.",
+    "normative_data": null
+  }
+}

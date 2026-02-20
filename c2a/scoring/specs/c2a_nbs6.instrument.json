@@ -1,0 +1,89 @@
+{
+  "id": "c2a_nbs6",
+  "version": "1.0.0",
+  "metadata": {
+    "name": "C2A Networking Behavior Scale",
+    "abbreviation": "C2A-NBS-6",
+    "authors": "ThriveIEP / LE3 (adapted from Wolff & Moser SNBS framework)",
+    "year": 2026,
+    "citation": "ThriveIEP. (2026). C2A Networking Behavior Scale (C2A-NBS-6). Based on Wolff, H. G., & Moser, K. (2009). Effects of networking on career success. Journal of Applied Psychology, 94, 196–206; Wolff, H. G., & Spurk, D. (2020). Developing and validating a short networking behavior scale. Journal of Career Assessment, 28, 277–299.",
+    "item_count": 6,
+    "tier": "rnd",
+    "license": "Original scale developed by ThriveIEP for C2A battery. Framework adapted from SNBS (Wolff & Moser, 2009; Wolff & Spurk, 2020).",
+    "stem": "Please indicate how often you have done each of the following in the past month."
+  },
+  "response_format": {
+    "type": "likert",
+    "min": 1,
+    "max": 5,
+    "step": 1,
+    "labels": {
+      "1": "Never",
+      "2": "Rarely",
+      "3": "Sometimes",
+      "4": "Often",
+      "5": "Very Often"
+    }
+  },
+  "items": [
+    {
+      "id": "nbs_01",
+      "position": 1,
+      "text": "In the past month, how often have you started a conversation with someone new in your program, school, or workplace to get to know them?",
+      "reverse_scored": false,
+      "subscale": "internal_networking"
+    },
+    {
+      "id": "nbs_02",
+      "position": 2,
+      "text": "In the past month, how often have you reached out to a classmate, coworker, or colleague you haven't spoken to in a while to stay in touch?",
+      "reverse_scored": false,
+      "subscale": "internal_networking"
+    },
+    {
+      "id": "nbs_03",
+      "position": 3,
+      "text": "In the past month, how often have you asked someone in your program or workplace for advice, information, or help with a challenge you faced?",
+      "reverse_scored": false,
+      "subscale": "internal_networking"
+    },
+    {
+      "id": "nbs_04",
+      "position": 4,
+      "text": "In the past month, how often have you introduced yourself to someone outside your program or workplace because they could be a useful professional contact?",
+      "reverse_scored": false,
+      "subscale": "external_networking"
+    },
+    {
+      "id": "nbs_05",
+      "position": 5,
+      "text": "In the past month, how often have you followed up with someone you met at an event, workshop, or professional setting to keep the connection going?",
+      "reverse_scored": false,
+      "subscale": "external_networking"
+    },
+    {
+      "id": "nbs_06",
+      "position": 6,
+      "text": "In the past month, how often have you reached out to someone outside your program or workplace to ask for advice, information, or an introduction to someone they know?",
+      "reverse_scored": false,
+      "subscale": "external_networking"
+    }
+  ],
+  "subscales": [
+    {
+      "id": "internal_networking",
+      "name": "Internal Networking",
+      "item_ids": ["nbs_01", "nbs_02", "nbs_03"]
+    },
+    {
+      "id": "external_networking",
+      "name": "External Networking",
+      "item_ids": ["nbs_04", "nbs_05", "nbs_06"]
+    }
+  ],
+  "validation": {
+    "cronbach_alpha": {},
+    "sample_description": "Pilot instrument — no published validation data. Initial target α ≥ .65, refinement target α ≥ .70. Based on SNBS six-cell model (internal/external × building/maintaining/using) which shows robust factor structure (Wolff & Moser, 2009; Wolff & Spurk, 2020).",
+    "normative_data": null
+  }
+}
