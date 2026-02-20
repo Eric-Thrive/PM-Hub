@@ -4,10 +4,10 @@ description: >
   Core PM context for ThriveIEP — team, products, milestones, resource IDs.
   Use this skill for ANY ThriveIEP work: project management, issue tracking,
   meeting prep, stakeholder communications, technical planning, sprint planning,
-  or when referencing team members, products, milestones, or Notion/Linear/GitHub
+  or when referencing team members, products, milestones, or Linear/GitHub/Google
   resources. Always load this skill when the conversation involves ThriveIEP work.
   Trigger on: any mention of ThriveIEP, C2A, LE3, NLU, Linear issues (THR-),
-  Notion pages, team members (Elizabeth, Soham, Hannah, Lori), product names
+  team members (Elizabeth, Soham, Hannah, Lori), product names
   (Accommodation Engine, PI Redactor, Bloom Report), milestones (M1-M5),
   or PM workflow concepts like focus picks, priorities, blockers, dashboards.
 ---
@@ -19,14 +19,14 @@ AI-driven assessment and coaching platforms for neurodivergent students.
 
 Eric is Co-Founder & CPTO. He leads technical development and project management.
 This skill provides the stable context you need to be immediately useful in any
-ThriveIEP conversation without re-reading Notion pages.
+ThriveIEP conversation without re-reading docs.
 
 ## What This Skill Contains
 
 - Team roster and roles
 - Product portfolio with priority weights
 - NLU contract milestones and dates
-- All resource IDs (Notion, Linear, GitHub, Google)
+- All resource IDs (PM-Hub, Linear, GitHub, Google)
 - Conventions for to-do creation and priority sorting
 
 For detailed resource IDs: read `references/ids-and-resources.md`
@@ -57,16 +57,41 @@ For team context and working patterns: read `references/team.md`
 | Bloom Report | 2 | 🟡 Lower Priority |
 | PI Redactor | 3 (lowest) | 🟢 Stable |
 
-### Key Resource IDs
-| Resource | ID/Address |
-|----------|-----------|
-| Session Handoff Notes | Notion: `3094659c-b96d-81d1-be9a-ecbdb9e9aee2` |
-| PM Hub | Notion: `2f74659c-b96d-816e-b67e-cfeb8737ad9b` |
-| Priorities | Notion: `2f74659c-b96d-8110-a85a-eba7732df3e9` |
-| PM-Hub Repo | GitHub: `https://github.com/Eric-Thrive/PM-Hub` |
+### Key Resources
+| Resource | Location |
+|----------|----------|
+| PM-Hub Repo | `https://github.com/Eric-Thrive/PM-Hub` |
+| PM context files | PM-Hub `context/` directory |
+| Session Handoff | PM-Hub `sessions/handoff.md` |
+| Work Product Log | PM-Hub `logs/work-product-log.md` |
+| C2A Technical Docs | PM-Hub `c2a/docs/` |
+| C2A Scoring/Norms | PM-Hub `c2a/scoring/` |
 | Linear Team | ThriveIEP |
 | Gmail | falkeeric@gmail.com |
 | Work Calendar | eric@thriveiep.com |
+
+## Source of Truth Hierarchy
+
+1. **PM-Hub (GitHub)** — All PM context, technical docs, artifacts (read/write via terminal)
+2. **Linear** — Tactical issue tracking (authoritative for issue state)
+3. **Google Drive** — External reference documents only
+4. **Notion** — Legacy fallback only when GitHub token unavailable
+
+### GitHub Protocol
+PM-Hub repo stores all versioned PM context and artifacts. GitHub token is
+stored in memory edits (rotated daily). Clone at session start, commit/push
+after changes.
+
+Commit format: `[THR-XXX] Brief description of what changed and why`
+
+### Notion Fallback IDs (use only when PM-Hub unavailable)
+| Resource | ID |
+|----------|----|
+| Session Handoff Notes | `3094659c-b96d-81d1-be9a-ecbdb9e9aee2` |
+| Work Product Log | `3094659c-b96d-816e-b4a4-fad4d3482a6d` |
+| Priorities | `2f74659c-b96d-8110-a85a-eba7732df3e9` |
+| To-Do Database | `collection://1484659c-b96d-8132-94ea-000b793dca9b` |
+| Elizabeth Review Queue | `collection://60cfacd8-7531-4368-9273-97621f931612` |
 
 ## Conventions
 
@@ -78,17 +103,3 @@ if mentioned, and link to relevant Linear issue if applicable.
 ### Priority Sorting
 Sort issues and tasks by: (1) blocker status, (2) product weight (lower = higher
 priority), (3) milestone deadline proximity, (4) Linear priority field.
-
-### GitHub Protocol
-The PM-Hub repo (`https://github.com/Eric-Thrive/PM-Hub`) stores versioned
-artifacts (JSON, TS, MD specs). Eric provides a fresh GitHub token at session
-start when pushing is needed. Never store tokens in memory or files.
-
-Commit format: `[THR-XXX] Brief description of what changed and why`
-
-### Dynamic Content (Fetch from Notion)
-These change frequently — fetch live rather than caching:
-- "This Week's Focus" checklists → Notion Priorities page
-- "Blockers" section → Notion Priorities page
-- "Recent Context" narrative → Notion Priorities page
-- Elizabeth Review Queue → `collection://60cfacd8-7531-4368-9273-97621f931612`

@@ -14,10 +14,11 @@ days_to_m3 = days until March 15, 2026
 
 Fetch all sources. These are independent and can be gathered in any order.
 
-### 2a. Notion Priorities
-- Fetch page: `2f74659c-b96d-8110-a85a-eba7732df3e9`
+### 2a. PM-Hub Priorities (Primary)
+- Read `context/priorities.md` from cloned PM-Hub repo via terminal
 - Extract: "This Week's Focus" checklist items, "Blockers" section
 - Note which items are checked vs unchecked
+- **Fallback:** If PM-Hub not cloned, fetch Notion page `2f74659c-b96d-8110-a85a-eba7732df3e9`
 
 ### 2b. Linear Issues
 - `Linear:list_issues` — team: ThriveIEP, state: "In Progress" or "Todo"
