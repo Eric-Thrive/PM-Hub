@@ -1,0 +1,569 @@
+{
+  "$schema": "le3_graduate_pillars.framework.v2.0",
+  "version": "2.0.0",
+  "supersedes": "ref3_le3_graduate_pillars_framework.json",
+  "description": "LE3 Graduate Pillars Framework — source of truth for C2A profile generation. Maps 12 LE3 durable skills to assessment indicators, coaching strategies, and intervention logic. DDx explanatory dimensions (EF, ARC, GMS) are defined separately from reported skills.",
+  "framework": "le3_graduate_pillars",
+  "customer": "nlu",
+  "last_updated": "2026-02-19",
+
+  "pillars": [
+    {
+      "pillar_id": "p1",
+      "name": "Creative & Curious Thinkers",
+      "description": "Skills that drive intellectual exploration, analytical reasoning, and adaptive thinking.",
+      "skill_ids": ["creative_problem_solving", "critical_thinking", "curiosity", "adaptability"]
+    },
+    {
+      "pillar_id": "p2",
+      "name": "Leaders with Purpose & Agency",
+      "description": "Skills that enable self-directed action, empathic engagement, and effective expression.",
+      "skill_ids": ["initiative", "empathy", "communication"]
+    },
+    {
+      "pillar_id": "p3",
+      "name": "Thrivers in Change",
+      "description": "Skills for navigating uncertainty, recovering from setbacks, and working effectively with others.",
+      "skill_ids": ["resilience", "collaboration"],
+      "notes": "Adaptability is cross-listed from P1."
+    },
+    {
+      "pillar_id": "p4",
+      "name": "Network Builders",
+      "description": "Skills for intentionally building, maintaining, and leveraging professional relationships.",
+      "skill_ids": ["networking", "relationship_building", "social_awareness"]
+    }
+  ],
+
+  "reported_skills": {
+
+    "creative_problem_solving": {
+      "skill_id": "creative_problem_solving",
+      "pillar": "p1",
+      "display_name": "Creative Problem Solving",
+      "definition": "Generates novel solutions by combining ideas across domains; approaches challenges from multiple angles.",
+      "skill_family": "cognitive",
+      "primary_indicators": [
+        { "instrument": "cfs", "subscale": "cognitive_flexibility", "role": "primary", "rationale": "Flexible thinking is prerequisite for creative recombination" },
+        { "instrument": "caas_sf", "subscale": "curiosity", "role": "primary", "rationale": "Curiosity drives exploration of novel solution spaces" }
+      ],
+      "constraint_indicators": [
+        { "instrument": "adexi", "subscale": "working_memory", "role": "constraint", "rationale": "WM needed to hold and manipulate multiple ideas simultaneously" }
+      ],
+      "supporting_indicators": [
+        { "instrument": "caas_sf", "subscale": "confidence", "role": "supporting", "rationale": "Self-efficacy to attempt unfamiliar approaches" }
+      ],
+      "ef_relevance": ["working_memory", "cognitive_flexibility"],
+      "arc_relevance": ["autonomy", "competence"],
+      "intervention_logic": {
+        "when_low": "When creative problem solving is low, check whether cognitive flexibility (CFS) or working memory (ADEXI-WM) is constraining. If EF constraint present, scaffold with external idea-generation tools before expecting independent creative output.",
+        "when_high": "Strong creative problem solving indicates flexible, generative thinking. Leverage this strength to support skill-building in more structured areas like critical thinking or initiative."
+      }
+    },
+
+    "critical_thinking": {
+      "skill_id": "critical_thinking",
+      "pillar": "p1",
+      "display_name": "Critical Thinking",
+      "definition": "Analyzes information deeply; evaluates evidence before making decisions.",
+      "skill_family": "cognitive",
+      "primary_indicators": [
+        { "instrument": "mslq_ct", "subscale": "critical_thinking", "role": "primary", "rationale": "Direct measure of critical thinking strategy use" },
+        { "instrument": "cfs", "subscale": "cognitive_flexibility", "role": "primary", "rationale": "Cognitive flexibility enables perspective shifts needed for evaluation" }
+      ],
+      "constraint_indicators": [
+        { "instrument": "adexi", "subscale": "working_memory", "role": "constraint", "rationale": "WM capacity to hold arguments and counterarguments simultaneously" }
+      ],
+      "supporting_indicators": [
+        { "instrument": "caas_sf", "subscale": "curiosity", "role": "supporting", "rationale": "Curiosity motivates deeper investigation" }
+      ],
+      "ef_relevance": ["working_memory", "cognitive_flexibility"],
+      "arc_relevance": ["competence"],
+      "intervention_logic": {
+        "when_low": "When critical thinking is low, check WM capacity. If constrained, provide structured analytical frameworks (checklists, rubrics) to externalize the holding-and-comparing process. If WM is clear, focus on metacognitive strategy instruction.",
+        "when_high": "Strong critical thinking indicates analytical depth. Coach can use this as leverage for developing communication skills (articulating analyses) and initiative (applying analysis proactively)."
+      }
+    },
+
+    "curiosity": {
+      "skill_id": "curiosity",
+      "pillar": "p1",
+      "display_name": "Curiosity",
+      "definition": "Asks meaningful questions; seeks to understand beyond surface-level answers.",
+      "skill_family": "cognitive",
+      "primary_indicators": [
+        { "instrument": "caas_sf", "subscale": "curiosity", "role": "primary", "rationale": "Direct measure of exploratory orientation (CAAS Curiosity subscale)" },
+        { "instrument": "cfs", "subscale": "cognitive_flexibility", "role": "primary", "rationale": "Willingness to entertain new perspectives is a component of curiosity" }
+      ],
+      "constraint_indicators": [],
+      "supporting_indicators": [
+        { "instrument": "caas_sf", "subscale": "concern", "role": "supporting", "rationale": "Future-orientation may channel curiosity toward purposeful exploration" }
+      ],
+      "ef_relevance": ["cognitive_flexibility"],
+      "arc_relevance": ["autonomy"],
+      "intervention_logic": {
+        "when_low": "When curiosity is low, check autonomy satisfaction. Need frustration in autonomy often suppresses exploratory behavior. If autonomy is clear, use structured inquiry activities to build the curiosity habit.",
+        "when_high": "Strong curiosity is a powerful intrinsic motivator. Channel toward skill areas that need development — curious students respond well to framing growth areas as interesting problems to solve."
+      }
+    },
+
+    "adaptability": {
+      "skill_id": "adaptability",
+      "pillar": "p1",
+      "display_name": "Adaptability",
+      "definition": "Adjusts approach as new information or challenges arise. Cross-listed: Pillars 1 & 3.",
+      "skill_family": "cognitive",
+      "cross_listed_pillars": ["p1", "p3"],
+      "primary_indicators": [
+        { "instrument": "cfs", "subscale": "cognitive_flexibility", "role": "primary", "rationale": "Core cognitive substrate of adaptive behavior" },
+        { "instrument": "caas_sf", "subscale": "concern", "role": "primary", "rationale": "Anticipatory awareness enables proactive adaptation" },
+        { "instrument": "brs", "subscale": "brief_resilience", "role": "primary", "rationale": "Bounce-back capacity enables adaptation under stress" }
+      ],
+      "constraint_indicators": [
+        { "instrument": "adexi", "subscale": "working_memory", "role": "constraint", "rationale": "WM needed to track changing conditions and update plans" },
+        { "instrument": "adexi", "subscale": "inhibition", "role": "constraint", "rationale": "Inhibition needed to suppress habitual responses when conditions change" }
+      ],
+      "supporting_indicators": [
+        { "instrument": "caas_sf", "subscale": "confidence", "role": "supporting", "rationale": "Self-efficacy to attempt new approaches" }
+      ],
+      "ef_relevance": ["working_memory", "inhibition", "cognitive_flexibility"],
+      "arc_relevance": ["autonomy", "competence"],
+      "intervention_logic": {
+        "when_low": "Adaptability draws on all three EF domains. Check which are constrained. If cognitive flexibility is the primary constraint, the student gets stuck in one frame — use perspective-taking exercises. If WM/inhibition, scaffold with structured change-management templates.",
+        "when_high": "Strong adaptability is a resilience asset. Note as a resource the student can draw on during coaching for more challenging skill areas."
+      }
+    },
+
+    "initiative": {
+      "skill_id": "initiative",
+      "pillar": "p2",
+      "display_name": "Initiative",
+      "definition": "Takes proactive steps; does not wait to be told what to do.",
+      "skill_family": "self_directed",
+      "primary_indicators": [
+        { "instrument": "caas_sf", "subscale": "control", "role": "primary", "rationale": "Self-directed action and ownership of outcomes" },
+        { "instrument": "cfs", "subscale": "cognitive_flexibility", "role": "primary", "rationale": "Ability to generate action plans across different contexts" }
+      ],
+      "constraint_indicators": [
+        { "instrument": "adexi", "subscale": "working_memory", "role": "constraint", "rationale": "WM needed to hold multi-step plans in mind during execution" }
+      ],
+      "supporting_indicators": [
+        { "instrument": "caas_sf", "subscale": "confidence", "role": "supporting", "rationale": "Self-efficacy to act without external prompting" }
+      ],
+      "ef_relevance": ["working_memory"],
+      "arc_relevance": ["autonomy", "competence"],
+      "intervention_logic": {
+        "when_low": "When initiative is low, first check autonomy satisfaction. If autonomy is frustrated, the environment may be suppressing proactive behavior — address context before coaching the skill. If autonomy is clear, check WM: the student may know what to do but can't organize the doing.",
+        "when_high": "Strong initiative is a self-directed learning asset. Can be leveraged to drive engagement across all other skill areas — the student naturally seeks growth opportunities."
+      }
+    },
+
+    "empathy": {
+      "skill_id": "empathy",
+      "pillar": "p2",
+      "display_name": "Empathy",
+      "definition": "Understands and respects others' feelings and perspectives.",
+      "skill_family": "interpersonal",
+      "primary_indicators": [
+        { "instrument": "iri", "subscale": "perspective_taking", "role": "primary", "rationale": "Cognitive empathy — ability to adopt others' viewpoints" },
+        { "instrument": "iri", "subscale": "empathic_concern", "role": "primary", "rationale": "Affective empathy — emotional responsiveness to others' experiences" }
+      ],
+      "constraint_indicators": [
+        { "instrument": "adexi", "subscale": "inhibition", "role": "constraint", "rationale": "Inhibition needed to regulate own emotional reactions and truly listen" }
+      ],
+      "supporting_indicators": [
+        { "instrument": "cfs", "subscale": "cognitive_flexibility", "role": "supporting", "rationale": "Flexibility supports taking multiple perspectives" }
+      ],
+      "ef_relevance": ["inhibition", "cognitive_flexibility"],
+      "arc_relevance": ["relatedness"],
+      "intervention_logic": {
+        "when_low": "When empathy is low, distinguish between cognitive (PT) and affective (EC) components. If PT is low but EC adequate, focus on perspective-taking exercises. If both low and inhibition is constrained, the student may be emotionally reactive — teach self-regulation strategies alongside empathy-building.",
+        "when_high": "Strong empathy is a relational asset. Note as a foundation for relationship building, collaboration, and social awareness development."
+      }
+    },
+
+    "communication": {
+      "skill_id": "communication",
+      "pillar": "p2",
+      "display_name": "Communication",
+      "definition": "Clearly articulates ideas verbally and in writing for different audiences.",
+      "skill_family": "interpersonal",
+      "primary_indicators": [
+        { "instrument": "spcc", "subscale": "public_speaking", "role": "primary", "rationale": "Competence in formal communication contexts" },
+        { "instrument": "spcc", "subscale": "meeting", "role": "primary", "rationale": "Competence in structured group communication" },
+        { "instrument": "spcc", "subscale": "group_discussion", "role": "primary", "rationale": "Competence in informal group communication" },
+        { "instrument": "spcc", "subscale": "dyad", "role": "primary", "rationale": "Competence in one-on-one communication" }
+      ],
+      "constraint_indicators": [
+        { "instrument": "adexi", "subscale": "working_memory", "role": "constraint", "rationale": "WM needed to organize thoughts and track conversation" },
+        { "instrument": "adexi", "subscale": "inhibition", "role": "constraint", "rationale": "Inhibition needed to regulate impulsive speech and listen before responding" }
+      ],
+      "supporting_indicators": [
+        { "instrument": "cfs", "subscale": "cognitive_flexibility", "role": "supporting", "rationale": "Flexibility supports adapting message to audience" }
+      ],
+      "ef_relevance": ["working_memory", "inhibition"],
+      "arc_relevance": ["relatedness", "competence"],
+      "intervention_logic": {
+        "when_low": "When communication is low, identify which contexts are weakest (SPCC subscales). If public speaking is low but dyad is adequate, anxiety/exposure interventions differ from global communication deficits. Check WM: if constrained, teach structured communication frameworks (outlines, talking points).",
+        "when_high": "Strong communication is a multiplier for all interpersonal skills. Note as a coaching delivery channel — the student can articulate their own growth needs."
+      }
+    },
+
+    "resilience": {
+      "skill_id": "resilience",
+      "pillar": "p3",
+      "display_name": "Resilience",
+      "definition": "Perseveres through challenges; maintains effort despite obstacles.",
+      "skill_family": "self_directed",
+      "primary_indicators": [
+        { "instrument": "brs", "subscale": "brief_resilience", "role": "primary", "rationale": "Direct measure of bounce-back capacity" },
+        { "instrument": "caas_sf", "subscale": "confidence", "role": "primary", "rationale": "Self-efficacy component of persistence through difficulty" }
+      ],
+      "constraint_indicators": [
+        { "instrument": "adexi", "subscale": "working_memory", "role": "constraint", "rationale": "WM needed to maintain goals in the face of distraction and setback" }
+      ],
+      "supporting_indicators": [
+        { "instrument": "caas_sf", "subscale": "control", "role": "supporting", "rationale": "Sense of agency supports active coping rather than helplessness" }
+      ],
+      "ef_relevance": ["working_memory", "inhibition"],
+      "arc_relevance": ["competence"],
+      "intervention_logic": {
+        "when_low": "When resilience is low, check competence satisfaction. If competence is frustrated, the student may have learned helplessness — build small wins before attempting resilience coaching. If competence is clear, focus on coping strategy instruction and stress inoculation.",
+        "when_high": "Strong resilience is a foundational asset — the student can tolerate the discomfort of skill-building in weaker areas. Note as a coaching enabler."
+      }
+    },
+
+    "collaboration": {
+      "skill_id": "collaboration",
+      "pillar": "p3",
+      "display_name": "Collaboration",
+      "definition": "Works well with others towards shared goals, even in stressful contexts.",
+      "skill_family": "interpersonal",
+      "primary_indicators": [
+        { "instrument": "spcc", "subscale": "group_discussion", "role": "primary", "rationale": "Competence in group contexts is prerequisite for effective collaboration" },
+        { "instrument": "spcc", "subscale": "meeting", "role": "primary", "rationale": "Structured group participation skills" },
+        { "instrument": "iri", "subscale": "perspective_taking", "role": "primary", "rationale": "Ability to understand team members' viewpoints enables coordination" }
+      ],
+      "constraint_indicators": [
+        { "instrument": "adexi", "subscale": "inhibition", "role": "constraint", "rationale": "Inhibition needed to regulate reactions in group settings and share floor" }
+      ],
+      "supporting_indicators": [
+        { "instrument": "cfs", "subscale": "cognitive_flexibility", "role": "supporting", "rationale": "Flexibility to adapt to others' ideas and approaches" }
+      ],
+      "ef_relevance": ["inhibition", "cognitive_flexibility"],
+      "arc_relevance": ["relatedness"],
+      "intervention_logic": {
+        "when_low": "When collaboration is low, check inhibition — impulsive behavior in group settings undermines teamwork. Also check relatedness satisfaction: if frustrated, the student may be socially withdrawn. Build from dyad-level competence (SPCC) toward group skills.",
+        "when_high": "Strong collaboration indicates social maturity. Leverage in group coaching activities and peer mentoring arrangements."
+      }
+    },
+
+    "networking": {
+      "skill_id": "networking",
+      "pillar": "p4",
+      "display_name": "Networking",
+      "definition": "Intentionally builds and maintains relationships to expand opportunities.",
+      "skill_family": "interpersonal",
+      "primary_indicators": [
+        { "instrument": "c2a_nbs", "subscale": "networking_behaviors", "role": "primary", "rationale": "Direct measure of networking behaviors across internal/external × build/maintain/use dimensions" },
+        { "instrument": "spcc", "subscale": "stranger", "role": "primary", "rationale": "Communication competence with unfamiliar people — prerequisite for network expansion" },
+        { "instrument": "spcc", "subscale": "acquaintance", "role": "primary", "rationale": "Communication competence with casual contacts — prerequisite for network maintenance" }
+      ],
+      "constraint_indicators": [],
+      "supporting_indicators": [
+        { "instrument": "caas_sf", "subscale": "curiosity", "role": "supporting", "rationale": "Curiosity about others drives initial connection-seeking" }
+      ],
+      "ef_relevance": ["working_memory"],
+      "arc_relevance": ["relatedness", "autonomy"],
+      "intervention_logic": {
+        "when_low": "When networking is low, check whether stranger/acquaintance communication competence (SPCC) is the barrier. If SPCC is adequate but NBS is low, the student may need exposure and practice rather than skill-building. If SPCC is low, build basic communication confidence first.",
+        "when_high": "Strong networking indicates proactive relational behavior. Leverage for career development activities and peer connection facilitation."
+      }
+    },
+
+    "relationship_building": {
+      "skill_id": "relationship_building",
+      "pillar": "p4",
+      "display_name": "Relationship Building",
+      "definition": "Establishes and nurtures authentic, trust-based connections that last over time.",
+      "skill_family": "interpersonal",
+      "primary_indicators": [
+        { "instrument": "c2a_rqm", "subscale": "relationship_quality", "role": "primary", "rationale": "Direct measure of relational maintenance behaviors (proactive support, trust, appreciation)" },
+        { "instrument": "iri", "subscale": "empathic_concern", "role": "primary", "rationale": "Emotional responsiveness sustains deep relationships" },
+        { "instrument": "spcc", "subscale": "dyad", "role": "primary", "rationale": "One-on-one communication competence is the channel for relationship maintenance" }
+      ],
+      "constraint_indicators": [
+        { "instrument": "adexi", "subscale": "inhibition", "role": "constraint", "rationale": "Inhibition needed to manage emotional reactions that damage relationships" }
+      ],
+      "supporting_indicators": [
+        { "instrument": "iri", "subscale": "perspective_taking", "role": "supporting", "rationale": "Understanding others' viewpoints deepens relational trust" }
+      ],
+      "ef_relevance": ["inhibition"],
+      "arc_relevance": ["relatedness"],
+      "intervention_logic": {
+        "when_low": "When relationship building is low, check empathic concern (IRI-EC) and relatedness satisfaction. If EC is low, build empathic capacity first — relationship quality follows. If EC adequate but RQM low, focus on relational maintenance behaviors (checking in, showing appreciation, follow-through).",
+        "when_high": "Strong relationship building indicates social-emotional maturity. Leverage for mentoring relationships and team cohesion activities."
+      }
+    },
+
+    "social_awareness": {
+      "skill_id": "social_awareness",
+      "pillar": "p4",
+      "display_name": "Social Awareness",
+      "definition": "Recognizes group dynamics and cultural differences; adapts communication and behavior accordingly.",
+      "skill_family": "interpersonal",
+      "primary_indicators": [
+        { "instrument": "sfcq", "subscale": "metacognition", "role": "primary", "rationale": "Sociocultural awareness and self-monitoring in cross-cultural contexts" },
+        { "instrument": "iri", "subscale": "empathic_concern", "role": "primary", "rationale": "Emotional attunement to others' experiences — foundation for social reading" }
+      ],
+      "constraint_indicators": [
+        { "instrument": "adexi", "subscale": "inhibition", "role": "constraint", "rationale": "Inhibition needed to pause default assumptions and attend to social cues" }
+      ],
+      "supporting_indicators": [
+        { "instrument": "cfs", "subscale": "cognitive_flexibility", "role": "supporting", "rationale": "Flexibility to shift between cultural frames and social contexts" },
+        { "instrument": "iri", "subscale": "perspective_taking", "role": "supporting", "rationale": "Cognitive perspective-taking supports reading group dynamics" }
+      ],
+      "ef_relevance": ["inhibition", "cognitive_flexibility"],
+      "arc_relevance": ["relatedness"],
+      "intervention_logic": {
+        "when_low": "When social awareness is low, check whether the constraint is metacognitive (SFCQ — student doesn't monitor social dynamics) or affective (IRI-EC — student doesn't pick up emotional cues). If inhibition is constrained, the student may read social cues but react before processing — teach pause-and-observe strategies.",
+        "when_high": "Strong social awareness enables nuanced social navigation. Leverage for cross-cultural teamwork, conflict mediation, and leadership development."
+      }
+    }
+  },
+
+  "ddx_explanatory_dimensions": {
+    "_description": "These dimensions are scored and categorized but NOT reported as durable skills. They serve as explanatory inputs to the DDx engine — they tell coaches WHY a skill is constrained, not WHAT the student's skill level is.",
+
+    "executive_function": {
+      "working_memory": {
+        "dimension_id": "working_memory",
+        "display_name": "Working Memory",
+        "instrument": "adexi",
+        "subscale": "working_memory",
+        "direction": "high_is_deficit",
+        "reflection_applied": true,
+        "description": "Ability to hold and manipulate information in mind. When constrained, student struggles with multi-step tasks, following complex instructions, and tracking multiple ideas simultaneously.",
+        "ddx_role": "ef_domain",
+        "scoring_note": "ADEXI is reflected before normalization (6 - raw) so high = good in display scores."
+      },
+      "inhibition": {
+        "dimension_id": "inhibition",
+        "display_name": "Inhibition",
+        "instrument": "adexi",
+        "subscale": "inhibition",
+        "direction": "high_is_deficit",
+        "reflection_applied": true,
+        "description": "Ability to regulate impulses and emotional responses. When constrained, student may act before thinking, interrupt others, or have difficulty managing emotional reactions.",
+        "ddx_role": "ef_domain",
+        "scoring_note": "ADEXI is reflected before normalization (6 - raw) so high = good in display scores."
+      },
+      "cognitive_flexibility": {
+        "dimension_id": "cognitive_flexibility",
+        "display_name": "Cognitive Flexibility",
+        "instrument": "cfs",
+        "subscale": "cognitive_flexibility",
+        "direction": "high_is_positive",
+        "reflection_applied": false,
+        "description": "Ability to shift perspectives, adapt thinking strategies, and consider multiple alternatives. When constrained, student gets stuck in one frame and struggles to see alternatives.",
+        "ddx_role": "ef_domain",
+        "scoring_note": "CFS uses sum scoring; reverse items 2, 3, 5, 10."
+      }
+    },
+
+    "basic_psychological_needs": {
+      "_description": "BPNSFS measures satisfaction and frustration as separate facets per need. DDx uses quadrant model: Thriving (high sat/low frust), Disengaged (low sat/low frust), Conflicted (high sat/high frust), Crisis (low sat/high frust). ARC aggregate collapses across needs for strategy assignment.",
+      "autonomy_satisfaction": {
+        "dimension_id": "autonomy_satisfaction",
+        "instrument": "bpnsfs",
+        "subscale": "autonomy_satisfaction",
+        "direction": "high_is_positive",
+        "ddx_role": "arc_facet"
+      },
+      "autonomy_frustration": {
+        "dimension_id": "autonomy_frustration",
+        "instrument": "bpnsfs",
+        "subscale": "autonomy_frustration",
+        "direction": "high_is_negative",
+        "reflection_applied": true,
+        "ddx_role": "arc_facet"
+      },
+      "relatedness_satisfaction": {
+        "dimension_id": "relatedness_satisfaction",
+        "instrument": "bpnsfs",
+        "subscale": "relatedness_satisfaction",
+        "direction": "high_is_positive",
+        "ddx_role": "arc_facet"
+      },
+      "relatedness_frustration": {
+        "dimension_id": "relatedness_frustration",
+        "instrument": "bpnsfs",
+        "subscale": "relatedness_frustration",
+        "direction": "high_is_negative",
+        "reflection_applied": true,
+        "ddx_role": "arc_facet"
+      },
+      "competence_satisfaction": {
+        "dimension_id": "competence_satisfaction",
+        "instrument": "bpnsfs",
+        "subscale": "competence_satisfaction",
+        "direction": "high_is_positive",
+        "ddx_role": "arc_facet"
+      },
+      "competence_frustration": {
+        "dimension_id": "competence_frustration",
+        "instrument": "bpnsfs",
+        "subscale": "competence_frustration",
+        "direction": "high_is_negative",
+        "reflection_applied": true,
+        "ddx_role": "arc_facet"
+      }
+    },
+
+    "motivation_dynamics": {
+      "_description": "GMS-Bookends measures intrinsic motivation and amotivation only. Used as circuit breaker — not a nuanced motivational profile. Per §5.2, adding identified regulation subscale is a future enhancement.",
+      "intrinsic_motivation": {
+        "dimension_id": "intrinsic_motivation",
+        "instrument": "gms_bookends",
+        "subscale": "intrinsic_motivation",
+        "direction": "high_is_positive",
+        "ddx_role": "gms_cascade"
+      },
+      "amotivation": {
+        "dimension_id": "amotivation",
+        "instrument": "gms_bookends",
+        "subscale": "amotivation",
+        "direction": "high_is_negative",
+        "reflection_applied": true,
+        "ddx_role": "gms_cascade"
+      }
+    },
+
+    "environment": {
+      "_description": "Environmental dimensions live outside the DDx proper. Relevant at T3+ as 'coaching isn't working — check the environment' diagnostic.",
+      "autonomy_support": {
+        "dimension_id": "autonomy_support",
+        "instrument": "lcq",
+        "subscale": "autonomy_support",
+        "direction": "high_is_positive",
+        "ddx_role": "environmental",
+        "timepoint": "T3+"
+      },
+      "psychological_safety": {
+        "dimension_id": "psychological_safety",
+        "instrument": "team_psych_safety",
+        "subscale": "psychological_safety",
+        "direction": "high_is_positive",
+        "ddx_role": "environmental",
+        "timepoint": "T3+"
+      }
+    }
+  },
+
+  "coaching_lenses": {
+    "_description": "The C2A assessment is organized into 4 coaching lenses. Lens 1-3 are scored at T1. Lens 4 at T3+.",
+    "lens_1": {
+      "name": "Executive Function Capacity",
+      "instruments": ["adexi", "cfs"],
+      "purpose": "Measures the cognitive engine — WM, inhibition, cognitive flexibility. Determines HOW a student processes information and regulates behavior.",
+      "ddx_role": "Explanatory dimension (EF tiers)"
+    },
+    "lens_2": {
+      "name": "Durable Skills",
+      "instruments": ["caas_sf", "mslq_ct", "iri", "spcc", "brs", "sfcq", "c2a_nbs", "c2a_rqm"],
+      "purpose": "Measures the 12 LE3 durable skills directly. This is WHAT the student's skill levels are.",
+      "ddx_role": "Reported scores (primary output)"
+    },
+    "lens_3": {
+      "name": "Motivation & Basic Needs",
+      "instruments": ["bpnsfs", "gms_bookends"],
+      "purpose": "Measures autonomy/relatedness/competence satisfaction and frustration, plus motivational dynamics. Determines the psychological fuel for development.",
+      "ddx_role": "Explanatory dimension (ARC state + GMS cascade)"
+    },
+    "lens_4": {
+      "name": "Learning Environment",
+      "instruments": ["lcq", "team_psych_safety"],
+      "purpose": "Measures whether the environment supports or undermines skill development. Administered at T3+ only.",
+      "ddx_role": "Environmental diagnostic"
+    }
+  },
+
+  "ddx_configuration": {
+    "strategy_matrix": {
+      "_description": "12-cell EF tier × ARC state matrix, plus GMS cascade override and pure skill gap path. Strategy types are skill-independent. See DDx Engine Design doc for full specification.",
+      "strategy_types": [
+        "change_strengthen",
+        "change_strengthen_monitor",
+        "change_strengthen_need",
+        "scaffold_targeted",
+        "scaffold_targeted_monitor",
+        "compensate_targeted_need",
+        "compensate_change",
+        "compensate_scaffold_monitor",
+        "compensate_need_high",
+        "compensate_heavy",
+        "compensate_heavy_monitor",
+        "compensate_heavy_need_max",
+        "clinical_screen",
+        "pure_skill_gap"
+      ]
+    },
+    "skill_families": {
+      "cognitive": {
+        "skills": ["creative_problem_solving", "critical_thinking", "curiosity", "adaptability"],
+        "ef_impact": "Direct — EF constraints directly impede the skill itself.",
+        "narrative_flavor": "Working memory difficulty may make it harder to hold multiple perspectives when evaluating arguments."
+      },
+      "interpersonal": {
+        "skills": ["empathy", "communication", "collaboration", "relationship_building", "networking", "social_awareness"],
+        "ef_impact": "Indirect — poor inhibition manifests as reactivity, not inability to understand others.",
+        "narrative_flavor": "Difficulty with impulse regulation may show up as interrupting or reacting before fully hearing others."
+      },
+      "self_directed": {
+        "skills": ["initiative", "resilience"],
+        "ef_impact": "Execution gap — student may know what to do but can't organize the doing.",
+        "narrative_flavor": "Working memory difficulty may make it harder to hold a plan in mind while executing multi-step tasks."
+      }
+    },
+    "category_labels": {
+      "_description": "Normalized display score ranges for categorical classification. Used by both profile display and DDx engine.",
+      "very_strong": { "range": [75, 100], "ddx_triggered": false },
+      "strong": { "range": [58, 75], "ddx_triggered": false },
+      "developing": { "range": [42, 58], "ddx_triggered": false },
+      "needs_focus": { "range": [25, 42], "ddx_triggered": true },
+      "low": { "range": [1, 25], "ddx_triggered": true }
+    },
+    "arc_quadrant_mapping": {
+      "crisis": { "sat": "low", "frust": "high", "arc_state": "blocker" },
+      "disengaged": { "sat": "low", "frust": "low", "arc_state": "watch" },
+      "conflicted": { "sat": "high", "frust": "high", "arc_state": "watch" },
+      "thriving": { "sat": "high", "frust": "low", "arc_state": "clear" }
+    },
+    "gms_cascade_conditions": {
+      "_description": "All three must be true at Blocker level (display < 25) for cascade to trigger.",
+      "conditions": [
+        "any_arc_need_frustrated",
+        "amotivation_blocker_level",
+        "intrinsic_motivation_blocker_level"
+      ]
+    }
+  },
+
+  "instrument_registry": {
+    "_description": "Quick reference for instruments used in this framework. Detailed scoring specs live in individual instrument .scoring.json files.",
+    "adexi": { "full_name": "Adult Executive Functioning Inventory", "subscales": ["working_memory", "inhibition"], "items": 14, "timepoints": ["T1"] },
+    "cfs": { "full_name": "Cognitive Flexibility Scale", "subscales": ["cognitive_flexibility"], "items": 12, "timepoints": ["T1"] },
+    "caas_sf": { "full_name": "Career Adapt-Abilities Scale — Short Form", "subscales": ["concern", "control", "curiosity", "confidence"], "items": 12, "timepoints": ["T1", "T2"] },
+    "mslq_ct": { "full_name": "Motivated Strategies for Learning Questionnaire — Critical Thinking", "subscales": ["critical_thinking"], "items": 5, "timepoints": ["T1"] },
+    "iri": { "full_name": "Interpersonal Reactivity Index (PT + EC)", "subscales": ["perspective_taking", "empathic_concern"], "items": 14, "timepoints": ["T1"] },
+    "spcc": { "full_name": "Self-Perceived Communication Competence Scale", "subscales": ["public_speaking", "meeting", "group_discussion", "dyad", "stranger", "acquaintance", "friend"], "items": 12, "timepoints": ["T1", "T2"] },
+    "brs": { "full_name": "Brief Resilience Scale", "subscales": ["brief_resilience"], "items": 6, "timepoints": ["T1", "T2"] },
+    "sfcq": { "full_name": "Sociocultural Fluency and Communication Questionnaire — Metacognition", "subscales": ["metacognition"], "items": 7, "timepoints": ["T1"] },
+    "c2a_nbs": { "full_name": "C2A Networking Behaviors Scale", "subscales": ["networking_behaviors"], "items": 6, "timepoints": ["T1", "T2"] },
+    "c2a_rqm": { "full_name": "C2A Relationship Quality Measure", "subscales": ["relationship_quality"], "items": 6, "timepoints": ["T1", "T2"] },
+    "bpnsfs": { "full_name": "Basic Psychological Need Satisfaction and Frustration Scale", "subscales": ["autonomy_satisfaction", "autonomy_frustration", "relatedness_satisfaction", "relatedness_frustration", "competence_satisfaction", "competence_frustration"], "items": 24, "timepoints": ["T1", "T2"] },
+    "gms_bookends": { "full_name": "Global Motivation Scale — Bookends", "subscales": ["intrinsic_motivation", "amotivation"], "items": 8, "timepoints": ["T1", "T2"] },
+    "lcq": { "full_name": "Learning Climate Questionnaire", "subscales": ["autonomy_support"], "items": 6, "timepoints": ["T3"] },
+    "team_psych_safety": { "full_name": "Team Psychological Safety Scale", "subscales": ["psychological_safety"], "items": 7, "timepoints": ["T3"] }
+  }
+}
