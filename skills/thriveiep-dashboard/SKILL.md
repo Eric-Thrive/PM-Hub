@@ -2,7 +2,7 @@
 name: thriveiep-dashboard
 description: >
   Generate Eric's ThriveIEP morning dashboard as an interactive React artifact.
-  Fetches live data from PM-Hub, Linear, Google Calendar, Gmail, and HubSpot.
+  Fetches live data from Linear, Google Calendar, Notion, Gmail, and HubSpot.
   Curates 3 priority-driven Focus Picks. Renders an interactive dashboard with
   checkboxes, milestone countdowns, copy-to-clipboard, and persistent state.
   Use this skill when Eric says "/update", "morning dashboard", "morning briefing",
@@ -17,79 +17,107 @@ description: >
 This skill orchestrates data from 6+ sources into an interactive React artifact
 that serves as Eric's daily command center.
 
+## ⚠️ Critical: Use the Canonical Template
+
+**Do NOT design a new dashboard layout.** The canonical React artifact template
+lives in PM-Hub at:
+
+```
+dashboard/dashboard-template.jsx
+```
+
+Read it via terminal at session start:
+```bash
+cat /home/claude/PM-Hub/dashboard/dashboard-template.jsx
+```
+
+Then:
+1. Populate the data constants at the top of the file with today's live data
+2. Render the populated file as a React artifact
+3. Do not alter the component structure, styling, or tab layout
+
+The template defines: `META`, `FOCUS_PICKS`, `CALENDAR_TODAY`, `CALENDAR_UPCOMING`,
+`ACTIVE_ISSUES`, `TODO_ISSUES`, `COMPLETED`, `GMAIL`, `NOTION_FOCUS`, `STANDUP_TEXT`.
+These are the only sections Claude should modify.
+
+---
+
 ## Workflow Overview
 
-1. **Gather data** from all sources (see `references/data-gathering.md`)
-2. **Classify and sort** events, issues, and tasks
-3. **Curate Focus Picks** using the algorithm (see `references/focus-pick-logic.md`)
-4. **Render** an interactive React artifact with tabs and persistent state
-5. **Provide** a text summary alongside the artifact
+1. **Read template** from PM-Hub (`dashboard/dashboard-template.jsx`)
+2. **Gather data** from all sources (see `references/data-gathering.md`)
+3. **Classify and sort** events, issues, and tasks
+4. **Curate Focus Picks** using the algorithm (see `references/focus-pick-logic.md`)
+5. **Populate** the template data constants with live data
+6. **Render** the populated file as a React artifact
+7. **Provide** a brief text summary alongside the artifact
 
 ## Data Sources
 
 | Source | Tool | What to Fetch |
-|--------|------|---------------|
-| PM-Hub Priorities | Terminal (read file) | "This Week's Focus", "Blockers" from `context/priorities.md` |
+|--------|------|--------------|
+| PM-Hub | bash (git) | dashboard/dashboard-template.jsx, context/priorities.md |
 | Linear | Linear MCP | Active issues, completed (last 48h), relations |
-| Google Calendar | list_gcal_events | 4 calendars, week view |
+| Google Calendar | list_gcal_events | Today + this week |
+| Notion Priorities | Notion MCP | "This Week's Focus", "Blockers" sections |
 | Notion To-Dos | Notion MCP | Open items from To-Do database |
 | Gmail | search_gmail_messages | Unread important, action-needed |
 | HubSpot | HubSpot MCP | Pipeline deals, recent activity, stale contacts |
 
 For the complete data-gathering sequence: read `references/data-gathering.md`
 
-## Dashboard Tabs
+## Template Data Sections to Populate
 
-The artifact renders as a tabbed React component:
+### META
+```js
+const META = {
+  date: "Friday, February 20, 2026",   // today's full date
+  weekLabel: "Week of Feb 17",           // current week label
+  m2Days: 9,                             // days until M2 (Mar 1)
+  m3Days: 23,                            // days until M3 (Mar 15)
+};
+```
 
-### Today (Default Tab)
-- **Focus Picks** (3 items): Curated highest-priority actions
-- **Calendar**: Today + tomorrow's schedule, classified by type
-- **Milestone Countdown**: Days remaining to M2, M3
-- **Gmail Highlights**: Unread important messages needing action
-- **Networking Nudge**: If 5+ days since last HubSpot outreach
+### FOCUS_PICKS
+3 items using the Focus Pick algorithm (see `references/focus-pick-logic.md`).
+Each has: `icon`, `title`, `source`, `sourceUrl`, `why`.
 
-### Issues
-- Active issues sorted by product weight × priority
-- Recently completed (last 48h) for standup context
-- Blocked issues highlighted
+### CALENDAR_TODAY / CALENDAR_UPCOMING
+From Google Calendar. Classify events per `references/event-classification.md`.
+Include `zoom` link if present in event description. Include `alert` if there's
+a relevant Slack/Gmail note about the event.
 
-### Documents & Artifacts
-- Project → document tree from Work Product Log
-- Status indicators (current / draft / superseded)
-- Links to source (PM-Hub / Linear)
+### ACTIVE_ISSUES / TODO_ISSUES
+From Linear. Active = In Progress. Todo = Todo status, assigned to Eric or team.
+Include: `id`, `title`, `priority`, `milestone`, `assignee`, `url`, `due` (if set).
 
-### Dependencies
-- Critical path graph for current milestone
-- Blocked-by / blocks relations from Linear
-- Visual directed graph with status coloring
+### COMPLETED
+Linear issues completed in last 48h. Include: `id`, `title`, `when`.
 
-### Pipeline & Networking
-- HubSpot deal pipeline by stage
-- Stale contacts (no outreach in 5+ days)
-- Suggested outreach actions
-- Recent activity feed
+### GMAIL
+From Gmail search. Unread important messages. Include: `from`, `subject`, `preview`, `tag`, `action`.
+`tag`: "Action", "FYI", "Test", "Reply". `action: true` if needs response.
 
-### Team (Shared View)
-- Per-person work cards (from Linear "In Progress")
-- Milestone burndown bars
-- Shared calendar (team meetings only)
-- Uses `window.storage` with `shared: true`
+### NOTION_FOCUS
+From Notion Priorities "This Week's Focus". Each item: `text`, `done` (boolean).
+Mark `done: true` if the corresponding Linear issue is completed.
 
-## Artifact Design
+### STANDUP_TEXT
+Auto-generated standup based on COMPLETED + today's top priorities.
+Format:
+```
+Yesterday: [completed issues summary]
+Today: [top 3 focus items]
+Blockers: [None / list]
+```
 
-The React artifact should include:
-- **Checkboxes** on all actionable items (focus picks, issues, to-dos, gmail)
-- **Strikethrough/dim** on checked items
-- **Sticky action bar**: "Copy Checked", "Copy All", "Clear All"
-- **Toast notifications** on copy
-- **Persistent state** via `window.storage.set('dashboard-YYYY-MM-DD', state)`
-- **Tailwind styling** with clean, professional look
-- **Tab navigation** across all sections
+## Dashboard Tabs (defined in template — do not change)
 
-For event classification rules: read `references/event-classification.md`
-For focus pick algorithm: read `references/focus-pick-logic.md`
-For data gathering sequence: read `references/data-gathering.md`
+- **Today** — Focus Picks, Calendar, Blockers banner
+- **Issues** — In Progress + Todo with checkboxes
+- **Notion Focus** — This Week's Focus checklist
+- **Gmail** — Unread important messages
+- **Standup** — Completed last 48h + copyable standup draft
 
 ## Text Summary
 
@@ -106,3 +134,7 @@ Good morning! Here's your dashboard for [date].
 **Issues:** [N] active, [N] completed yesterday
 **Milestone:** M2 in [N] days
 ```
+
+For event classification rules: read `references/event-classification.md`
+For focus pick algorithm: read `references/focus-pick-logic.md`
+For data gathering sequence: read `references/data-gathering.md`
