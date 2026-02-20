@@ -1,0 +1,60 @@
+{
+  "instrument_id": "gms_bookends",
+  "spec_version": "1.0.0",
+  "context": "c2a_mvp",
+  "reverse_scoring": null,
+  "subscale_scoring": [
+    {
+      "subscale_id": "intrinsic_motivation",
+      "method": "mean",
+      "score_range": [1.0, 7.0],
+      "interpretation": {
+        "direction": "high_is_positive",
+        "bands": null
+      }
+    },
+    {
+      "subscale_id": "external_regulation",
+      "method": "mean",
+      "score_range": [1.0, 7.0],
+      "interpretation": {
+        "direction": "high_is_negative",
+        "bands": null
+      }
+    },
+    {
+      "subscale_id": "amotivation",
+      "method": "mean",
+      "score_range": [1.0, 7.0],
+      "interpretation": {
+        "direction": "high_is_negative",
+        "bands": [
+          { "label": "Engaged", "min": 1.0, "max": 2.99 },
+          { "label": "Moderate", "min": 3.0, "max": 3.99 },
+          { "label": "Disengaged (floor detector)", "min": 4.0, "max": 7.0 }
+        ]
+      }
+    }
+  ],
+  "total_scoring": {
+    "method": "weighted_composite",
+    "formula": "(2 * intrinsic_motivation) + (0 * external_regulation) + (-2 * amotivation)",
+    "score_range": [-14.0, 14.0]
+  },
+  "construct_mapping": {
+    "intrinsic_motivation": [
+      "curiosity",
+      "creative_problem_solving",
+      "initiative"
+    ],
+    "external_regulation": [
+      "initiative",
+      "adaptability"
+    ],
+    "amotivation": [
+      "resilience",
+      "curiosity",
+      "initiative"
+    ]
+  }
+}

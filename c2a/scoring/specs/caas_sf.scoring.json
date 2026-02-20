@@ -1,0 +1,67 @@
+{
+  "instrument_id": "caas_sf",
+  "spec_version": "1.0.0",
+  "context": "c2a_mvp",
+  "reverse_scoring": null,
+  "subscale_scoring": [
+    {
+      "subscale_id": "concern",
+      "method": "mean",
+      "score_range": [1.0, 5.0],
+      "interpretation": {
+        "direction": "high_is_positive",
+        "bands": null
+      }
+    },
+    {
+      "subscale_id": "control",
+      "method": "mean",
+      "score_range": [1.0, 5.0],
+      "interpretation": {
+        "direction": "high_is_positive",
+        "bands": null
+      }
+    },
+    {
+      "subscale_id": "curiosity",
+      "method": "mean",
+      "score_range": [1.0, 5.0],
+      "interpretation": {
+        "direction": "high_is_positive",
+        "bands": null
+      }
+    },
+    {
+      "subscale_id": "confidence",
+      "method": "mean",
+      "score_range": [1.0, 5.0],
+      "interpretation": {
+        "direction": "high_is_positive",
+        "bands": null
+      }
+    }
+  ],
+  "total_scoring": {
+    "method": "mean_of_subscale_means",
+    "formula": null,
+    "score_range": [1.0, 5.0]
+  },
+  "construct_mapping": {
+    "concern": [
+      "adaptability"
+    ],
+    "control": [
+      "initiative"
+    ],
+    "curiosity": [
+      "curiosity",
+      "creative_problem_solving",
+      "critical_thinking",
+      "networking"
+    ],
+    "confidence": [
+      "resilience",
+      "initiative"
+    ]
+  }
+}

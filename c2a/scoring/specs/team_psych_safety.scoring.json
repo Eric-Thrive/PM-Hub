@@ -1,0 +1,36 @@
+{
+  "instrument_id": "team_psych_safety",
+  "spec_version": "1.0.0",
+  "context": "c2a_mvp",
+  "reverse_scoring": {
+    "formula": "(max + min) - raw",
+    "items": ["tps_01", "tps_03", "tps_05"]
+  },
+  "subscale_scoring": [
+    {
+      "subscale_id": "psychological_safety",
+      "method": "mean",
+      "score_range": [1.0, 5.0],
+      "interpretation": {
+        "direction": "high_is_positive",
+        "bands": null
+      }
+    }
+  ],
+  "total_scoring": {
+    "method": "mean",
+    "formula": null,
+    "score_range": [1.0, 5.0]
+  },
+  "construct_mapping": {
+    "psychological_safety": [
+      "creative_problem_solving",
+      "adaptability",
+      "communication",
+      "initiative",
+      "collaboration",
+      "relationship_building",
+      "social_awareness"
+    ]
+  }
+}

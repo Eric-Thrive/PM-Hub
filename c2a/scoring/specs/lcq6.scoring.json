@@ -1,0 +1,34 @@
+{
+  "instrument_id": "lcq6",
+  "spec_version": "1.0.0",
+  "context": "c2a_mvp",
+  "reverse_scoring": null,
+  "subscale_scoring": [
+    {
+      "subscale_id": "autonomy_support",
+      "method": "mean",
+      "score_range": [1.0, 7.0],
+      "interpretation": {
+        "direction": "high_is_positive",
+        "bands": [
+          { "label": "Low autonomy support", "min": 1.0, "max": 3.99 },
+          { "label": "Moderate autonomy support", "min": 4.0, "max": 5.49 },
+          { "label": "High autonomy support", "min": 5.5, "max": 7.0 }
+        ]
+      }
+    }
+  ],
+  "total_scoring": {
+    "method": "mean",
+    "formula": null,
+    "score_range": [1.0, 7.0]
+  },
+  "construct_mapping": {
+    "autonomy_support": [
+      "curiosity",
+      "initiative",
+      "adaptability",
+      "relationship_building"
+    ]
+  }
+}

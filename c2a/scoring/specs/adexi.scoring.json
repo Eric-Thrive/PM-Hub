@@ -1,0 +1,43 @@
+{
+  "instrument_id": "adexi",
+  "spec_version": "1.0.0",
+  "context": "c2a_mvp",
+  "reverse_scoring": null,
+  "subscale_scoring": [
+    {
+      "subscale_id": "working_memory",
+      "method": "mean",
+      "score_range": [1.0, 5.0],
+      "interpretation": {
+        "direction": "high_is_deficit",
+        "bands": null
+      }
+    },
+    {
+      "subscale_id": "inhibition",
+      "method": "mean",
+      "score_range": [1.0, 5.0],
+      "interpretation": {
+        "direction": "high_is_deficit",
+        "bands": null
+      }
+    }
+  ],
+  "total_scoring": null,
+  "construct_mapping": {
+    "working_memory": [
+      "creative_problem_solving",
+      "critical_thinking",
+      "adaptability",
+      "initiative",
+      "communication",
+      "resilience"
+    ],
+    "inhibition": [
+      "empathy",
+      "collaboration",
+      "social_awareness",
+      "adaptability"
+    ]
+  }
+}

@@ -1,0 +1,37 @@
+{
+  "instrument_id": "cfs",
+  "spec_version": "1.0.0",
+  "context": "c2a_mvp",
+  "reverse_scoring": {
+    "formula": "(max + min) - raw",
+    "items": ["cfs_02", "cfs_03", "cfs_05", "cfs_10"]
+  },
+  "subscale_scoring": [
+    {
+      "subscale_id": "cognitive_flexibility",
+      "method": "mean",
+      "score_range": [1.0, 6.0],
+      "interpretation": {
+        "direction": "high_is_positive",
+        "bands": null
+      }
+    }
+  ],
+  "total_scoring": {
+    "method": "mean",
+    "formula": null,
+    "score_range": [1.0, 6.0]
+  },
+  "construct_mapping": {
+    "cognitive_flexibility": [
+      "creative_problem_solving",
+      "critical_thinking",
+      "curiosity",
+      "adaptability",
+      "initiative",
+      "communication",
+      "collaboration",
+      "social_awareness"
+    ]
+  }
+}

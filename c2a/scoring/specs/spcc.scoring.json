@@ -1,0 +1,118 @@
+{
+  "instrument_id": "spcc",
+  "spec_version": "1.0.0",
+  "context": "c2a_mvp",
+  "reverse_scoring": null,
+  "subscale_scoring": [
+    {
+      "subscale_id": "public_speaking",
+      "method": "mean",
+      "score_range": [0, 100],
+      "interpretation": {
+        "direction": "high_is_positive",
+        "bands": [
+          { "label": "Low", "min": 0, "max": 58 },
+          { "label": "Normal", "min": 59, "max": 86 },
+          { "label": "High", "min": 87, "max": 100 }
+        ]
+      }
+    },
+    {
+      "subscale_id": "meeting",
+      "method": "mean",
+      "score_range": [0, 100],
+      "interpretation": {
+        "direction": "high_is_positive",
+        "bands": [
+          { "label": "Low", "min": 0, "max": 58 },
+          { "label": "Normal", "min": 59, "max": 86 },
+          { "label": "High", "min": 87, "max": 100 }
+        ]
+      }
+    },
+    {
+      "subscale_id": "group",
+      "method": "mean",
+      "score_range": [0, 100],
+      "interpretation": {
+        "direction": "high_is_positive",
+        "bands": [
+          { "label": "Low", "min": 0, "max": 58 },
+          { "label": "Normal", "min": 59, "max": 86 },
+          { "label": "High", "min": 87, "max": 100 }
+        ]
+      }
+    },
+    {
+      "subscale_id": "dyad",
+      "method": "mean",
+      "score_range": [0, 100],
+      "interpretation": {
+        "direction": "high_is_positive",
+        "bands": [
+          { "label": "Low", "min": 0, "max": 58 },
+          { "label": "Normal", "min": 59, "max": 86 },
+          { "label": "High", "min": 87, "max": 100 }
+        ]
+      }
+    },
+    {
+      "subscale_id": "stranger",
+      "method": "mean",
+      "score_range": [0, 100],
+      "interpretation": {
+        "direction": "high_is_positive",
+        "bands": null
+      }
+    },
+    {
+      "subscale_id": "acquaintance",
+      "method": "mean",
+      "score_range": [0, 100],
+      "interpretation": {
+        "direction": "high_is_positive",
+        "bands": null
+      }
+    },
+    {
+      "subscale_id": "friend",
+      "method": "mean",
+      "score_range": [0, 100],
+      "interpretation": {
+        "direction": "high_is_positive",
+        "bands": null
+      }
+    }
+  ],
+  "total_scoring": {
+    "method": "matrix",
+    "formula": "mean_of_all_12_items",
+    "score_range": [0, 100]
+  },
+  "construct_mapping": {
+    "public_speaking": [
+      "communication"
+    ],
+    "meeting": [
+      "communication",
+      "collaboration"
+    ],
+    "group": [
+      "communication",
+      "collaboration"
+    ],
+    "dyad": [
+      "communication",
+      "relationship_building"
+    ],
+    "stranger": [
+      "networking"
+    ],
+    "acquaintance": [
+      "networking"
+    ],
+    "friend": [
+      "relationship_building"
+    ]
+  }
+}

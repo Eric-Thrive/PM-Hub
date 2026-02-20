@@ -1,0 +1,98 @@
+{
+  "instrument_id": "bpnsfs",
+  "spec_version": "1.0.0",
+  "context": "c2a_mvp",
+  "reverse_scoring": null,
+  "subscale_scoring": [
+    {
+      "subscale_id": "autonomy_satisfaction",
+      "method": "mean",
+      "score_range": [1.0, 7.0],
+      "interpretation": {
+        "direction": "high_is_positive",
+        "bands": null
+      }
+    },
+    {
+      "subscale_id": "autonomy_frustration",
+      "method": "mean",
+      "score_range": [1.0, 7.0],
+      "interpretation": {
+        "direction": "high_is_negative",
+        "bands": null
+      }
+    },
+    {
+      "subscale_id": "competence_satisfaction",
+      "method": "mean",
+      "score_range": [1.0, 7.0],
+      "interpretation": {
+        "direction": "high_is_positive",
+        "bands": null
+      }
+    },
+    {
+      "subscale_id": "competence_frustration",
+      "method": "mean",
+      "score_range": [1.0, 7.0],
+      "interpretation": {
+        "direction": "high_is_negative",
+        "bands": null
+      }
+    },
+    {
+      "subscale_id": "relatedness_satisfaction",
+      "method": "mean",
+      "score_range": [1.0, 7.0],
+      "interpretation": {
+        "direction": "high_is_positive",
+        "bands": null
+      }
+    },
+    {
+      "subscale_id": "relatedness_frustration",
+      "method": "mean",
+      "score_range": [1.0, 7.0],
+      "interpretation": {
+        "direction": "high_is_negative",
+        "bands": null
+      }
+    }
+  ],
+  "total_scoring": null,
+  "construct_mapping": {
+    "autonomy_satisfaction": [
+      "initiative",
+      "adaptability",
+      "critical_thinking",
+      "curiosity"
+    ],
+    "autonomy_frustration": [
+      "initiative",
+      "adaptability"
+    ],
+    "competence_satisfaction": [
+      "creative_problem_solving",
+      "critical_thinking",
+      "communication",
+      "resilience"
+    ],
+    "competence_frustration": [
+      "creative_problem_solving",
+      "resilience"
+    ],
+    "relatedness_satisfaction": [
+      "empathy",
+      "collaboration",
+      "relationship_building",
+      "social_awareness",
+      "communication"
+    ],
+    "relatedness_frustration": [
+      "empathy",
+      "collaboration",
+      "relationship_building",
+      "social_awareness"
+    ]
+  }
+}

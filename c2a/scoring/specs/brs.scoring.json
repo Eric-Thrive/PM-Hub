@@ -1,0 +1,35 @@
+{
+  "instrument_id": "brs",
+  "spec_version": "1.0.0",
+  "context": "c2a_mvp",
+  "reverse_scoring": {
+    "formula": "(max + min) - raw",
+    "items": ["brs_02", "brs_04", "brs_06"]
+  },
+  "subscale_scoring": [
+    {
+      "subscale_id": "resilience",
+      "method": "mean",
+      "score_range": [1.0, 5.0],
+      "interpretation": {
+        "direction": "high_is_positive",
+        "bands": [
+          { "label": "Low resilience", "min": 1.0, "max": 2.99 },
+          { "label": "Normal resilience", "min": 3.0, "max": 4.3 },
+          { "label": "High resilience", "min": 4.31, "max": 5.0 }
+        ]
+      }
+    }
+  ],
+  "total_scoring": {
+    "method": "mean",
+    "formula": null,
+    "score_range": [1.0, 5.0]
+  },
+  "construct_mapping": {
+    "resilience": [
+      "resilience",
+      "adaptability"
+    ]
+  }
+}

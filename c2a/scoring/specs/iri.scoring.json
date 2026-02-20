@@ -1,0 +1,42 @@
+{
+  "instrument_id": "iri",
+  "spec_version": "1.0.0",
+  "context": "c2a_mvp",
+  "reverse_scoring": {
+    "formula": "(max + min) - raw",
+    "items": ["iri_03", "iri_15", "iri_04", "iri_14", "iri_18"]
+  },
+  "subscale_scoring": [
+    {
+      "subscale_id": "perspective_taking",
+      "method": "mean",
+      "score_range": [1.0, 7.0],
+      "interpretation": {
+        "direction": "high_is_positive",
+        "bands": null
+      }
+    },
+    {
+      "subscale_id": "empathic_concern",
+      "method": "mean",
+      "score_range": [1.0, 7.0],
+      "interpretation": {
+        "direction": "high_is_positive",
+        "bands": null
+      }
+    }
+  ],
+  "total_scoring": null,
+  "construct_mapping": {
+    "perspective_taking": [
+      "empathy",
+      "collaboration",
+      "social_awareness",
+      "relationship_building"
+    ],
+    "empathic_concern": [
+      "empathy",
+      "relationship_building"
+    ]
+  }
+}

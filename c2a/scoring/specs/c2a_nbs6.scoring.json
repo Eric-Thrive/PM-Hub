@@ -1,0 +1,38 @@
+{
+  "instrument_id": "c2a_nbs6",
+  "spec_version": "1.0.0",
+  "context": "c2a_mvp",
+  "reverse_scoring": {
+    "formula": "No reverse-scored items in this instrument"
+  },
+  "subscale_scoring": [
+    {
+      "subscale_id": "internal_networking",
+      "method": "mean",
+      "score_range": [1.0, 5.0],
+      "interpretation": {
+        "direction": "high_is_positive",
+        "bands": null
+      }
+    },
+    {
+      "subscale_id": "external_networking",
+      "method": "mean",
+      "score_range": [1.0, 5.0],
+      "interpretation": {
+        "direction": "high_is_positive",
+        "bands": null
+      }
+    }
+  ],
+  "total_scoring": {
+    "method": "mean",
+    "formula": null,
+    "score_range": [1.0, 5.0]
+  },
+  "construct_mapping": {
+    "internal_networking": ["networking"],
+    "external_networking": ["networking"],
+    "total": ["networking", "relationship_building"]
+  }
+}
