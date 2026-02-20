@@ -25,7 +25,6 @@ When starting a new session or when Eric references previous work:
 3. Read `sessions/handoff.md` for context
 4. Note any "Pickup for next session" items and proactively mention them
 5. If token is missing/expired: ask Eric for a fresh one
-6. If no token available: fetch Notion fallback `3094659c-b96d-81d1-be9a-ecbdb9e9aee2`
 
 ## Session End Protocol
 
@@ -75,11 +74,7 @@ Keep only the 5 most recent sessions. When adding Session N:
 
 If the session produced significant deliverables (specs, data files, design docs),
 also update `logs/work-product-log.md` in PM-Hub with:
-- Date
-- What was created/updated
-- What changed and why
-- Key decisions
-- Open threads
+- Date, what was created/updated, what changed and why, key decisions, open threads
 
 Commit together with the handoff update.
 
@@ -91,9 +86,5 @@ Sessions are numbered sequentially. Check the most recent entry in
 ## Edge Cases
 
 - **Short conversations** (quick questions, single lookups): No handoff needed
-- **Multi-topic sessions**: Use the most impactful topic for the title; list all
-  topics in "What we did"
-- **Interrupted sessions**: Write what was accomplished; note the interruption
-  point in "Pickup for next session"
-- **No GitHub token**: Fall back to Notion `3094659c-b96d-81d1-be9a-ecbdb9e9aee2`
-  for both read and write. Note in the entry that it needs syncing to PM-Hub.
+- **Multi-topic sessions**: Use the most impactful topic for the title
+- **Interrupted sessions**: Write what was accomplished; note the interruption point

@@ -7,13 +7,13 @@ Produces exactly 3 Focus Picks — the most important things Eric should work on
 Evaluate in order. First match fills the slot.
 
 ### Slot 1: Blockers (always highest priority)
-1. Check Notion Priorities "Blockers" section
+1. Check PM-Hub `context/priorities.md` "Blockers" section
 2. Check Linear issues with "blocked" label that Eric can unblock
 3. Check issues blocking other issues on the critical path
 4. If no blockers: fall through to Slot 2 logic
 
 ### Slot 2: Deadline-Driven Work
-1. Unchecked items in "This Week's Focus" from Notion Priorities
+1. Unchecked items in "This Week's Focus" from PM-Hub priorities
 2. Ranked by: `(days_until_deadline)^-1 × product_weight^-1`
    - Closer deadline + higher priority product = higher rank
 3. Meeting prep: if a meeting in the next 24h maps to a Linear issue or
@@ -52,7 +52,7 @@ When suggesting contacts for outreach:
 Each focus pick should include:
 ```
 [Priority indicator] [Action verb] [Specific task]
-Source: [Linear THR-XXX / Notion / Calendar / HubSpot]
+Source: [Linear THR-XXX / PM-Hub / Calendar / HubSpot]
 Why now: [Brief justification]
 ```
 

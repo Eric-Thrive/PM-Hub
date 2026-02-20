@@ -2,7 +2,7 @@
 name: thriveiep-dashboard
 description: >
   Generate Eric's ThriveIEP morning dashboard as an interactive React artifact.
-  Fetches live data from Linear, Google Calendar, Notion, Gmail, and HubSpot.
+  Fetches live data from PM-Hub, Linear, Google Calendar, Gmail, and HubSpot.
   Curates 3 priority-driven Focus Picks. Renders an interactive dashboard with
   checkboxes, milestone countdowns, copy-to-clipboard, and persistent state.
   Use this skill when Eric says "/update", "morning dashboard", "morning briefing",
@@ -28,10 +28,10 @@ that serves as Eric's daily command center.
 ## Data Sources
 
 | Source | Tool | What to Fetch |
-|--------|------|--------------|
+|--------|------|---------------|
+| PM-Hub Priorities | Terminal (read file) | "This Week's Focus", "Blockers" from `context/priorities.md` |
 | Linear | Linear MCP | Active issues, completed (last 48h), relations |
 | Google Calendar | list_gcal_events | 4 calendars, week view |
-| Notion Priorities | Notion MCP | "This Week's Focus", "Blockers" sections |
 | Notion To-Dos | Notion MCP | Open items from To-Do database |
 | Gmail | search_gmail_messages | Unread important, action-needed |
 | HubSpot | HubSpot MCP | Pipeline deals, recent activity, stale contacts |
@@ -57,7 +57,7 @@ The artifact renders as a tabbed React component:
 ### Documents & Artifacts
 - Project → document tree from Work Product Log
 - Status indicators (current / draft / superseded)
-- Links to source (Notion / GitHub / Linear)
+- Links to source (PM-Hub / Linear)
 
 ### Dependencies
 - Critical path graph for current milestone

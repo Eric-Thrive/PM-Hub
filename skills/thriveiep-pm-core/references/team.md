@@ -6,7 +6,7 @@
 - Leads technical development, project management, assessment design
 - Background: MIT, UCSF Dyslexia Center, Carroll School
 - Tutors students (Jack, George, Vera, Jen, Nehmet)
-- Uses Linear for issue tracking, Notion for documentation, GitHub for artifact versioning
+- Uses Linear for issue tracking, PM-Hub (GitHub) for documentation, Google Drive for reference docs
 - Manages 16 Google Tasks lists across professional and personal domains
 - Prefers structured documentation and systematic handoff processes
 
@@ -14,7 +14,7 @@
 - UX design, stakeholder relations, coach journey mapping
 - Primary contact for NLU relationship
 - Reviews design docs and user-facing content (Elizabeth Review Queue in Notion)
-- Collaborates via Notion comments and shared pages
+- Collaborates via shared pages and review queue
 
 ### Soham — Developer
 - Backend infrastructure, FERPA compliance, Aptible deployment
@@ -30,8 +30,8 @@
 ## Working Patterns
 
 **Standups:** Eric coordinates standup meetings with Soham
-**Reviews:** Elizabeth reviews user-facing content; use Elizabeth Review Queue
-**Handoffs:** Session handoff notes in Notion (rolling 5-session window)
+**Reviews:** Elizabeth reviews user-facing content; use Elizabeth Review Queue (Notion)
+**Handoffs:** Session handoff notes in PM-Hub `sessions/handoff.md` (rolling 5-session window)
 **Sprints:** Aligned with NLU contract milestones (M1-M5)
 
 ## External Contacts

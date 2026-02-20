@@ -1,8 +1,6 @@
 # ThriveIEP Resource IDs
 
-Complete reference for all system IDs and resource locations.
-
-## PM-Hub (GitHub — Primary Source of Truth)
+## PM-Hub (GitHub — Source of Truth)
 
 Repository: `https://github.com/Eric-Thrive/PM-Hub`
 
@@ -32,23 +30,6 @@ c2a/
 └── research/         # DDx literature review
 ```
 
-## Notion (Legacy Fallback — use only when PM-Hub unavailable)
-
-### Pages
-| Resource | ID |
-|----------|----|
-| PM Hub | `2f74659c-b96d-816e-b67e-cfeb8737ad9b` |
-| Priorities | `2f74659c-b96d-8110-a85a-eba7732df3e9` |
-| Session Handoff Notes | `3094659c-b96d-81d1-be9a-ecbdb9e9aee2` |
-| C2A Pilot Resources | `2f74659c-b96d-8160a8e4ec4300fcadbd` |
-
-### Databases (Collections)
-| Resource | Collection URL |
-|----------|---------------|
-| Work Product Log | `collection://3094659cb96d816eb4a4fad4d3482a6d` |
-| To-Do Database | `collection://1484659c-b96d-8132-94ea-000b793dca9b` |
-| Elizabeth Review Queue | `collection://60cfacd8-7531-4368-9273-97621f931612` |
-
 ## Linear
 
 | Field | Value |
@@ -58,6 +39,13 @@ c2a/
 | Accommodation Engine Project | `accommodation-engine` |
 | PI Redactor Project | `pi-redactor` |
 | Team/Admin Project | `team-admin` |
+
+## Notion Databases (Active)
+
+| Database | Collection ID |
+|----------|--------------|
+| To-Do Database | `collection://1484659c-b96d-8132-94ea-000b793dca9b` |
+| Elizabeth Review Queue | `collection://60cfacd8-7531-4368-9273-97621f931612` |
 
 ## Google
 

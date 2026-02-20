@@ -29,6 +29,6 @@ An event triggers meeting prep logic when:
 1. It's within the next 24 hours
 2. It's type `client` or `team`
 3. The event title or description contains a Linear issue reference (THR-XXX)
-   OR maps to a known focus area from Notion Priorities
+   OR maps to a known focus area from PM-Hub `context/priorities.md`
 
 When detected, the meeting prep task is promoted in Focus Picks.
