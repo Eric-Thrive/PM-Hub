@@ -45,13 +45,27 @@ These are the only sections Claude should modify.
 
 ## Workflow Overview
 
-1. **Read template** from PM-Hub (`dashboard/dashboard-template.jsx`)
-2. **Gather data** from all sources (see `references/data-gathering.md`)
-3. **Classify and sort** events, issues, and tasks
-4. **Curate Focus Picks** using the algorithm (see `references/focus-pick-logic.md`)
-5. **Populate** the template data constants with live data
-6. **Save as artifact** — write the populated JSX to `/mnt/user-data/outputs/thriveiep-dashboard.jsx` and call `present_files` to render it as an interactive React artifact
-7. **Provide** a brief text summary alongside the artifact
+### Phase 1: Gather & Review
+1. **Gather data** from all sources (see `references/data-gathering.md`)
+2. **Read current priorities** from PM-Hub (`context/priorities.md`)
+3. **Compare priorities against live data** — identify:
+   - Completed items that should be marked done or removed
+   - New blockers surfaced from Linear, Gmail, or Calendar
+   - Focus shifts driven by milestone countdowns (M2/M3 days remaining)
+   - Issues that have changed state since priorities were last updated
+4. **Present a proposed priorities update to Eric** — show what changed and why,
+   ask for confirmation or adjustments. Keep this lightweight: some days nothing
+   changes, other days approaching milestones reshuffle everything.
+5. **Commit updated priorities** to PM-Hub (`context/priorities.md`) and push
+
+### Phase 2: Generate Dashboard
+6. **Read template** from PM-Hub (`skills/thriveiep-dashboard/templates/dashboard-template.jsx`)
+7. **Classify and sort** events, issues, and tasks
+8. **Curate Focus Picks** using the algorithm (see `references/focus-pick-logic.md`) —
+   these should now reflect the **updated** priorities, not stale data
+9. **Populate** the template data constants with live data
+10. **Save as artifact** — write the populated JSX to `/mnt/user-data/outputs/thriveiep-dashboard.jsx` and call `present_files` to render it as an interactive React artifact
+11. **Provide** a brief text summary alongside the artifact
 
 ## Data Sources
 
@@ -100,8 +114,8 @@ From Gmail search. Unread important messages. Include: `from`, `subject`, `previ
 `tag`: "Action", "FYI", "Test", "Reply". `action: true` if needs response.
 
 ### NOTION_FOCUS
-From Notion Priorities "This Week's Focus". Each item: `text`, `done` (boolean).
-Mark `done: true` if the corresponding Linear issue is completed.
+From the **updated** `context/priorities.md` "This Week's Focus" section (after Phase 1 review).
+Each item: `text`, `done` (boolean). Mark `done: true` if the corresponding Linear issue is completed.
 
 ### STANDUP_TEXT
 Auto-generated standup based on COMPLETED + today's top priorities.
