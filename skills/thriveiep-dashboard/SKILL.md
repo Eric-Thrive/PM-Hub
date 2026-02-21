@@ -23,18 +23,19 @@ that serves as Eric's daily command center.
 lives in PM-Hub at:
 
 ```
-dashboard/dashboard-template.jsx
+skills/thriveiep-dashboard/templates/dashboard-template.jsx
 ```
 
 Read it via terminal at session start:
 ```bash
-cat /home/claude/PM-Hub/dashboard/dashboard-template.jsx
+cat /home/claude/PM-Hub/skills/thriveiep-dashboard/templates/dashboard-template.jsx
 ```
 
 Then:
 1. Populate the data constants at the top of the file with today's live data
-2. Render the populated file as a React artifact
-3. Do not alter the component structure, styling, or tab layout
+2. **Save the populated file as `/mnt/user-data/outputs/thriveiep-dashboard.jsx`** — this renders it as an interactive React artifact in the conversation
+3. Present the file using `present_files` so the user sees the live artifact
+4. Do not alter the component structure, styling, or tab layout
 
 The template defines: `META`, `FOCUS_PICKS`, `CALENDAR_TODAY`, `CALENDAR_UPCOMING`,
 `ACTIVE_ISSUES`, `TODO_ISSUES`, `COMPLETED`, `GMAIL`, `NOTION_FOCUS`, `STANDUP_TEXT`.
@@ -49,14 +50,14 @@ These are the only sections Claude should modify.
 3. **Classify and sort** events, issues, and tasks
 4. **Curate Focus Picks** using the algorithm (see `references/focus-pick-logic.md`)
 5. **Populate** the template data constants with live data
-6. **Render** the populated file as a React artifact
+6. **Save as artifact** — write the populated JSX to `/mnt/user-data/outputs/thriveiep-dashboard.jsx` and call `present_files` to render it as an interactive React artifact
 7. **Provide** a brief text summary alongside the artifact
 
 ## Data Sources
 
 | Source | Tool | What to Fetch |
 |--------|------|--------------|
-| PM-Hub | bash (git) | dashboard/dashboard-template.jsx, context/priorities.md |
+| PM-Hub | bash (git) | skills/thriveiep-dashboard/templates/dashboard-template.jsx, context/priorities.md |
 | Linear | Linear MCP | Active issues, completed (last 48h), relations |
 | Google Calendar | list_gcal_events | Today + this week |
 | Notion Priorities | Notion MCP | "This Week's Focus", "Blockers" sections |
