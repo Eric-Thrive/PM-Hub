@@ -74,6 +74,34 @@ to session end. This keeps the repo current if the session is interrupted.
 Use descriptive commit messages: `[THR-XX] Add scoring pipeline spec` or
 `[DR-010] Hybrid knowledge management system`.
 
+### Versioning
+
+Every deliverable gets a changelog header immediately below the title. Add it
+when creating the file, and update it on every significant revision.
+
+```markdown
+# Document Title
+
+| Version | Date | What Changed | Session |
+|---------|------|-------------|---------|
+| 1.0 | 2026-02-21 | Initial draft | S28 |
+| 1.1 | 2026-02-23 | Added scoring edge cases per THR-XX | S30 |
+| 2.0 | 2026-03-01 | Revised for 155-item battery | S35 |
+```
+
+**Rules:**
+- **Minor revisions (1.0 → 1.1):** Clarifications, additions, fixes. Update in place.
+- **Major revisions (1.0 → 2.0):** Structural changes, scope changes, anything that
+  could break work already in progress against the current version.
+- **Fork when necessary:** If someone is actively building against the current version
+  and a major revision is needed, create a new file (`scoring-spec-v2.md`) so both
+  versions are live. Update Linear links to point to the new version. Add a note at
+  the top of the old file: `⚠️ Superseded by [v2](path). Kept for reference.`
+- **Reconstruction:** Git history preserves every committed state. Use
+  `git show <hash>:path/to/file.md` to recover any previous version.
+- **Decision records and knowledge notes are exempt** — DRs use Status
+  (Accepted/Superseded) instead of versioning. Knowledge notes are living documents.
+
 ### Knowledge capture criteria
 
 **Goes to `knowledge/`:**
@@ -179,6 +207,7 @@ When wrapping up a substantive session:
 
 Before writing handoff notes, verify:
 - [ ] All deliverables created this session are saved to the correct PM-Hub directory
+- [ ] All deliverables have a changelog header (new files get v1.0, updates get new entry)
 - [ ] All deliverables are linked to Linear issues (or noted as unlinked with reason)
 - [ ] Any decisions made are captured as DRs (or flagged as not DR-worthy)
 - [ ] Any research/exploration is in `knowledge/` if worth preserving
