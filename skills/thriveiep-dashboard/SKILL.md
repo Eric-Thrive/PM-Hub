@@ -110,10 +110,13 @@ to proceed with current priorities.
 
 ## Phase 3: Render Dashboard
 
-### Template strategy (avoids truncation)
+### Template: v3 dark-theme (canonical)
 
-The template is 420+ lines. Writing it in a single `create_file` call will
-truncate. Use this approach instead:
+The template is ~500 lines. It uses inline styles, a dark color scheme, tiered
+issue accordions, a clickable calendar grid, Notion To-Dos accordion, and an
+embedded Claude chat sidebar. **Do not redesign or restyle.** (See DR-003.)
+
+### Rendering strategy (avoids truncation)
 
 ```bash
 # 1. Copy template to output location
@@ -121,31 +124,37 @@ cp /home/claude/PM-Hub/skills/thriveiep-dashboard/templates/dashboard-template.j
    /mnt/user-data/outputs/thriveiep-dashboard.jsx
 ```
 
-Then use `str_replace` to swap each data constant one at a time:
-- META
-- FOCUS_PICKS
-- CALENDAR_TODAY
-- CALENDAR_UPCOMING
-- ACTIVE_ISSUES
-- TODO_ISSUES
-- COMPLETED
-- GMAIL
-- NOTION_FOCUS
-- STANDUP_TEXT
+Then use `str_replace` to swap each data constant one at a time. The v3
+template uses these data blocks between `// ─── DATA` and `// ─── END DATA ───`:
 
-Each `str_replace` call targets the old constant value from the template and
-replaces it with today's live data. Match from `const NAME = ` through the
-closing `];` or `};` for each block.
+| Constant | Shape | Notes |
+|----------|-------|-------|
+| `ISSUES_INITIAL` | `[{ id, title, status, priority, due, project, labels }]` | All active Linear issues |
+| `COMPLETED_INITIAL` | `[{ id, title, completedAt }]` | Done in last 48h |
+| `EVENTS` | `[{ day: 0-6, time, end, name, type, loc? }]` | Calendar events, day 0 = Sunday |
+| `NOTION_TODOS` | `[{ title, status, assign, due, url }]` | From priorities checklist |
+| `FOCUS_PICKS` | `[{ id, title, reason, project, tag, due }]` | 3 curated picks |
+| `DAYS` | `["Sun DD", "Mon DD", ...]` | 7 entries for the week |
+| `TODAY` | `new Date("YYYY-MM-DDT12:00:00")` | Current date |
 
-Also update the comment line:
-```
-// ─── LIVE DATA (fetched Feb 20, 2026) ──────
-```
-to today's date.
+Each `str_replace` targets from `const NAME = ` through the closing `];` or `)`.
+
+Also update:
+- The comment line: `// ─── DATA (LIVE - February 22, 2026) ───` → today's date
+- The header subtitle: `Week of Feb 22 – 28, 2026` → current week
+- Milestone countdown values (M2 days, M3 days) in the countdown section
+- Chat system prompt date in `sendChat`
+
+**Event type mapping:** Use these `type` values that match `TYPE_COLORS`:
+`team`, `client`, `tutoring`, `work`, `gtm`, `personal`
+
+**Issue priority values:** `Urgent`, `High`, `Medium`, `Normal`, `Low`
+(maps to tier logic: Urgent → overdue, High → thisWeek, etc.)
 
 ### After rendering
 
 1. Call `present_files` on `/mnt/user-data/outputs/thriveiep-dashboard.jsx`
+   — this renders it as an interactive React artifact in the chat
 2. Provide a brief text summary (see format below)
 
 ### Text summary format
@@ -171,7 +180,7 @@ Good morning! Here's your dashboard for [date].
 
 | Source | Tool | Required? | What to Fetch |
 |--------|------|-----------|---------------|
-| PM-Hub | bash (git) | ✅ Yes | templates/dashboard-template.jsx, context/priorities.md |
+| PM-Hub | bash (git) | ✅ Yes | templates/dashboard-template.jsx (v3 dark-theme), context/priorities.md |
 | Linear | Linear MCP | ✅ Yes | In Progress, Todo, Done (last 48h) |
 | Google Calendar | list_gcal_events | ✅ Yes (work cal) | Today + this week, all 4 calendars |
 | Gmail | search_gmail_messages | ✅ Yes | Unread important + primary |
