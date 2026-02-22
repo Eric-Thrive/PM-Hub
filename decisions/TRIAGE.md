@@ -14,7 +14,7 @@
 | ✅ | THR-132 | Design scoring engine architecture for C2A | DR-006 | DR-014, 015, 016, 017 | 5 DRs total. Pipeline, file architecture, MEAN override, 3-layer model. |
 | ✅ | THR-131 | Reporting schema / construct mapping (Layer 1→2) | DR-017 | DR-018, 019, 020 | 4 DRs total. Configurable schema, distributed mapping, coverage gaps. |
 | ✅ | THR-133 | Define C2A report dimensions and info architecture | — | DR-021, 022, 023, 024 | 4 DRs: report philosophy, HTML delivery, template-driven interp, four-view hierarchy. |
-| ⬜ | THR-197 | Normalization service (norm-referenced + linear fallback) | — | — | T-score conversion, category thresholds, normalization at profile-gen time not scoring. |
+| ✅ | THR-197 | Normalization service (norm-referenced + linear fallback) | DR-006 | DR-025, 026, 027 | 4 DRs total. Architectural separation, norms registry design, interpretive categories. |
 | ⬜ | THR-12 | Design NLU assessment app | — | — | Foundational design: requirements, wireframes, data model, LE3 integration. |
 | ⬜ | THR-32 | Instrument definition files (JSON) | DR-009 | — | ASSesJSON schema decisions. DR-015 may partially cover via two-file architecture. |
 | ⬜ | THR-140 | Build TypeScript scoring engine for C2A | DR-006 (partial) | — | Language choice (TS over Python), JSON-driven config. May be covered by DR-014/015/016. |
@@ -86,6 +86,6 @@
 | HIGH priority | 8 |
 | MEDIUM priority | 6 |
 | LOW priority (skip) | 37 |
-| **Issues complete** | **3 of 8 HIGH** |
-| **DRs created (retroactive)** | **11** (DR-010 through DR-020) |
-| **DRs created (all time)** | **20** (DR-001 through DR-020) |
+| **Issues complete** | **5 of 8 HIGH** |
+| **DRs created (retroactive)** | **18** (DR-010 through DR-027) |
+| **DRs created (all time)** | **27** (DR-001 through DR-027) |
