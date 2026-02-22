@@ -15,3 +15,7 @@
 | DR-007 | [Migrate to Aptible for FERPA/HIPAA hosting](DR-007--aptible-ferpa-hipaa-hosting.md) | General | 2026-02-10 | Accepted | THR-52, THR-108, THR-130 | FERPA, HIPAA, compliance, hosting, Aptible, infrastructure |
 | DR-008 | [Defer instrument licensing to post-pilot](DR-008--licensing-deferred-post-pilot.md) | C2A | 2026-02-10 | Accepted | THR-17, THR-18, THR-19 | licensing, instruments, pilot, NLU, risk |
 | DR-009 | [Preserve original published response formats (5 distinct UI formats)](DR-009--response-format-architecture.md) | C2A | 2026-02-21 | Accepted | THR-32 | response-formats, UI, psychometrics, instruments, Likert, SPCC |
+| DR-010 | [Split GPU workloads to Modal, persist data on Aptible](DR-010--aptible-modal-split-architecture.md) | General | 2026-01-31 | Accepted | THR-52, THR-113 | infrastructure, GPU, Modal, Aptible, cost-optimization, compliance |
+| DR-011 | [C2A requires FERPA compliance only (not HIPAA)](DR-011--c2a-ferpa-only-compliance.md) | C2A | 2026-01-31 | Accepted | THR-52, THR-80 | FERPA, HIPAA, compliance, scope, cost |
+| DR-012 | [7-year audit log retention with append-only storage](DR-012--seven-year-audit-retention.md) | General | 2026-01-29 | Accepted | THR-52, THR-95, THR-109 | FERPA, audit, retention, compliance, logging |
+| DR-013 | [Port main app to Aptible first, then build C2A on top](DR-013--port-main-app-first.md) | General | 2026-01-27 | Accepted | THR-52, THR-108, THR-130 | migration, sequencing, infrastructure, Aptible |
