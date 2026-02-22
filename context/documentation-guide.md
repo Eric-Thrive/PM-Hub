@@ -17,10 +17,12 @@ This guide explains where documentation lives, what each type is for, and how to
 - `sessions/handoff.md` — Session continuity notes
 - `logs/work-product-log.md` — Deliverable version history
 - `c2a/` — All C2A technical documentation, scoring specs, framework files
+- `decisions/` — Decision records (DR-XXX) with INDEX.md
 - `skills/` — Claude Skills system
 
 **Linear** ← Tactical execution
-- Issues, comments, specs, decisions made during work
+- Issues, status, assignments, milestones, sprints
+- Links to PM-Hub decision records and specs for reasoning context
 
 **Google Drive** ← External reference documents
 - [ThrivePM References](https://drive.google.com/drive/folders/1sZBu0Veon-g3PgJOIg_gpmxgWA06ay_J) — SOWs, grants, research papers, assessment docs, meeting briefs
@@ -77,11 +79,30 @@ This guide explains where documentation lives, what each type is for, and how to
 
 ---
 
-## Linear as Documentation
+## Decision Records (PM-Hub `decisions/`)
 
-Linear serves as living documentation for current work, decisions made (issue comments), technical specs (issue descriptions), blockers, and historical context (closed issues).
+Structured records capturing the reasoning behind significant decisions. Each DR includes context, the decision itself, alternatives considered, consequences, and links to related issues and artifacts.
 
-**Convention:** When a significant decision is made in a Claude conversation, capture it in a Linear issue or comment. Claude conversations are ephemeral; Linear is the record.
+| File | Purpose |
+|------|---------|
+| `INDEX.md` | Searchable table of all DRs with tags — read at session start |
+| `TEMPLATE.md` | Template for new decision records |
+| `DR-XXX--slug.md` | Individual decision records |
+
+**When to create a DR:**
+- Architecture or infrastructure choices
+- Product scope decisions (what's in/out of MVP)
+- Process or tooling changes
+- Any decision you might need to explain 6 months from now
+
+**Workflow:** Decisions are captured in real-time during conversations (while context is fresh), not extracted after the fact. Claude drafts the DR, Eric approves, Claude commits to PM-Hub and links from relevant Linear issues.
+
+**Convention:** Linear issues link to DRs for reasoning context. DRs reference Linear issue IDs (THR-XX) for tactical traceability.
+
+### Naming Convention
+- Files: `DR-XXX--lowercase-slug.md` (e.g., `DR-006--dual-scoring-approach.md`)
+- Sequential numbering, never reuse IDs
+- Slugs should be descriptive enough to identify the decision from a file listing
 
 ---
 
@@ -100,9 +121,9 @@ Linear serves as living documentation for current work, decisions made (issue co
 
 ## Quick Decision Guide
 
+- **Decision Record needed:** Architecture choices, infrastructure decisions, product scope, process changes, anything you'd need to explain later
 - **Spec needed:** New features, architecture changes, anything touching compliance, multi-sprint work
-- **ADR needed:** Technical decisions you might need to explain later ("why did we choose X?")
-- **Linear issue only:** Bug fixes, small enhancements, maintenance tasks
+- **Linear issue only:** Bug fixes, small enhancements, maintenance tasks, tactical work
 
 ---
 
@@ -110,9 +131,10 @@ Linear serves as living documentation for current work, decisions made (issue co
 
 Start here:
 1. `context/product-context.md` — Understand the products
-2. `context/linear-workflow.md` — How we track work
-3. Repo `README.md` — Get your dev environment running
-4. Repo `claude.md` — Understand the codebase
+2. `decisions/INDEX.md` — Key decisions and their reasoning
+3. `context/linear-workflow.md` — How we track work
+4. Repo `README.md` — Get your dev environment running
+5. Repo `claude.md` — Understand the codebase
 
 ---
 
