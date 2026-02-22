@@ -17,6 +17,13 @@ At the end of any conversation where a deliverable is created or significantly m
 
 ## Log
 
+### 2026-02-22 — Decision Record System + Linear Integration
+
+- **What:** Built complete decision tracking system in `decisions/` directory. 8 initial decision records (DR-001 through DR-008), INDEX.md with searchable tags, TEMPLATE.md, and full integration spec. Created `decision-record` label in Linear. Tested end-to-end link from THR-52 → DR-007.
+- **Why:** Decisions made in PM conversations were evaporating. Linear tracks what we're doing but not why. Need to answer "why did we decide X?" six months from now with full reasoning, alternatives, and context.
+- **Key decisions:** Linear is tactical spine, PM-Hub is knowledge store (DR-004). Real-time capture during conversations, not session-end extraction (DR-005). Forward-only backfill. Link convention: 📋 emoji prefix for DRs in Linear attachments.
+- **Open threads:** Wire remaining DRs to Linear issues. Invite Soham/Elizabeth to PM-Hub GitHub. Update skills to include decision record workflow.
+
 ### 2026-02-20 — Notion → GitHub Migration
 
 - **What:** Migrated all PM context pages and operational docs from Notion to PM-Hub as markdown files. Context pages (product, team, linear workflow, workflows, priorities, documentation guide), session handoff notes, and work product log now live in GitHub.
