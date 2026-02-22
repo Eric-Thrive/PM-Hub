@@ -1,20 +1,23 @@
 ---
 name: thriveiep-session-handoff
 description: >
-  Session management protocol for ThriveIEP PM Copilot — handles deliverable
-  tracking, decision capture, and session continuity. Three responsibilities that
-  run throughout every conversation:
+  Session and knowledge management protocol for ThriveIEP PM Copilot — handles
+  deliverable tracking, decision capture, and session continuity. Decisions don't
+  just happen in PM Copilot conversations — they happen in meetings, email threads,
+  and Slack. This skill applies to all of them. Three responsibilities run
+  throughout every conversation:
   (1) Save every deliverable to PM-Hub and link it to a Linear issue immediately.
-  (2) Capture decision records when significant decisions are made.
+  (2) Capture decision records when significant decisions are made — whether in
+  this conversation or surfaced from meeting transcripts, Gmail, Slack, or calendar notes.
   (3) Write structured handoff notes at session end.
   Use this skill at session START to clone PM-Hub and load context. Use DURING
   sessions whenever you create a file, make a decision, or capture research.
-  Use at session END to write handoff notes. Triggers on: "wrap up", "session
-  notes", "handoff", "save session", "what did we cover", "end of session",
-  "let's wrap up", starting a new session, referencing previous work, or when
-  a conversation has produced deliverables and is winding down. Also trigger
-  when producing any file output — specs, analyses, templates, data files,
-  skill updates — even if Eric doesn't explicitly mention session management.
+  Use at session END to write handoff notes. Also trigger AFTER the morning
+  routine — reviewing Gmail, Slack, and Calendar often surfaces decisions that
+  need to be captured. Triggers on: "wrap up", "session notes", "handoff",
+  "save session", "what did we cover", "end of session", "let's wrap up",
+  starting a new session, referencing previous work, producing any file output,
+  or when reviewing external communications that contain decisions or deliverables.
 ---
 
 # ThriveIEP Session & Knowledge Management Protocol
@@ -72,9 +75,27 @@ session is interrupted, the work is still traceable.
 
 ## Part 2: At Decision Points — Decision Records
 
-Decisions evaporate from conversations. When a significant decision is reached,
-capture it so the team can answer "why did we do it this way?" months later
-without re-litigating.
+Decisions evaporate. They happen in PM Copilot conversations, but also in
+meetings, email threads, Slack discussions, and calls. When a significant
+decision is made — or discovered — capture it so the team can answer "why
+did we do it this way?" months later without re-litigating.
+
+### Sources of decisions
+
+Decisions surface from multiple channels. Watch for them in all of these:
+
+- **This conversation** — the most obvious case
+- **Morning routine** — Gmail, Slack, and Calendar review often reveals
+  decisions that were made asynchronously (e.g., Elizabeth confirming scope
+  in an email, Soham proposing an architecture change in Slack)
+- **Meeting transcripts** — decisions made verbally in standups, stakeholder
+  calls, or planning sessions
+- **Email threads** — especially with external partners (NLU, Prepare to Bloom)
+- **Slack threads** — team discussions that reach a conclusion
+
+After the morning routine is a natural moment to scan for decisions that
+need capturing. If something DR-worthy surfaces during Gmail/Slack/Calendar
+review, flag it immediately rather than waiting.
 
 ### Workflow
 
@@ -84,10 +105,15 @@ without re-litigating.
 
 2. **Flag it:** "That's a DR-worthy decision. Want me to capture it?" Or just
    capture it if the pattern is clear and Eric has given general consent.
+   For decisions found in external sources, summarize what you found and
+   confirm with Eric before creating the DR.
 
 3. **Draft, save, link.**
    → Read `references/decision-records.md` for the template, numbering, file
    location, and Linear integration steps.
+   For external decisions, note the source in the DR's Source field (e.g.,
+   "Email thread between Elizabeth and NLU, 2026-02-20" or "Slack #dev
+   discussion, 2026-02-19").
 
 4. **Mention in conversation:** "Captured as DR-XXX, linked to THR-XX."
 
