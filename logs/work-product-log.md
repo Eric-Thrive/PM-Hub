@@ -17,6 +17,13 @@ At the end of any conversation where a deliverable is created or significantly m
 
 ## Log
 
+### 2026-02-22 — Session Handoff Skill Restructure + External Decision Capture
+
+- **What:** Restructured session-handoff skill per Anthropic's skills authoring best practices. Added deliverable linking, versioning policy, DR capture, and knowledge tracking workflows. Expanded scope to capture decisions from external sources (meetings, email, Slack). Created `knowledge/` and `general/` directories. Drafted new project instructions that defer to skills for procedures.
+- **Why:** Skill was overlong (271 lines) and mixed instructions with reference material. Best practices say SKILL.md under 500 lines, progressive disclosure via reference files. Decisions were only being captured from PM Copilot conversations — but significant decisions happen in meetings, emails, and Slack.
+- **Key decisions:** Hybrid knowledge management (research → `knowledge/`, promote to Linear when actionable). Versioning Option C (changelog headers, update in place, fork only when someone builds against current). Morning routine is natural trigger for scanning external decisions.
+- **Open threads:** Project instructions draft complete but not yet installed. DR-010 (hybrid knowledge management) not formally captured. Remaining DR links from Session 27 still need wiring.
+
 ### 2026-02-22 — Decision Record System + Linear Integration
 
 - **What:** Built complete decision tracking system in `decisions/` directory. 8 initial decision records (DR-001 through DR-008), INDEX.md with searchable tags, TEMPLATE.md, and full integration spec. Created `decision-record` label in Linear. Tested end-to-end link from THR-52 → DR-007.

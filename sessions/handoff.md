@@ -4,6 +4,44 @@ Rolling log of the last 5 PM Copilot sessions. Oldest entry drops off when a new
 
 ---
 
+## Session 28 — 2026-02-22 (Session Handoff Skill Restructure + Project Instructions)
+**Focus:** Restructured session-handoff skill per best practices, expanded to capture external decisions, drafted new project instructions
+
+**What we did:**
+- Restructured session-handoff skill: SKILL.md 271→162 lines, moved templates/tables/conventions to `references/` (file-placement.md, decision-records.md, versioning.md)
+- Added deliverable linking workflow (save → changelog → link to Linear → commit immediately)
+- Added DR capture from external sources (meetings, email, Slack, transcripts) — not just PM Copilot conversations
+- Morning routine flagged as natural trigger for scanning external decisions
+- Added hybrid knowledge management: research → `knowledge/`, promote to Linear when actionable
+- Added versioning policy: changelog headers, update in place, fork only when building against current
+- Created `knowledge/` and `general/` directories in PM-Hub
+- Drafted lean project instructions v2 that defer to skills for process details
+- Researched Anthropic's official skills authoring best practices to validate our approach
+- Packaged updated `thriveiep-session-handoff.zip` for upload
+- PM-Hub commits: `2320869`, `412240c`, `27cbbb4`, `a97e54e`, `31b9169`
+
+**Key decisions:**
+- Skills handle procedures, project instructions handle role and context (no duplication)
+- External decisions get confirmed with Eric before DR creation; source noted in DR
+- Linear skill does NOT need update for DR workflow — it lives in session-handoff skill
+- Session 27 pickup item "update linear skill" resolved as unnecessary
+
+**Artifacts produced:**
+- Updated `skills/thriveiep-session-handoff/` — SKILL.md + 3 reference files
+- `thriveiep-session-handoff.zip` — ready for Settings → Skills upload
+- `project-instructions-v2.md` — ready for project instructions replacement
+- `knowledge/INDEX.md`, `general/README.md` — new PM-Hub directories
+
+**Pickup for next session:**
+- Install project-instructions-v2.md as project instructions (replace current)
+- Upload thriveiep-session-handoff.zip to Settings → Skills (replace current)
+- Wire remaining DR links: DR-006 → THR-132/THR-140, DR-008 → THR-17/18/19
+- Capture DR-010 (hybrid knowledge management decision) formally
+- Invite Soham and Elizabeth to PM-Hub GitHub repo
+- Still outstanding: Notion → `c2a/docs/` export, scoring spec updates (155 vs 144 items), exemplar cards
+
+---
+
 ## Session 27 — 2026-02-22 (Decision Record System + Linear Integration)
 **Focus:** Designed and built decision tracking system with Linear ↔ PM-Hub integration
 
@@ -37,83 +75,27 @@ Rolling log of the last 5 PM Copilot sessions. Oldest entry drops off when a new
 - Wire remaining DR links to Linear issues (DR-006 → THR-132/THR-140, DR-008 → THR-17/18/19)
 - Invite Soham and Elizabeth to PM-Hub GitHub repo (so they can click DR links from Linear)
 - Still outstanding from prior sessions: Notion → `c2a/docs/` export, scoring spec updates (155 vs 144 items), exemplar cards
-- Update session-handoff skill and linear skill to include decision record workflow
+- Update session-handoff skill to include decision record workflow → ✅ Done in Session 28
 
 ---
 
 ## Session 26 — 2026-02-20 (Dashboard Canonicalized + Artifact Rendered)
 **Focus:** Fixed dashboard skill to use canonical template; rendered live morning dashboard artifact
-
-**What we did:**
-- Identified root cause of dark-mode redesign bug: skill had no template reference
-- Copied Eric's light-mode template to `dashboard/dashboard-template.jsx` in PM-Hub
-- Updated `skills/thriveiep-dashboard/SKILL.md` with explicit template read instruction and data constants
-- Synced template into `skills/thriveiep-dashboard/templates/`
-- Packaged updated `thriveiep-dashboard.zip` for re-upload
-- Pushed all changes to PM-Hub — commits `86aa441`, `89ac54b`
-- Rendered live morning dashboard artifact with Feb 20 data (Focus Picks, Calendar, Issues, Gmail, Standup)
-- Read Claude Code article from project files — discussed memory hierarchy, skills system, multi-agent orchestration
-
-**Key decisions:**
-- Dashboard skill must `cat` the template file first, populate data constants only, never alter structure/styling
-- Artifact renders best as inline JSX in response (not via file present_files)
-
-**Artifacts produced:**
-- Updated `thriveiep-dashboard` skill zip (ready to upload)
-- PM-Hub commits `86aa441`, `89ac54b`
-- Morning dashboard artifact (Feb 20, live data)
-
-**Pickup for next session:**
-- Upload updated `thriveiep-dashboard.zip` to Claude.ai Settings → Skills (replaces old version)
-- Test in new conversation: say "morning" — verify template is used, not redesigned
-- Claude Code Phase 2: export 8 C2A docs from Notion → `c2a/docs/`
-- Still outstanding: Step 2.5 scoring spec updates, 155 vs 144 item count, exemplar cards (Ref #6)
+**What we did:** Root-caused dark-mode redesign bug (no template reference). Copied template to PM-Hub, updated dashboard skill with explicit template read instruction. Rendered live morning dashboard. Read Claude Code article.
+**Key decisions:** Dashboard skill must `cat` template first, populate data constants only. Artifact renders as inline JSX.
+**Pickup:** Upload dashboard zip, test, C2A docs export → carried forward.
 
 ---
 
 ## Session 25 — 2026-02-20 (Skills Built + Uploaded for Claude.ai)
-**Focus:** Built and packaged 4 Claude.ai skills updated for GitHub-first architecture; pushed updated skills to PM-Hub
-
-**What we did:**
-- Adapted all 4 PM-Hub skills for Claude.ai upload format (SKILL.md + references/)
-- Updated pm-core: resource IDs point to PM-Hub paths, Notion demoted to fallback
-- Updated session-handoff: read/write via PM-Hub terminal, Notion fallback
-- Updated dashboard data-gathering: priorities from PM-Hub `context/priorities.md`
-- Updated ids-and-resources: PM-Hub directory structure as primary reference
-- Linear skill copied unchanged (already correct)
-- Packaged 4 zips for Claude.ai Skills upload
-- Pushed updated skills to PM-Hub — commit `ba2bd98`
-
-**Key decisions:**
-- Skills work in Claude.ai via project Settings > Skills (upload zip folders)
-- Each skill is a folder with SKILL.md + optional references/ directory
-- Skills auto-trigger based on description field semantic matching
-- All skills now GitHub-first with Notion as fallback only
-
-**Artifacts produced:**
-- 4 skill zips: thriveiep-pm-core, thriveiep-linear, thriveiep-session-handoff, thriveiep-dashboard
-- PM-Hub commit `ba2bd98` (updated skills in `skills/` directory)
-
-**Pickup for next session:**
-- Upload 4 skill zips to Claude.ai project Settings > Skills
-- Test in new conversation: try `/update` or "morning" to verify dashboard skill fires
-- Claude Code: export 8 C2A docs from Notion → `c2a/docs/` (Phase 2 migration)
-- Still outstanding: Step 2.5 scoring spec updates, 155 vs 144 item count, exemplar cards (Ref #6)
+**Focus:** Built and packaged 4 Claude.ai skills for GitHub-first architecture
+**What we did:** Adapted all 4 skills for Claude.ai upload (SKILL.md + references/). All now GitHub-first, Notion fallback. Packaged 4 zips. Commit `ba2bd98`.
+**Pickup:** Upload skills, test dashboard trigger → carried forward.
 
 ---
 
-## Session 24 — 2026-02-20 (Notion → GitHub Migration Executed + Project Instructions Updated)
-**Focus:** Created all Phase 1 migration files, pushed to PM-Hub, updated project instructions for GitHub-first workflow
-**What we did:**
-- Created 10 markdown files (943 lines), pushed to PM-Hub — commit `40432fd`
-- Updated project instructions: PM-Hub via terminal is primary, Notion is legacy fallback
-- GitHub PAT stored in memory edits (rotate daily)
+## Session 24 — 2026-02-20 (Notion → GitHub Migration Executed)
+**Focus:** Created 10 markdown files (943 lines), pushed to PM-Hub. Updated project instructions for GitHub-first workflow. GitHub PAT in memory edits.
 **Pickup:** Skills build → done in Session 25.
-
----
-
-## Session 23 — 2026-02-20 (Notion → GitHub Migration Planned)
-**Focus:** Strategic decision to migrate all PM context from Notion to GitHub PM-Hub. Everything moves to GitHub — no Notion exceptions for PM context.
-**Pickup:** Migration execution → done in Session 24.
 
 
