@@ -13,7 +13,7 @@
 | ✅ | THR-52 | BLOCKER: Architect HIPAA/FERPA compliant system | DR-007 | DR-010, 011, 012, 013 | 5 DRs total. Full proof-of-concept. |
 | ✅ | THR-132 | Design scoring engine architecture for C2A | DR-006 | DR-014, 015, 016, 017 | 5 DRs total. Pipeline, file architecture, MEAN override, 3-layer model. |
 | ✅ | THR-131 | Reporting schema / construct mapping (Layer 1→2) | DR-017 | DR-018, 019, 020 | 4 DRs total. Configurable schema, distributed mapping, coverage gaps. |
-| ⬜ | THR-133 | Define C2A report dimensions and info architecture | — | — | Report philosophy: short/chunked/empowering, NOT neuropsych. Two deliverables split. |
+| ✅ | THR-133 | Define C2A report dimensions and info architecture | — | DR-021, 022, 023, 024 | 4 DRs: report philosophy, HTML delivery, template-driven interp, four-view hierarchy. |
 | ⬜ | THR-197 | Normalization service (norm-referenced + linear fallback) | — | — | T-score conversion, category thresholds, normalization at profile-gen time not scoring. |
 | ⬜ | THR-12 | Design NLU assessment app | — | — | Foundational design: requirements, wireframes, data model, LE3 integration. |
 | ⬜ | THR-32 | Instrument definition files (JSON) | DR-009 | — | ASSesJSON schema decisions. DR-015 may partially cover via two-file architecture. |
