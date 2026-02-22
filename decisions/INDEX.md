@@ -23,3 +23,6 @@
 | DR-015 | [Two-file instrument architecture (definition + scoring spec)](DR-015--two-file-instrument-architecture.md) | C2A | 2026-02-10 | Accepted | THR-132, THR-32 | instruments, JSON, schema, FHIR, ASSesJSON |
 | DR-016 | [MEAN scoring for all instruments, overriding published SUM](DR-016--mean-scoring-all-instruments.md) | C2A | 2026-02-10 | Accepted | THR-132, THR-32, THR-140 | scoring, MEAN, psychometrics, comparability |
 | DR-017 | [Three-layer measurement architecture (Skills → Context → SDT Outcomes)](DR-017--three-layer-measurement-architecture.md) | C2A | 2026-02-11 | Accepted | THR-132, THR-131 | measurement, layers, C2A-model, SDT, construct-map |
+| DR-018 | [Configurable reporting schema — same scores serve multiple customer frameworks](DR-018--configurable-reporting-schema.md) | C2A | 2026-02-09 | Accepted | THR-131, THR-22 | construct-map, reporting, framework, LE3, configurable |
+| DR-019 | [Distributed construct mapping embedded in scoring JSONs](DR-019--distributed-construct-mapping.md) | C2A | 2026-02-10 | Accepted | THR-131, THR-32, THR-140 | construct-map, scoring, JSON, registry, deprecated |
+| DR-020 | [Coverage gap classification — direct vs. composite/inferred constructs](DR-020--coverage-gap-classification.md) | C2A | 2026-02-09 | Accepted | THR-131 | construct-map, coverage, psychometrics, gaps, LE3 |

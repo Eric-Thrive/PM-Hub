@@ -12,7 +12,7 @@
 |:----:|-------|-------|-------------|----------------|-------|
 | ✅ | THR-52 | BLOCKER: Architect HIPAA/FERPA compliant system | DR-007 | DR-010, 011, 012, 013 | 5 DRs total. Full proof-of-concept. |
 | ✅ | THR-132 | Design scoring engine architecture for C2A | DR-006 | DR-014, 015, 016, 017 | 5 DRs total. Pipeline, file architecture, MEAN override, 3-layer model. |
-| ⬜ | THR-131 | Reporting schema / construct mapping (Layer 1→2) | — | — | LE3 skill framework, configurable mapping, deprecated construct-map.ts. Rich history. |
+| ✅ | THR-131 | Reporting schema / construct mapping (Layer 1→2) | DR-017 | DR-018, 019, 020 | 4 DRs total. Configurable schema, distributed mapping, coverage gaps. |
 | ⬜ | THR-133 | Define C2A report dimensions and info architecture | — | — | Report philosophy: short/chunked/empowering, NOT neuropsych. Two deliverables split. |
 | ⬜ | THR-197 | Normalization service (norm-referenced + linear fallback) | — | — | T-score conversion, category thresholds, normalization at profile-gen time not scoring. |
 | ⬜ | THR-12 | Design NLU assessment app | — | — | Foundational design: requirements, wireframes, data model, LE3 integration. |
@@ -86,6 +86,6 @@
 | HIGH priority | 8 |
 | MEDIUM priority | 6 |
 | LOW priority (skip) | 37 |
-| **Issues complete** | **2 of 8 HIGH** |
-| **DRs created (retroactive)** | **8** (DR-010 through DR-017) |
-| **DRs created (all time)** | **17** (DR-001 through DR-017) |
+| **Issues complete** | **3 of 8 HIGH** |
+| **DRs created (retroactive)** | **11** (DR-010 through DR-020) |
+| **DRs created (all time)** | **20** (DR-001 through DR-020) |
