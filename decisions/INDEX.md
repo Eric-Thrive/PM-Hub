@@ -19,3 +19,7 @@
 | DR-011 | [C2A requires FERPA compliance only (not HIPAA)](DR-011--c2a-ferpa-only-compliance.md) | C2A | 2026-01-31 | Accepted | THR-52, THR-80 | FERPA, HIPAA, compliance, scope, cost |
 | DR-012 | [7-year audit log retention with append-only storage](DR-012--seven-year-audit-retention.md) | General | 2026-01-29 | Accepted | THR-52, THR-95, THR-109 | FERPA, audit, retention, compliance, logging |
 | DR-013 | [Port main app to Aptible first, then build C2A on top](DR-013--port-main-app-first.md) | General | 2026-01-27 | Accepted | THR-52, THR-108, THR-130 | migration, sequencing, infrastructure, Aptible |
+| DR-014 | [Six-stage sequential scoring pipeline architecture](DR-014--six-stage-scoring-pipeline.md) | C2A | 2026-02-11 | Accepted | THR-132, THR-140 | scoring, pipeline, architecture, stages |
+| DR-015 | [Two-file instrument architecture (definition + scoring spec)](DR-015--two-file-instrument-architecture.md) | C2A | 2026-02-10 | Accepted | THR-132, THR-32 | instruments, JSON, schema, FHIR, ASSesJSON |
+| DR-016 | [MEAN scoring for all instruments, overriding published SUM](DR-016--mean-scoring-all-instruments.md) | C2A | 2026-02-10 | Accepted | THR-132, THR-32, THR-140 | scoring, MEAN, psychometrics, comparability |
+| DR-017 | [Three-layer measurement architecture (Skills → Context → SDT Outcomes)](DR-017--three-layer-measurement-architecture.md) | C2A | 2026-02-11 | Accepted | THR-132, THR-131 | measurement, layers, C2A-model, SDT, construct-map |
