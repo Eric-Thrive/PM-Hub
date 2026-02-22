@@ -4,7 +4,42 @@ Rolling log of the last 5 PM Copilot sessions. Oldest entry drops off when a new
 
 ---
 
-## Session 29 — 2026-02-21 (Response Format Standardization + UI Reference Doc)
+## Session 30 — 2026-02-22 (Retroactive DR Triage + THR-132 Backfill)
+**Focus:** Built structured tracking doc for retroactive DR creation, then completed THR-132 backfill (4 new DRs)
+
+**What we did:**
+- Created `decisions/TRIAGE.md` — markdown tracking doc for retroactive DR workflow (replaces xlsx from earlier session)
+- Triaged 51 resolved issues: 8 HIGH, 6 MEDIUM, 37 LOW (skip)
+- Completed THR-132 (scoring engine architecture) backfill with 4 new DRs:
+  - DR-014: Six-stage sequential scoring pipeline (item→subscale→normalize→rollup→flags→profile)
+  - DR-015: Two-file instrument architecture (FHIR-inspired definition.json + scoring.json)
+  - DR-016: MEAN scoring override for all instruments (cross-subscale comparability)
+  - DR-017: Three-layer measurement architecture (Skills → Context → SDT Outcomes)
+- All 4 DRs linked as attachments in Linear on THR-132
+- THR-132 now has 5 DRs total (DR-006 existing + DR-014–017 new)
+- DR count: 17 total (DR-001 through DR-017)
+
+**Key decisions:**
+- Triage tracking doc lives as markdown in PM-Hub (`decisions/TRIAGE.md`), not xlsx — easier to update in-session
+- HIGH = architecture/strategy with alternatives considered; MEDIUM = meaningful but narrow; LOW = pure implementation
+
+**Artifacts produced:**
+- `decisions/TRIAGE.md` — retroactive DR tracking doc (commit `8cf9c49`)
+- `decisions/DR-014--six-stage-scoring-pipeline.md`
+- `decisions/DR-015--two-file-instrument-architecture.md`
+- `decisions/DR-016--mean-scoring-all-instruments.md`
+- `decisions/DR-017--three-layer-measurement-architecture.md`
+- All committed: `71a677e`, `8cf9c49`
+
+**Pickup for next session:**
+- Continue retroactive DR backfill — next HIGH issues: THR-131 (construct mapping), THR-133 (report dimensions), THR-197 (normalization service), THR-12 (NLU assessment design)
+- Check THR-140 and THR-32: may already be sufficiently covered by DR-014/015/016 — mark in TRIAGE.md
+- MEDIUM candidates: THR-29 (auth), THR-151 (PII/pronouns) worth a quick search
+- From Session 28/29: upload session-handoff skill zip, install project-instructions-v2, share Response Format Reference with Soham, SFCQ scale decision pending
+
+---
+
+ — 2026-02-21 (Response Format Standardization + UI Reference Doc)
 **Focus:** Defined all response scale formats across 14-instrument battery and produced implementation reference for Soham
 
 **What we did:**
@@ -116,15 +151,7 @@ Rolling log of the last 5 PM Copilot sessions. Oldest entry drops off when a new
 
 ## Session 26 — 2026-02-20 (Dashboard Canonicalized + Artifact Rendered)
 **Focus:** Fixed dashboard skill to use canonical template; rendered live morning dashboard artifact
-**What we did:** Root-caused dark-mode redesign bug (no template reference). Copied template to PM-Hub, updated dashboard skill with explicit template read instruction. Rendered live morning dashboard. Read Claude Code article.
-**Key decisions:** Dashboard skill must `cat` template first, populate data constants only. Artifact renders as inline JSX.
+**What we did:** Root-caused dark-mode redesign bug. Copied template to PM-Hub, updated dashboard skill. Rendered live morning dashboard.
 **Pickup:** Upload dashboard zip, test, C2A docs export → carried forward.
-
----
-
-## Session 25 — 2026-02-20 (Skills Built + Uploaded for Claude.ai)
-**Focus:** Built and packaged 4 Claude.ai skills for GitHub-first architecture
-**What we did:** Adapted all 4 skills for Claude.ai upload (SKILL.md + references/). All now GitHub-first, Notion fallback. Packaged 4 zips. Commit `ba2bd98`.
-**Pickup:** Upload skills, test dashboard trigger → carried forward.
 
 
