@@ -7,7 +7,11 @@
 
 ## Context
 
-Seven C2A instruments have published normative data (BPNSFS, CAAS-SF, BRS, IRI, CFS, ADEXI, GMS), but using these norms requires instrument-specific transformations: three instruments need score reflection (ADEXI, BPNSFS frustration subscales, GMS amotivation/external regulation) so that high scores universally indicate positive outcomes, and IRI requires reanchoring from the published 0–4 Likert to C2A's 1–5 scale with gender-pooled norms. The question was whether to store raw published norms and apply transformations at runtime, or pre-apply transformations in the norms files.
+Ten C2A instruments have published normative data. The original seven (BPNSFS, CAAS-SF, BRS, IRI, CFS, ADEXI, GMS) were identified first; subsequent research confirmed that MSLQ-CT (Pintrich et al., 1991/1993), SFCQ (Thomas et al., 2015; N=3,526), and SPCC (McCroskey & McCroskey, 1988) also have usable published norms, upgrading them from Tier 2 (linear fallback) to Tier 1 (norm-referenced).
+
+Several instruments require transformations before norms can be applied: three need score reflection (ADEXI, BPNSFS frustration subscales, GMS amotivation/external regulation) so that high scores universally indicate positive outcomes, and IRI requires reanchoring from the published 0–4 Likert to C2A's 1–5 scale with gender-pooled norms. The question was whether to store raw published norms and apply transformations at runtime, or pre-apply transformations in the norms files.
+
+> **⚠️ VERIFY (added 2026-02-22):** Confirm that MSLQ-CT, SFCQ, and SPCC norms JSON files were actually created and committed to the codebase at `packages/assessment-engine/data/norms/`. The Perplexity research confirming norms availability is documented, but the conversation where M/SD values were extracted and applied could not be located during DR backfill. Check the codebase before treating these three as fully implemented.
 
 ## Decision
 
@@ -32,6 +36,14 @@ A master `norms-index.json` declares per-instrument configuration: normalization
 
 The normalization service implementation is simple: load norms file, apply `T = 50 + 10 × ((score - mean) / sd)`, map to display scale. All complexity is front-loaded into the norms files where it can be audited by a psychometrician. Trade-off: if the reflection or reanchoring formulas change, the norms files must be regenerated (but this is unlikely — these are published instrument properties). The `tScoreExample` in each file serves as a built-in sanity check.
 
+**Updated tier breakdown (as of 2026-02-22):**
+
+- **Tier 1 — Norm-referenced (10 instruments):** ADEXI, BRS, BPNSFS, CAAS-SF, CFS, GMS, IRI + MSLQ-CT, SFCQ, SPCC
+- **Tier 1.5 — Criterion-referenced (2 instruments):** LCQ-6 (context-specific, change-over-time), TPS-7 (relative comparison only, no formal norms)
+- **Tier 2 — Linear fallback (2 instruments):** NBS-6, RQM-6 (custom/R&D)
+
+SPCC is a unique case — already on a 0–100 scale with McCroskey's published cutoffs (Low <59, Normal 59–86, High >87) and subscale M/SDs available.
+
 ## Related Decisions
 
 - Builds on: DR-006 (dual scoring), DR-016 (MEAN scoring override), DR-025 (normalization at profile-gen)
@@ -40,8 +52,9 @@ The normalization service implementation is simple: load norms file, apply `T = 
 ## Related Artifacts
 
 - `packages/assessment-engine/data/norms/norms-index.json`
-- `packages/assessment-engine/data/norms/{adexi,bpnsfs,brs,caas-sf,cfs,gms,iri}.json`
+- `packages/assessment-engine/data/norms/{adexi,bpnsfs,brs,caas-sf,cfs,gms,iri}.json` (confirmed)
+- `packages/assessment-engine/data/norms/{mslq-ct,sfcq,spcc}.json` (⚠️ verify existence in codebase)
 
 ## Source
 
-THR-197 norms registry conversation, 2026-02-17. Eric provided resolved decisions on IRI reanchoring, ADEXI/BPNSFS/GMS reflection, and pooled gender norms. JSON files drafted and validated in that session.
+THR-197 norms registry conversation, 2026-02-17. Eric provided resolved decisions on IRI reanchoring, ADEXI/BPNSFS/GMS reflection, and pooled gender norms. JSON files drafted and validated in that session. Tier reclassification based on Perplexity research confirming published norms for MSLQ-CT, SFCQ, and SPCC (date TBD — conversation not located during DR backfill 2026-02-22).
