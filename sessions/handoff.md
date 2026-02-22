@@ -4,6 +4,29 @@ Rolling log of the last 5 PM Copilot sessions. Oldest entry drops off when a new
 
 ---
 
+## Session 31 — 2026-02-22 (Retroactive DR Backfill: THR-131 Construct Mapping)
+**Focus:** Extracted 3 design records from past conversations for THR-131 (Reporting Schema / Construct Mapping)
+
+**What we did:**
+- Searched 6+ past conversations covering battery design (Jan 22), scoring specs (Feb 10), THR-131/132 overview (Feb 11), THR-140 build (Feb 12), norms registry (Feb 17), and Session 9 open questions (Feb 19)
+- Created DR-018: Configurable reporting schema — customer-framework-agnostic construct mapping (LE3 v1, America Succeeds future, employer composites)
+- Created DR-019: Distributed construct mapping — `construct_mapping` embedded in scoring JSONs is authoritative source of truth, deprecated `construct-map.ts`
+- Created DR-020: Coverage gap classification — 9/12 direct, 3 composite/inferred (Critical Thinking, Networking, Relationship Building) with transparent quality ratings
+- Updated INDEX.md with all 3 new DRs
+- Updated TRIAGE.md — THR-131 marked ✅ (3 of 8 HIGH complete)
+- Added Linear comment on THR-131 linking all 4 DRs (DR-017 from prior session + DR-018/019/020)
+- PM-Hub commit: `7b7c6bf`
+
+**DR count:** 20 total (DR-001 through DR-020)
+
+**Pickup for next session:**
+- Continue retroactive DR backfill — next HIGH issues: THR-133 (report dimensions), THR-197 (normalization service), THR-12 (NLU assessment design)
+- Check THR-140 and THR-32: may already be sufficiently covered by DR-014/015/016 — mark in TRIAGE.md
+- MEDIUM candidates: THR-29 (auth), THR-151 (PII/pronouns) worth a quick search
+- Outstanding from earlier: upload session-handoff skill zip, install project-instructions-v2, share Response Format Reference with Soham, SFCQ scale decision pending
+
+---
+
 ## Session 30 — 2026-02-22 (Retroactive DR Triage + THR-132 Backfill)
 **Focus:** Built structured tracking doc for retroactive DR creation, then completed THR-132 backfill (4 new DRs)
 
@@ -146,12 +169,4 @@ Rolling log of the last 5 PM Copilot sessions. Oldest entry drops off when a new
 - Invite Soham and Elizabeth to PM-Hub GitHub repo (so they can click DR links from Linear)
 - Still outstanding from prior sessions: Notion → `c2a/docs/` export, scoring spec updates (155 vs 144 items), exemplar cards
 - Update session-handoff skill to include decision record workflow → ✅ Done in Session 28
-
----
-
-## Session 26 — 2026-02-20 (Dashboard Canonicalized + Artifact Rendered)
-**Focus:** Fixed dashboard skill to use canonical template; rendered live morning dashboard artifact
-**What we did:** Root-caused dark-mode redesign bug. Copied template to PM-Hub, updated dashboard skill. Rendered live morning dashboard.
-**Pickup:** Upload dashboard zip, test, C2A docs export → carried forward.
-
 
