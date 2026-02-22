@@ -17,6 +17,13 @@ At the end of any conversation where a deliverable is created or significantly m
 
 ## Log
 
+### 2026-02-21 — C2A Response Format Reference Document
+
+- **What:** Created `C2A_Response_Format_Reference.docx` — 8-page landscape Word doc mapping all 14 instruments to their exact response formats, anchor wording, label arrays, sprint assignments, and UI component specs.
+- **Why:** Soham needs precise UI specs to build assessment forms. Battery has 5 distinct response formats (not 4 as previously assumed — CFS is 6-point). Each instrument has different anchor wording even within the same scale-point count. Without this reference, UI implementation would require repeated lookups across multiple source documents.
+- **Key decisions:** 7-point scales use endpoint-only labeling (per validation studies). 5/6-point scales fully labeled. SPCC slider defaults to 50. SFCQ format TBD — component should be configurable. Each instrument keeps original published anchors.
+- **Open threads:** SFCQ scale decision pending. BPNSFS replacement research initiated. Share doc with Soham.
+
 ### 2026-02-22 — Session Handoff Skill Restructure + External Decision Capture
 
 - **What:** Restructured session-handoff skill per Anthropic's skills authoring best practices. Added deliverable linking, versioning policy, DR capture, and knowledge tracking workflows. Expanded scope to capture decisions from external sources (meetings, email, Slack). Created `knowledge/` and `general/` directories. Drafted new project instructions that defer to skills for procedures.

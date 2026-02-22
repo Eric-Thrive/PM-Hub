@@ -4,6 +4,39 @@ Rolling log of the last 5 PM Copilot sessions. Oldest entry drops off when a new
 
 ---
 
+## Session 29 — 2026-02-21 (Response Format Standardization + UI Reference Doc)
+**Focus:** Defined all response scale formats across 14-instrument battery and produced implementation reference for Soham
+
+**What we did:**
+- Located "Perplexity report all items.rtf" in Google Drive (https://docs.google.com/document/d/1BSr7L9RId7YOf9IixuS707dsC5G1bBJUBBmojGNzwYA/edit) — master item listing by instrument
+- Analyzed scale standardization options: converting 7-point instruments to 5-point vs preserving original formats. Concluded BPNSFS and GMS must stay 7-point for SDT outcome precision; LCQ-6 and TPS-7 could convert but no strong reason to since they're T3-only
+- Identified CFS as 6-point (Martin & Rubin 1995), not 5-point — intentional no-midpoint design. Battery actually has **5 distinct response formats**, not 4
+- Established standard anchor wording for all formats: 5-point (fully labeled, instrument-specific anchors), 6-point CFS (fully labeled), 7-point (endpoint-only labels per validation studies), 5-point frequency (Never→Very often), 0-100 slider (Completely Incompetent→Completely Competent)
+- Caught BPNSFS scale error in Perplexity doc: listed as 1-5 but published Chen et al. (2015) is 1-7
+- Confirmed GMS-Bookends = 10 items (3 Intrinsic + 3 Integrated + 1 External + 3 Amotivation)
+- Created `C2A_Response_Format_Reference.docx` — landscape Word doc with: quick reference summary, per-format detail pages with exact anchor arrays, sprint-to-format mapping, and 3-component UI spec (LikertScale, CompetenceSlider, InstrumentBlock)
+- SFCQ format flagged as TBD (Thomas et al. published 7-pt, some adaptations use 5-pt)
+
+**Key decisions:**
+- 5 response formats confirmed (not 4): 5-pt agreement, 6-pt CFS, 7-pt true/agree, 5-pt frequency, 0-100 slider
+- 7-point scales use endpoint-only labeling (follows original validation studies, avoids anchoring artifacts)
+- 5-point and 6-point scales use full labeling (respondents can hold 5-6 distinct categories)
+- SPCC slider defaults to 50 (not 0) to avoid low-anchor bias
+- Each instrument keeps its original published anchor wording — no forced standardization across instruments within same scale-point count
+- SFCQ: Soham should build configurable component accepting either 5 or 7 options
+
+**Artifacts produced:**
+- `C2A_Response_Format_Reference.docx` — landscape, 8 pages, ready for Soham (output in Claude chat)
+
+**Pickup for next session:**
+- Share Response Format Reference with Soham
+- BPNSFS replacement research — Eric exploring less proprietary alternatives for need satisfaction/frustration measurement
+- SFCQ scale decision (5-pt vs 7-pt) still pending
+- RAI (Relative Autonomy Index) — discussed as composite from GMS subscales, not separate instrument. Need to decide if modified RAI formula works with 3-subscale GMS-Bookends (missing Identified Regulation)
+- From Session 28: Install project-instructions-v2, upload session-handoff skill zip, wire DR links, invite Soham/Elizabeth to PM-Hub
+
+---
+
 ## Session 28 — 2026-02-22 (Session Handoff Skill Restructure + Project Instructions)
 **Focus:** Restructured session-handoff skill per best practices, expanded to capture external decisions, drafted new project instructions
 
@@ -91,11 +124,5 @@ Rolling log of the last 5 PM Copilot sessions. Oldest entry drops off when a new
 **Focus:** Built and packaged 4 Claude.ai skills for GitHub-first architecture
 **What we did:** Adapted all 4 skills for Claude.ai upload (SKILL.md + references/). All now GitHub-first, Notion fallback. Packaged 4 zips. Commit `ba2bd98`.
 **Pickup:** Upload skills, test dashboard trigger → carried forward.
-
----
-
-## Session 24 — 2026-02-20 (Notion → GitHub Migration Executed)
-**Focus:** Created 10 markdown files (943 lines), pushed to PM-Hub. Updated project instructions for GitHub-first workflow. GitHub PAT in memory edits.
-**Pickup:** Skills build → done in Session 25.
 
 
