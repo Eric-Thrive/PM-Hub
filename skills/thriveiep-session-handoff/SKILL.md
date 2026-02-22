@@ -2,8 +2,9 @@
 name: thriveiep-session-handoff
 description: >
   Session management protocol for ThriveIEP PM Copilot. Three responsibilities:
-  (1) DURING sessions: link every deliverable (file, spec, DR) to its Linear issue
-  at creation time — if no issue exists, ask Eric before creating one.
+  (1) DURING sessions: save every deliverable to PM-Hub in the correct product
+  directory and link it to its Linear issue at creation time — if no issue exists,
+  ask Eric before creating one.
   (2) AT DECISION POINTS: capture decision records when significant decisions are made.
   (3) AT SESSION END: write structured handoff notes to PM-Hub.
   Also use at session START to clone PM-Hub and read previous handoff notes.
@@ -16,17 +17,37 @@ description: >
 
 # ThriveIEP Session & Knowledge Management Protocol
 
-This skill ensures three things: deliverables are always traceable to Linear issues,
-decisions are captured with full reasoning, and session continuity is maintained.
+This skill ensures three things: deliverables are saved to PM-Hub and traceable
+to Linear issues, decisions are captured with full reasoning, and session
+continuity is maintained.
 
 ---
 
-## Part 1: During Session — Deliverable & Knowledge Tracking
+## Part 1: During Session — Deliverable Saving & Linking
 
-### Every deliverable gets linked
+### Where deliverables go in PM-Hub
 
-Whenever you create or significantly update a file (spec, analysis, template, data file,
-skill, DR, knowledge note), immediately:
+Every file you create (spec, analysis, template, data file, skill update) gets
+saved to PM-Hub in the appropriate location:
+
+| Deliverable type | Save to |
+|-----------------|---------|
+| C2A / LE3 work | `c2a/` (use existing subdirs: `scoring/`, `framework/`, `pipeline/`, `research/`, `ddx/`) |
+| Accommodation Engine work | `accommodation-engine/` |
+| PI Redactor work | `pi-redactor/` |
+| Bloom Report work | `bloom-report/` |
+| Cross-product or general | `general/` |
+| Decision records | `decisions/` |
+| Research / exploration | `knowledge/` |
+| Session notes | `sessions/` |
+| Skills | `skills/` |
+
+**Do not leave deliverables only in `/mnt/user-data/outputs/`.** That's for
+presenting files to Eric. The canonical copy lives in PM-Hub, committed and pushed.
+
+### Every deliverable gets linked to Linear
+
+After saving a file to PM-Hub, immediately:
 
 1. **Identify the relevant Linear issue.** Check if the work relates to an existing THR-XX.
 2. **If issue exists:** Add a link attachment to the issue.
@@ -41,10 +62,17 @@ skill, DR, knowledge note), immediately:
    - If yes: create issue following Linear conventions, then attach the link.
    - If no: note it in the session handoff as an unlinked deliverable.
 4. **If the work is general research/exploration** (not tied to a product task):
-   - Write to `knowledge/KB-XXX--slug.md` in PM-Hub
+   - Save to `knowledge/KB-XXX--slug.md` in PM-Hub
    - Add entry to `knowledge/INDEX.md`
    - No Linear issue needed unless it leads to actionable work
    - If it does lead to action: create a Linear issue, update the `Promoted To` column
+
+### Commit cadence
+
+Commit and push to PM-Hub after each deliverable is saved — don't batch everything
+to session end. This keeps the repo current if the session is interrupted.
+Use descriptive commit messages: `[THR-XX] Add scoring pipeline spec` or
+`[DR-010] Hybrid knowledge management system`.
 
 ### Knowledge capture criteria
 
@@ -115,7 +143,8 @@ When a decision is reached:
 3. **Save to PM-Hub:**
    - File: `decisions/DR-XXX--slug.md`
    - Update `decisions/INDEX.md`
-   - Commit with message: `[DR-XXX] Decision title`
+   - Commit: `[DR-XXX] Decision title`
+   - Push immediately
 
 4. **Link to Linear** (using the deliverable linking workflow from Part 1):
    - Add `📋 DR-XXX: Title` link attachment to all related issues
@@ -149,10 +178,12 @@ When wrapping up a substantive session:
 ### 1. Pre-close checklist
 
 Before writing handoff notes, verify:
-- [ ] All deliverables created this session are linked to Linear issues
+- [ ] All deliverables created this session are saved to the correct PM-Hub directory
+- [ ] All deliverables are linked to Linear issues (or noted as unlinked with reason)
 - [ ] Any decisions made are captured as DRs (or flagged as not DR-worthy)
 - [ ] Any research/exploration is in `knowledge/` if worth preserving
 - [ ] Work product log is updated for significant deliverables
+- [ ] All PM-Hub changes are committed and pushed
 
 ### 2. Write Session Entry
 
@@ -172,8 +203,8 @@ Use this exact format:
 - Decision 2 and rationale
 
 **Artifacts produced:**
-- File/document name — brief description (Linear: THR-XX | PM-Hub path)
-- Commit hash or Linear comment reference where applicable
+- File/document name — PM-Hub path (Linear: THR-XX)
+- Commit hash where applicable
 
 **Knowledge captured:**
 - KB-XXX: Topic (if any research/exploration was documented)
