@@ -14,3 +14,4 @@
 | DR-006 | [T-scores for norm-referenced, linear scaling for research instruments](DR-006--dual-scoring-approach.md) | C2A | 2026-02-15 | Accepted | THR-132, THR-140 | scoring, psychometrics, T-scores, instruments, pipeline |
 | DR-007 | [Migrate to Aptible for FERPA/HIPAA hosting](DR-007--aptible-ferpa-hipaa-hosting.md) | General | 2026-02-10 | Accepted | THR-52, THR-108, THR-130 | FERPA, HIPAA, compliance, hosting, Aptible, infrastructure |
 | DR-008 | [Defer instrument licensing to post-pilot](DR-008--licensing-deferred-post-pilot.md) | C2A | 2026-02-10 | Accepted | THR-17, THR-18, THR-19 | licensing, instruments, pilot, NLU, risk |
+| DR-009 | [Preserve original published response formats (5 distinct UI formats)](DR-009--response-format-architecture.md) | C2A | 2026-02-21 | Accepted | THR-32 | response-formats, UI, psychometrics, instruments, Likert, SPCC |

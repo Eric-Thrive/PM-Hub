@@ -27,6 +27,8 @@ Rolling log of the last 5 PM Copilot sessions. Oldest entry drops off when a new
 
 **Artifacts produced:**
 - `C2A_Response_Format_Reference.docx` — landscape, 8 pages, ready for Soham (output in Claude chat)
+- `c2a/docs/C2A_Response_Format_Reference.md` — markdown version saved to PM-Hub
+- `decisions/DR-009--response-format-architecture.md` — decision record for 5-format architecture
 
 **Pickup for next session:**
 - Share Response Format Reference with Soham
